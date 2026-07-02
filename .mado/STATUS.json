@@ -17,7 +17,7 @@
       "status": "pending",
       "steps": [
         { "number": 1, "name": "Repo layout, monorepo tooling & README", "file": ".mado/steps/step-00-01.md", "status": "pending" },
-        { "number": 2, "name": "Spring Boot + Postgres + Flyway skeleton, docker-compose", "file": ".mado/steps/step-00-02.md", "status": "pending" },
+        { "number": 2, "name": "Spring Boot + Postgres + Liquibase skeleton, docker-compose", "file": ".mado/steps/step-00-02.md", "status": "pending" },
         { "number": 3, "name": "Flutter skeleton: theme, i18n/RTL, routing, dio client", "file": ".mado/steps/step-00-03.md", "status": "pending" },
         { "number": 4, "name": "Shared API envelope, error handling & health endpoint", "file": ".mado/steps/step-00-04.md", "status": "pending" }
       ]
@@ -27,7 +27,7 @@
       "name": "Domain & Data",
       "status": "pending",
       "steps": [
-        { "number": 1, "name": "Flyway V1: clients, accounts, transactions schema", "file": ".mado/steps/step-01-01.md", "status": "pending" },
+        { "number": 1, "name": "Liquibase: clients, accounts, transactions schema", "file": ".mado/steps/step-01-01.md", "status": "pending" },
         { "number": 2, "name": "JPA entities & repositories (Client, Account, Transaction)", "file": ".mado/steps/step-01-02.md", "status": "pending" },
         { "number": 3, "name": "MockDataSeeder: load 5 clients on boot (idempotent)", "file": ".mado/steps/step-01-03.md", "status": "pending" },
         { "number": 4, "name": "Core DTOs + client/account/transaction endpoints", "file": ".mado/steps/step-01-04.md", "status": "pending" }
@@ -38,7 +38,7 @@
       "name": "Financial Stress Score",
       "status": "pending",
       "steps": [
-        { "number": 1, "name": "StressScoreCalculator + Flyway V2 stress_scores + snapshots", "file": ".mado/steps/step-02-01.md", "status": "pending" },
+        { "number": 1, "name": "StressScoreCalculator + Liquibase stress_scores + snapshots", "file": ".mado/steps/step-02-01.md", "status": "pending" },
         { "number": 2, "name": "Stress-score endpoint (score, zone, sub-scores)", "file": ".mado/steps/step-02-02.md", "status": "pending" },
         { "number": 3, "name": "Flutter Home/Radar screen: gauge, chart, accounts", "file": ".mado/steps/step-02-03.md", "status": "pending" }
       ]
@@ -48,7 +48,7 @@
       "name": "Forecast & Loan Simulation",
       "status": "pending",
       "steps": [
-        { "number": 1, "name": "ForecastEngine interface + HeuristicForecast + Flyway forecasts", "file": ".mado/steps/step-03-01.md", "status": "pending" },
+        { "number": 1, "name": "ForecastEngine interface + HeuristicForecast + Liquibase forecasts", "file": ".mado/steps/step-03-01.md", "status": "pending" },
         { "number": 2, "name": "Forecast endpoints (30-day + 3/6/12-month horizons)", "file": ".mado/steps/step-03-02.md", "status": "pending" },
         { "number": 3, "name": "LoanCalculator + loan-simulate endpoint", "file": ".mado/steps/step-03-03.md", "status": "pending" },
         { "number": 4, "name": "GenAiClient interface + MockGenAi + chat/invoice endpoints", "file": ".mado/steps/step-03-04.md", "status": "pending" },
@@ -60,7 +60,7 @@
       "name": "Smart Rescue & Cross-sell",
       "status": "pending",
       "steps": [
-        { "number": 1, "name": "Deficit alert + RescueService + Flyway rescue_events", "file": ".mado/steps/step-04-01.md", "status": "pending" },
+        { "number": 1, "name": "Deficit alert + RescueService + Liquibase rescue_events", "file": ".mado/steps/step-04-01.md", "status": "pending" },
         { "number": 2, "name": "Rescue endpoints (shortfall/options, confirm → recovery)", "file": ".mado/steps/step-04-02.md", "status": "pending" },
         { "number": 3, "name": "Flutter Rescue screen: banner, bridge cards, recovery", "file": ".mado/steps/step-04-03.md", "status": "pending" }
       ]
@@ -70,7 +70,7 @@
       "name": "Gamified Micro-Saving",
       "status": "pending",
       "steps": [
-        { "number": 1, "name": "ChallengeService + RewardsService + Flyway + seed challenges", "file": ".mado/steps/step-05-01.md", "status": "pending" },
+        { "number": 1, "name": "ChallengeService + RewardsService + Liquibase + seed challenges", "file": ".mado/steps/step-05-01.md", "status": "pending" },
         { "number": 2, "name": "Challenge/rewards endpoints (list, claim, balance)", "file": ".mado/steps/step-05-02.md", "status": "pending" },
         { "number": 3, "name": "Flutter Goals screen: points card, challenges, claim flow", "file": ".mado/steps/step-05-03.md", "status": "pending" }
       ]

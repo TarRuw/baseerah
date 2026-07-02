@@ -27,7 +27,7 @@ affordability checks; maximise SAMA Open Banking utilisation.
 |---|---|---|
 | Backend | **Spring Boot 3.x, Java 21** | Stateless REST, layered (Controller → Service → Repository) |
 | Build | **Gradle (Kotlin DSL)** | |
-| Persistence | **PostgreSQL 16** + **Spring Data JPA** + **Flyway** | Flyway for all schema migrations |
+| Persistence | **PostgreSQL 16** + **Spring Data JPA** + **Liquibase** | Liquibase for all schema migrations |
 | Frontend | **Flutter 3.x (Dart 3)** | One codebase, two shells (consumer mobile + bank portal web/tablet). RTL + Arabic first |
 | State mgmt | **Riverpod** | Also acceptable: Bloc — pick one in Phase 0 and keep it |
 | HTTP client | **dio** | |
@@ -97,9 +97,13 @@ Five seeded clients (`data-mocks/`), each ~6 months of SAMA-style transactions:
 Categories observed: `SALARY`, `GROCERIES`, `TRANSPORTATION`, and more across files. Treat the category
 set as data-driven (enum-with-fallback), not a fixed list.
 
-### 4.2 Database schema (PostgreSQL, via Flyway)
+### 4.2 Database schema (PostgreSQL, via Liquibase)
 
-Introduced progressively per phase. Full target model:
+Introduced progressively per phase, one Liquibase changeset per phase. A master changelog
+(`db/changelog/db.changelog-master.yaml`, `includeAll` over `db/changelog/changes/`) loads formatted-SQL
+changesets in filename order: `001-core-schema` (Phase 1), `002-stress-scores` (Phase 2), `003-forecasts`
+(Phase 3), `004-rescue-events` (Phase 4), `005-gamification` (Phase 5), `006-bank` (Phase 6), then
+`007`/`008` for Phase 7 tokenization/perf indexes. Full target model:
 
 - **clients** — `id (uuid pk)`, `external_id (text unique, e.g. client_001_family)`, `profile_label`, `persona`, `created_at`
 - **accounts** — `id (uuid pk)`, `client_id (fk)`, `external_id`, `bank_name`, `display_color`, `currency`, `latest_balance (numeric)`, `tokenized_account_id`

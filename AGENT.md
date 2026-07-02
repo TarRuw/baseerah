@@ -48,7 +48,7 @@ At the start of every session:
 ## Tech Stack
 
 - **Backend:** Spring Boot 3, Java 21, Gradle (Kotlin DSL), Spring Web / Data JPA / Validation / Actuator.
-- **DB:** PostgreSQL 16, Flyway migrations, UUID PKs, `numeric(14,2)` money, `timestamptz`.
+- **DB:** PostgreSQL 16, Liquibase migrations, UUID PKs, `numeric(14,2)` money, `timestamptz`.
 - **Frontend:** Flutter 3 / Dart 3, Riverpod state, dio HTTP, `intl` for i18n (Arabic-first, RTL).
 - **Forecasting:** `ForecastEngine` interface → `HeuristicForecast` (pure Java). Sidecar swappable later.
 - **GenAI:** `GenAiClient` interface → `MockGenAi` (default, deterministic, no key) / `RemoteGenAi` (opt-in).

@@ -6,7 +6,7 @@
 **Description:** A proactive AI-driven FinTech platform for Saudi Arabia that predicts liquidity gaps and
 cash-flow deficits 12–15 days ahead, offers rescue actions to consumers, and gives banks a predictive
 credit-verification pipeline. Two shells (consumer app + bank portal) over one backend.
-**Tech Stack:** Spring Boot 3 / Java 21 / Gradle · PostgreSQL 16 + Spring Data JPA + Flyway · Flutter 3 /
+**Tech Stack:** Spring Boot 3 / Java 21 / Gradle · PostgreSQL 16 + Spring Data JPA + Liquibase · Flutter 3 /
 Dart 3 (Riverpod, dio) · pure-Java heuristic forecasting (Python sidecar swappable later) · pluggable
 GenAI (`MockGenAi` default, `RemoteGenAi` optional).
 **Started:** 2026-07-02
@@ -30,7 +30,7 @@ hardening) is **explicitly out of scope for now** — see DESIGN.md §10. Do not
 ## Phases
 
 ### Phase 0: Foundations
-**Purpose:** Repo layout, Spring Boot + Postgres + Flyway skeleton, Flutter skeleton with theme/i18n/RTL,
+**Purpose:** Repo layout, Spring Boot + Postgres + Liquibase skeleton, Flutter skeleton with theme/i18n/RTL,
 shared API envelope & error handling. **Steps:** 4 — see `steps/step-00-*.md`
 
 ### Phase 1: Domain & Data
@@ -60,7 +60,13 @@ tests, demo script. **Steps:** 4 — see `steps/step-07-*.md`
 
 ## Global Rules
 
-- **All schema changes go through Flyway migrations.** No `ddl-auto` in prod profiles (`validate` only).
+- **All schema changes go through Liquibase.** No `ddl-auto` in prod profiles (`validate` only).
+  **Changelog convention:** a master changelog at `backend/src/main/resources/db/changelog/db.changelog-master.yaml`
+  uses `includeAll` over `db/changelog/changes/`; each change is a **Liquibase formatted-SQL** file named
+  `NNN-kebab-name.sql` (zero-padded, e.g. `001-core-schema.sql`) beginning with `--liquibase formatted sql`
+  and one `--changeset baseerah:NNN-kebab-name`. Files load in filename order — no master edit needed to add
+  one. Changesets are immutable once applied (Liquibase checksums them); fix mistakes with a new changeset.
+  Liquibase tracks state in `databasechangelog` / `databasechangeloglock`.
 - **All primary keys are UUID.** Money is `numeric(14,2)`; timestamps are `timestamptz`.
 - **Business logic lives in services, never controllers.** Entities never leave the service layer — map
   to DTOs. Controllers are thin.
