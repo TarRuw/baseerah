@@ -1,0 +1,15 @@
+# Build outputs (populated during implementation phases)
+backend/build/
+backend/.gradle/
+frontend/build/
+frontend/.dart_tool/
+*.class
+# IDE
+.idea/
+.vscode/
+*.iml
+# Env / secrets
+.env
+*.key
+# OS
+.DS_Store

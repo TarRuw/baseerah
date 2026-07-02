@@ -1,0 +1,2293 @@
+{
+  "status": "OK",
+  "timestamp": "2026-06-30T23:18:03Z",
+  "data": {
+    "type": "transactions",
+    "client_profile": "الموظف المستقر (أبو عائلة)",
+    "transactions": [
+      {
+        "transaction_id": "tx-client_001_family-99",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 337.06
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 107629.32
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-98",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 18500.0
+        },
+        "transaction_information": "راتب وزارة التعليم",
+        "booking_date_time": "2026-06-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "راتب وزارة التعليم",
+          "category": "SALARY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 107966.38
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-97",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 111.42
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-06-25T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 89466.38
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-96",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 405.59
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-25T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 89577.8
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-95",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 121.31
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-06-24T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 89983.39
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-94",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 558.08
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-24T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 90104.7
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-93",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 108.03
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-06-23T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 90662.78
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-92",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 560.25
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-21T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 90770.81
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-91",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 109.4
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-06-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 91331.06
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-90",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 596.85
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-16T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 91440.46
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-89",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 368.74
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-15T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92037.31
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-88",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 109.31
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-06-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92406.05
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-87",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 229.62
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92515.36
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-86",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 239.78
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-12T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92744.98
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-85",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 334.79
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-11T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92984.76
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-84",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 94.97
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-06-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 93319.55
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-83",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 250.47
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 93414.52
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-82",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 263.0
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-06-07T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 93664.99
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-81",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 520.77
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 93927.99
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-80",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 18500.0
+        },
+        "transaction_information": "راتب وزارة التعليم",
+        "booking_date_time": "2026-05-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "راتب وزارة التعليم",
+          "category": "SALARY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 94448.76
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-79",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 464.2
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-22T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 75948.76
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-78",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 239.67
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-05-21T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 76412.96
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-77",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 415.54
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-19T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 76652.63
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-76",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 88.22
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-05-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 77068.17
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-75",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 227.1
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-17T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 77156.39
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-74",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 532.37
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-16T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 77383.49
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-73",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 181.3
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-05-15T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 77915.86
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-72",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 337.98
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-15T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 78097.16
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-71",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 112.4
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-05-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 78435.14
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-70",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 463.02
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 78547.54
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-69",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 325.31
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-12T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 79010.56
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-68",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 335.05
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-04T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 79335.87
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-67",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 237.81
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-05-02T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 79670.92
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-66",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 82.38
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-05-01T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 79908.73
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-65",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 92.83
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-04-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 79991.11
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-64",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 440.81
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 80083.94
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-63",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 18500.0
+        },
+        "transaction_information": "راتب وزارة التعليم",
+        "booking_date_time": "2026-04-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "راتب وزارة التعليم",
+          "category": "SALARY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 80524.75
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-62",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 358.76
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-19T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 62024.75
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-61",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 536.14
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-17T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 62383.51
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-60",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 476.31
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-15T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 62919.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-59",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 523.38
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-12T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 63395.96
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-58",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 103.18
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-04-05T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 63919.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-57",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 469.95
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-04T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 64022.52
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-56",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 444.11
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-03T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 64492.47
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-55",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 160.81
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-04-02T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 64936.58
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-54",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 106.19
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-04-02T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 65097.39
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-53",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 294.4
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-02T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 65203.58
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-52",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 392.54
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-04-01T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 65497.98
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-51",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 445.92
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-03-31T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 65890.52
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-50",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 91.28
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-03-30T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 66336.44
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-49",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 210.24
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-03-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 66427.72
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-48",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 18500.0
+        },
+        "transaction_information": "راتب وزارة التعليم",
+        "booking_date_time": "2026-03-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "راتب وزارة التعليم",
+          "category": "SALARY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 66637.96
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-47",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 87.43
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-03-23T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 48137.96
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-46",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 129.9
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-03-21T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 48225.39
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-45",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 449.65
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-03-20T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 48355.29
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-44",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 463.15
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-03-16T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 48804.94
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-43",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 415.95
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-03-13T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 49268.09
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-42",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 482.96
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-03-07T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 49684.04
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-41",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 355.02
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-03-06T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 50167.0
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-40",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 385.49
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-03-03T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 50522.02
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-39",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 97.95
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-02-28T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 50907.51
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-38",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 312.53
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-02-28T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 51005.46
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-37",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 233.64
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-02-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 51317.99
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-36",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 18500.0
+        },
+        "transaction_information": "راتب وزارة التعليم",
+        "booking_date_time": "2026-02-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "راتب وزارة التعليم",
+          "category": "SALARY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 51551.63
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-35",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 264.39
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-02-26T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 33051.63
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-34",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 128.31
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-02-23T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 33316.02
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-33",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 181.07
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-02-21T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 33444.33
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-32",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 107.32
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-02-20T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 33625.4
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-31",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 129.7
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-02-16T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 33732.72
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-30",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 83.02
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-02-11T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 33862.42
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-29",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 124.1
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-02-10T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 33945.44
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-28",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 566.44
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-02-10T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 34069.54
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-27",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 668.36
+        },
+        "transaction_information": "شراء من شركة الكهرباء السعودية",
+        "booking_date_time": "2026-02-09T00:00:00Z",
+        "insights": {
+          "description_cleansed": "شركة الكهرباء السعودية",
+          "category": "UTILITIES",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 34635.98
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-26",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 593.24
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-02-06T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 35304.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-25",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 502.55
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-02-04T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 35897.58
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-24",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 66.98
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-02-02T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 36400.13
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-23",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 117.33
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-01-31T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 36467.11
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-22",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 438.16
+        },
+        "transaction_information": "شراء من شركة الكهرباء السعودية",
+        "booking_date_time": "2026-01-30T00:00:00Z",
+        "insights": {
+          "description_cleansed": "شركة الكهرباء السعودية",
+          "category": "UTILITIES",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 36584.44
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-21",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 136.24
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-01-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 37022.6
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-20",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 355.61
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-01-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 37158.84
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-19",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 138.66
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-01-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 37514.45
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-18",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 580.41
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-01-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 37653.11
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-17",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 18500.0
+        },
+        "transaction_information": "راتب وزارة التعليم",
+        "booking_date_time": "2026-01-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "راتب وزارة التعليم",
+          "category": "SALARY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 38233.52
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-16",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 119.33
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-01-25T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 19733.52
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-15",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 542.03
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-01-22T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 19852.85
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-14",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 81.06
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-01-20T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 20394.88
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-13",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 81.41
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-01-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 20475.94
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-12",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 299.61
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-01-15T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 20557.35
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-11",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 125.66
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-01-15T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 20856.96
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-10",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 126.38
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-01-12T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 20982.62
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-9",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 293.42
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-01-10T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 21109.0
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-8",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 107.13
+        },
+        "transaction_information": "شراء من محطة الدريس - وقود",
+        "booking_date_time": "2026-01-10T00:00:00Z",
+        "insights": {
+          "description_cleansed": "محطة الدريس - وقود",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 21402.42
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-7",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 428.03
+        },
+        "transaction_information": "شراء من شركة الكهرباء السعودية",
+        "booking_date_time": "2026-01-10T00:00:00Z",
+        "insights": {
+          "description_cleansed": "شركة الكهرباء السعودية",
+          "category": "UTILITIES",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 21509.55
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-6",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 311.58
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-01-09T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 21937.58
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-5",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 128.87
+        },
+        "transaction_information": "شراء من صيدلية النهدي",
+        "booking_date_time": "2026-01-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "صيدلية النهدي",
+          "category": "HEALTHCARE",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 22249.16
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-4",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 218.48
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-01-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 22378.03
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-3",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 569.7
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-01-05T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 22596.51
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-2",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 533.28
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-01-04T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 23166.21
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_001_family-1",
+        "account_id": "acc-client_001_family",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 550.51
+        },
+        "transaction_information": "شراء من بنده فرع الياسمين",
+        "booking_date_time": "2026-01-02T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بنده فرع الياسمين",
+          "category": "GROCERIES",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 23699.49
+          }
+        }
+      }
+    ],
+    "page": {
+      "number": 0,
+      "size": 99,
+      "total_elements": 99,
+      "total_pages": 1
+    }
+  }
+}

@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#1b2420;font-family:'IBM Plex Sans','IBM Plex Sans Arabic',system-ui,sans-serif}
+  ::-webkit-scrollbar{width:0;height:0}
+  @keyframes bsr-pulse{0%,100%{box-shadow:0 0 0 0 rgba(220,75,75,.35)}50%{box-shadow:0 0 0 8px rgba(220,75,75,0)}}
+  @keyframes bsr-spin{to{transform:rotate(360deg)}}
+  @keyframes bsr-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes bsr-blink{0%,100%{opacity:.35}50%{opacity:1}}
+</style>
+</helmet>
+
+<div dir="{{ dir }}" style="min-height:100vh;background:radial-gradient(1200px 700px at 50% -10%,#243530 0%,#161e1a 60%);display:flex;flex-direction:column;align-items:center;padding:26px 16px 60px;font-family:{{ fontStack }}">
+
+  <!-- Top toolbar -->
+  <div style="width:100%;max-width:1180px;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#0e6b54,#0a3d33);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(10,61,51,.5)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C4A24C" stroke-width="1.6"/><path d="M12 12 L12 4.5" stroke="#C4A24C" stroke-width="1.6" stroke-linecap="round"/><path d="M12 12 L17 15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="1.7" fill="#C4A24C"/></svg>
+      </div>
+      <div>
+        <div style="color:#fff;font-weight:600;font-size:15px;letter-spacing:.2px">{{ t.brand }} <span style="color:#C4A24C">بصيرة</span></div>
+        <div style="color:#7f938c;font-size:11px;margin-top:1px">{{ t.tagline }}</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:11px;padding:3px">
+        <button onClick="{{ setApp }}" style="{{ segAppStyle }}">{{ t.consumerApp }}</button>
+        <button onClick="{{ setBank }}" style="{{ segBankStyle }}">{{ t.bankPortal }}</button>
+      </div>
+      <button onClick="{{ toggleLang }}" style="height:36px;padding:0 14px;border-radius:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);color:#dfe8e4;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">{{ langBtn }}</button>
+    </div>
+  </div>
+
+  <!-- ============ CONSUMER MOBILE APP ============ -->
+  <sc-if value="{{ isApp }}" hint-placeholder-val="{{ true }}">
+  <div style="width:390px;height:812px;background:#0c1512;border-radius:52px;padding:13px;box-shadow:0 40px 90px -20px rgba(0,0,0,.7),0 0 0 2px rgba(255,255,255,.05);position:relative">
+    <div style="position:absolute;top:26px;left:50%;transform:translateX(-50%);width:120px;height:30px;background:#0c1512;border-radius:16px;z-index:40"></div>
+    <div dir="{{ dir }}" style="width:100%;height:100%;background:#F6F4EE;border-radius:40px;overflow:hidden;position:relative;display:flex;flex-direction:column">
+
+      <!-- status bar -->
+      <div style="height:46px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 30px 6px;flex:none">
+        <span style="font-size:13px;font-weight:600;color:#13241F">9:41</span>
+        <span style="display:flex;gap:5px;align-items:center;color:#13241F"><svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5" rx="1"/><rect x="4.5" y="4" width="3" height="7" rx="1"/><rect x="9" y="2" width="3" height="9" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="14" height="7" rx="1.2" fill="currentColor"/><rect x="20" y="3.5" width="1.6" height="4" rx="1" fill="currentColor" opacity=".5"/></svg></span>
+      </div>
+
+      <!-- scroll area -->
+      <div style="flex:1;overflow-y:auto;overflow-x:hidden">
+
+        <!-- ===== HOME ===== -->
+        <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:6px 20px 24px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+            <div>
+              <div style="color:#6E7F78;font-size:13px">{{ t.greeting }}</div>
+              <div style="color:#13241F;font-size:20px;font-weight:600">{{ t.personName }}</div>
+            </div>
+            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#0e6b54,#0a3d33);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px">ف</div>
+          </div>
+
+          <!-- gauge card -->
+          <div style="background:#fff;border-radius:24px;padding:20px 18px 16px;box-shadow:0 10px 30px -14px rgba(10,61,51,.28);border:1px solid rgba(19,36,31,.05)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px">
+              <div style="color:#13241F;font-size:14px;font-weight:600">{{ t.healthScore }}</div>
+              <div style="font-size:11px;color:#6E7F78;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:#1D9E63;display:inline-block"></span>{{ t.liveMultibank }}</div>
+            </div>
+            <div style="position:relative;display:flex;justify-content:center;margin-top:4px">
+              <svg width="260" height="152" viewBox="0 0 240 140">
+                <path d="M20,120 A100,100 0 0 1 89.1,24.9" stroke="#E0574F" stroke-width="15" fill="none" stroke-linecap="round"/>
+                <path d="M89.1,24.9 A100,100 0 0 1 178.78,39.1" stroke="#E5A63A" stroke-width="15" fill="none"/>
+                <path d="M178.78,39.1 A100,100 0 0 1 220,120" stroke="#1D9E63" stroke-width="15" fill="none" stroke-linecap="round"/>
+                <circle cx="{{ markerCx }}" cy="{{ markerCy }}" r="12" fill="#fff" stroke="rgba(19,36,31,.12)" stroke-width="1"/>
+                <circle cx="{{ markerCx }}" cy="{{ markerCy }}" r="7" fill="{{ scoreColor }}"/>
+              </svg>
+              <div style="position:absolute;top:78px;left:0;right:0;text-align:center;pointer-events:none">
+                <div style="font-size:46px;font-weight:700;color:#13241F;line-height:1">{{ displayScore }}</div>
+                <div style="font-size:12px;color:{{ scoreColor }};font-weight:600;margin-top:3px">{{ scoreLabel }}</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:2px;padding:0 6px">
+              <span style="font-size:10px;color:#6E7F78">{{ t.critical }}</span>
+              <span style="font-size:10px;color:#6E7F78">{{ t.optimal }}</span>
+            </div>
+          </div>
+
+          <!-- early warning -->
+          <button onClick="{{ goRescue }}" style="width:100%;text-align:{{ startAlign }};margin-top:14px;background:linear-gradient(135deg,#fff 0%,#fff5f3 100%);border:1px solid rgba(224,87,79,.3);border-radius:20px;padding:15px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;animation:bsr-pulse 2.4s infinite;font-family:inherit">
+            <div style="width:44px;height:44px;border-radius:13px;background:rgba(224,87,79,.12);display:flex;align-items:center;justify-content:center;flex:none">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3 L22 20 H2 Z" stroke="#E0574F" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10 v4" stroke="#E0574F" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1" fill="#E0574F"/></svg>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13.5px;font-weight:600;color:#B23A33">{{ t.deficitTitle }}</div>
+              <div style="font-size:12px;color:#6E7F78;margin-top:2px">{{ warningSub }}</div>
+            </div>
+            <div style="font-size:11px;font-weight:700;color:#E0574F;background:rgba(224,87,79,.1);padding:5px 9px;border-radius:9px;white-space:nowrap">{{ t.days13 }}</div>
+          </button>
+
+          <!-- forecast -->
+          <div style="background:#fff;border-radius:22px;padding:16px 16px 12px;margin-top:14px;box-shadow:0 8px 24px -16px rgba(10,61,51,.25);border:1px solid rgba(19,36,31,.05)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <div style="font-size:13px;font-weight:600;color:#13241F">{{ t.forecast30 }}</div>
+              <span style="font-size:10.5px;color:#6E7F78">{{ t.projectedBalance }}</span>
+            </div>
+            <div style="min-height:130px">{{ forecastChart }}</div>
+          </div>
+
+          <!-- stats -->
+          <div style="display:flex;gap:12px;margin-top:14px">
+            <div style="flex:1;background:#fff;border-radius:18px;padding:14px;border:1px solid rgba(19,36,31,.05)">
+              <div style="font-size:11px;color:#6E7F78">{{ t.incomeConsistency }}</div>
+              <div style="font-size:20px;font-weight:700;color:#1D9E63;margin-top:4px">92%</div>
+            </div>
+            <div style="flex:1;background:#fff;border-radius:18px;padding:14px;border:1px solid rgba(19,36,31,.05)">
+              <div style="font-size:11px;color:#6E7F78">{{ t.spendVelocity }}</div>
+              <div style="font-size:20px;font-weight:700;color:#E5A63A;margin-top:4px">{{ t.elevated }}</div>
+            </div>
+          </div>
+
+          <!-- accounts -->
+          <div style="font-size:12px;color:#6E7F78;margin:18px 4px 8px;font-weight:600">{{ t.linkedAccounts }}</div>
+          <div style="background:#fff;border-radius:20px;padding:4px 16px;border:1px solid rgba(19,36,31,.05)">
+            <sc-for list="{{ accounts }}" as="ac" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(19,36,31,.05)">
+                <div style="width:34px;height:34px;border-radius:9px;background:{{ ac.color }};color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none">{{ ac.tag }}</div>
+                <div style="flex:1"><div style="font-size:13px;color:#13241F;font-weight:500">{{ ac.name }}</div><div style="font-size:11px;color:#6E7F78">{{ ac.type }}</div></div>
+                <div style="font-size:13px;font-weight:600;color:#13241F">{{ ac.balance }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- ===== SIMULATE ===== -->
+        <sc-if value="{{ isSim }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:6px 20px 24px">
+          <div style="font-size:22px;font-weight:600;color:#13241F;margin-bottom:4px">{{ t.simulate }}</div>
+          <div style="font-size:13px;color:#6E7F78;margin-bottom:16px">{{ t.simulateSub }}</div>
+          <div style="display:flex;background:#EAE7DE;border-radius:13px;padding:4px;margin-bottom:18px">
+            <button onClick="{{ setLoanTab }}" style="{{ loanTabStyle }}">{{ t.loanTab }}</button>
+            <button onClick="{{ setChatTab }}" style="{{ chatTabStyle }}">{{ t.aiTab }}</button>
+          </div>
+
+          <sc-if value="{{ isLoanTab }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#fff;border-radius:22px;padding:18px 18px 8px;box-shadow:0 8px 24px -16px rgba(10,61,51,.25);border:1px solid rgba(19,36,31,.05)">
+            <div style="margin-bottom:20px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:#13241F;font-weight:500">{{ t.principal }}</span><span style="font-size:14px;font-weight:700;color:#0e6b54">{{ principalFmt }}</span></div>
+              <input type="range" min="5000" max="150000" step="1000" value="{{ loanPrincipal }}" onInput="{{ onPrincipal }}" style="{{ sliderStyle }}"/>
+            </div>
+            <div style="margin-bottom:20px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:#13241F;font-weight:500">{{ t.profitRate }}</span><span style="font-size:14px;font-weight:700;color:#0e6b54">{{ rateFmt }}</span></div>
+              <input type="range" min="2" max="14" step="0.25" value="{{ loanRate }}" onInput="{{ onRate }}" style="{{ sliderStyle }}"/>
+            </div>
+            <div style="margin-bottom:14px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:#13241F;font-weight:500">{{ t.term }}</span><span style="font-size:14px;font-weight:700;color:#0e6b54">{{ termFmt }}</span></div>
+              <input type="range" min="6" max="60" step="6" value="{{ loanTerm }}" onInput="{{ onTerm }}" style="{{ sliderStyle }}"/>
+            </div>
+          </div>
+
+          <div style="background:linear-gradient(150deg,#0e6b54,#0a3d33);border-radius:22px;padding:18px;margin-top:14px;color:#fff;box-shadow:0 14px 30px -16px rgba(10,61,51,.6)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start">
+              <div><div style="font-size:12px;color:#a9c9bf">{{ t.monthlyInstallment }}</div><div style="font-size:30px;font-weight:700;margin-top:2px">{{ installmentFmt }}</div></div>
+              <div style="text-align:{{ endAlign }}"><div style="font-size:12px;color:#a9c9bf">{{ t.totalRepay }}</div><div style="font-size:16px;font-weight:600;margin-top:6px">{{ totalFmt }}</div></div>
+            </div>
+            <div style="height:1px;background:rgba(255,255,255,.14);margin:16px 0"></div>
+            <div style="font-size:12px;color:#a9c9bf;margin-bottom:6px">{{ t.dtiAfter }} · {{ dtiFmt }}</div>
+            <div style="height:9px;background:rgba(255,255,255,.15);border-radius:6px;overflow:hidden"><div style="height:100%;width:{{ dtiBar }}%;background:{{ dtiColor }};border-radius:6px;transition:width .4s"></div></div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:16px;background:{{ verdictBg }};border-radius:13px;padding:12px 14px">
+              <span style="font-size:20px">{{ verdictIcon }}</span>
+              <div><div style="font-size:14px;font-weight:600">{{ verdictTitle }}</div><div style="font-size:11.5px;color:rgba(255,255,255,.75);margin-top:1px">{{ verdictSub }}</div></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-size:12px;color:#6E7F78"><span>{{ t.scoreIfTaken }}</span><span style="font-weight:700;color:{{ projColor }};font-size:15px">{{ projScore }}</span><span style="color:#c7cfcb">←</span><span style="font-weight:600;color:#13241F">{{ displayScore }}</span></div>
+          </sc-if>
+
+          <sc-if value="{{ isChatTab }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#fff;border-radius:22px;padding:16px;box-shadow:0 8px 24px -16px rgba(10,61,51,.25);border:1px solid rgba(19,36,31,.05);display:flex;flex-direction:column;min-height:440px">
+            <div style="display:flex;align-items:center;gap:9px;padding-bottom:12px;border-bottom:1px solid rgba(19,36,31,.06)">
+              <div style="width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#C4A24C,#a8863a);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg></div>
+              <div><div style="font-size:13px;font-weight:600;color:#13241F">{{ t.aiName }}</div><div style="font-size:10.5px;color:#1D9E63">{{ t.online }}</div></div>
+            </div>
+            <div style="flex:1;padding:14px 2px;display:flex;flex-direction:column;gap:12px">
+              <sc-for list="{{ chatMsgs }}" as="m" hint-placeholder-count="2">
+                <div style="align-self:{{ m.align }};max-width:82%;background:{{ m.bg }};color:{{ m.fg }};padding:11px 14px;border-radius:{{ m.radius }};font-size:13px;line-height:1.5;white-space:pre-line">{{ m.text }}</div>
+              </sc-for>
+              <sc-if value="{{ aiTyping }}" hint-placeholder-val="{{ false }}">
+                <div style="align-self:flex-start;background:#EEF2F0;padding:12px 16px;border-radius:16px 16px 16px 4px;display:flex;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#8a9c95;animation:bsr-blink 1s infinite"></span><span style="width:6px;height:6px;border-radius:50%;background:#8a9c95;animation:bsr-blink 1s infinite .2s"></span><span style="width:6px;height:6px;border-radius:50%;background:#8a9c95;animation:bsr-blink 1s infinite .4s"></span></div>
+              </sc-if>
+            </div>
+            <sc-if value="{{ showSuggest }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+              <sc-for list="{{ suggestions }}" as="s" hint-placeholder-count="2">
+                <button onClick="{{ s.onClick }}" style="font-family:inherit;font-size:12px;color:#0e6b54;background:#eef5f2;border:1px solid rgba(14,107,84,.2);border-radius:20px;padding:8px 12px;cursor:pointer;text-align:{{ startAlign }}">{{ s.label }}</button>
+              </sc-for>
+            </div>
+            </sc-if>
+            <div style="display:flex;gap:8px;align-items:center;background:#F2F0E9;border-radius:14px;padding:5px 5px 5px 14px">
+              <input value="{{ chatInput }}" onInput="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="{{ t.askPlaceholder }}" style="flex:1;border:none;background:transparent;outline:none;font-family:inherit;font-size:13px;color:#13241F"/>
+              <button onClick="{{ sendChat }}" style="width:38px;height:38px;border-radius:11px;background:#0e6b54;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12 L20 4 L14 20 L11 13 Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+          </sc-if>
+        </div>
+        </sc-if>
+
+        <!-- ===== RESCUE ===== -->
+        <sc-if value="{{ isRescue }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:6px 20px 24px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:11px;font-weight:700;letter-spacing:1px;color:#E0574F;text-transform:uppercase">{{ t.smartRescue }}</span></div>
+          <div style="font-size:22px;font-weight:600;color:#13241F;margin-bottom:16px">{{ t.rescueHead }}</div>
+
+          <sc-if value="{{ rescueOpen }}" hint-placeholder-val="{{ true }}">
+          <div>
+          <div style="background:linear-gradient(150deg,#3a1512,#241214);border-radius:22px;padding:20px;color:#fff;position:relative;overflow:hidden">
+            <div style="font-size:12px;color:#e6a49f">{{ t.predictedShortfall }}</div>
+            <div style="font-size:38px;font-weight:700;margin-top:4px">{{ shortfallFmt }}</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:#e6a49f"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#e6a49f" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="#e6a49f" stroke-width="1.6" stroke-linecap="round"/></svg>{{ t.expectedIn }} <b style="color:#fff">{{ t.days13 }}</b> · {{ t.rentTuition }}</div>
+          </div>
+          <div style="font-size:13px;color:#6E7F78;margin:18px 4px 10px;font-weight:600">{{ t.chooseBridge }}</div>
+
+          <button onClick="{{ pickMurabaha }}" style="{{ murabahaCardStyle }}">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="width:46px;height:46px;border-radius:13px;background:rgba(14,107,84,.1);display:flex;align-items:center;justify-content:center;flex:none"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 10 L12 4 L21 10" stroke="#0e6b54" stroke-width="1.7" stroke-linejoin="round"/><path d="M5 10 v9 h14 v-9" stroke="#0e6b54" stroke-width="1.7"/><path d="M9 19 v-5 h6 v5" stroke="#0e6b54" stroke-width="1.7"/></svg></div>
+              <div style="flex:1;text-align:{{ startAlign }}"><div style="font-size:15px;font-weight:600;color:#13241F">{{ t.murabahaTitle }}</div><div style="font-size:11.5px;color:#6E7F78;margin-top:2px">{{ t.murabahaSub }}</div></div>
+              <div style="text-align:{{ endAlign }}"><div style="font-size:10px;color:#1D9E63;font-weight:700;background:rgba(29,158,99,.1);padding:3px 8px;border-radius:8px">{{ t.preApproved }}</div></div>
+            </div>
+          </button>
+
+          <button onClick="{{ pickLiquidate }}" style="{{ liquidateCardStyle }}">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="width:46px;height:46px;border-radius:13px;background:rgba(196,162,76,.14);display:flex;align-items:center;justify-content:center;flex:none"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18 L9 12 L13 15 L20 6" stroke="#a8863a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="6" r="1.6" fill="#a8863a"/></svg></div>
+              <div style="flex:1;text-align:{{ startAlign }}"><div style="font-size:15px;font-weight:600;color:#13241F">{{ t.liquidateTitle }}</div><div style="font-size:11.5px;color:#6E7F78;margin-top:2px">{{ t.liquidateSub }}</div></div>
+              <div style="text-align:{{ endAlign }}"><div style="font-size:10px;color:#a8863a;font-weight:700;background:rgba(196,162,76,.14);padding:3px 8px;border-radius:8px">{{ t.instant }}</div></div>
+            </div>
+          </button>
+
+          <button onClick="{{ confirmRescue }}" style="{{ confirmBtnStyle }}">{{ confirmLabel }}</button>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ rescueDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:20px 0">
+            <div style="width:88px;height:88px;border-radius:50%;background:rgba(29,158,99,.12);display:flex;align-items:center;justify-content:center;margin:8px auto 18px"><svg width="46" height="46" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#1D9E63"/><path d="M7 12.5 L10.5 16 L17 8.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div style="font-size:20px;font-weight:700;color:#13241F">{{ t.shortfallBridged }}</div>
+            <div style="font-size:13px;color:#6E7F78;margin:8px 24px 0;line-height:1.5">{{ resolvedMsg }}</div>
+            <div style="background:#fff;border-radius:20px;padding:18px;margin-top:22px;border:1px solid rgba(19,36,31,.06)">
+              <div style="font-size:12px;color:#6E7F78;margin-bottom:6px">{{ t.scoreRecovered }}</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:12px"><span style="font-size:22px;font-weight:600;color:#c7cfcb;text-decoration:line-through">62</span><span style="color:#1D9E63;font-size:20px">→</span><span style="font-size:34px;font-weight:700;color:#1D9E63">{{ displayScore }}</span></div>
+            </div>
+            <button onClick="{{ resetRescue }}" style="margin-top:20px;background:none;border:none;color:#0e6b54;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;text-decoration:underline">{{ t.runAgain }}</button>
+          </div>
+          </sc-if>
+        </div>
+        </sc-if>
+
+        <!-- ===== GOALS ===== -->
+        <sc-if value="{{ isGoals }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:6px 20px 24px">
+          <div style="font-size:22px;font-weight:600;color:#13241F;margin-bottom:16px">{{ t.goalsHead }}</div>
+          <div style="background:linear-gradient(135deg,#C4A24C,#a8863a);border-radius:22px;padding:18px;color:#fff;display:flex;align-items:center;justify-content:space-between;box-shadow:0 14px 30px -16px rgba(196,162,76,.6)">
+            <div><div style="font-size:12px;color:rgba(255,255,255,.85)">{{ t.rewardPoints }}</div><div style="font-size:30px;font-weight:700;margin-top:2px">{{ pointsFmt }}</div><div style="font-size:11px;color:rgba(255,255,255,.85);margin-top:2px">{{ t.akthar }}</div></div>
+            <div style="text-align:center"><div style="width:58px;height:58px;border-radius:16px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2.9 6 6.6.5-5 4.3 1.5 6.4L12 16l-6 3.2L7.5 12.8l-5-4.3L9 8z"/></svg></div><div style="font-size:11px;font-weight:600;margin-top:6px">{{ riskTier }}</div></div>
+          </div>
+          <div style="font-size:13px;color:#6E7F78;margin:20px 4px 10px;font-weight:600">{{ t.activeChallenges }}</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ goalList }}" as="g" hint-placeholder-count="3">
+              <div style="background:#fff;border-radius:20px;padding:16px;border:1px solid rgba(19,36,31,.05)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                  <div style="width:40px;height:40px;border-radius:12px;background:{{ g.iconBg }};display:flex;align-items:center;justify-content:center;font-size:19px;flex:none">{{ g.icon }}</div>
+                  <div style="flex:1"><div style="font-size:14px;font-weight:600;color:#13241F">{{ g.title }}</div><div style="font-size:11.5px;color:#6E7F78;margin-top:1px">{{ g.sub }}</div></div>
+                  <div style="font-size:11px;font-weight:700;color:#C4A24C;white-space:nowrap">+{{ g.reward }}</div>
+                </div>
+                <div style="height:8px;background:#EEF2F0;border-radius:5px;overflow:hidden;margin-bottom:8px"><div style="height:100%;width:{{ g.pct }}%;background:{{ g.barColor }};border-radius:5px;transition:width .5s"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="font-size:11.5px;color:#6E7F78">{{ g.progressText }}</span>
+                  <button onClick="{{ g.onClaim }}" style="{{ g.btnStyle }}">{{ g.btnLabel }}</button>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+      </div>
+
+      <!-- bottom nav -->
+      <div dir="{{ dir }}" style="flex:none;background:#fff;border-top:1px solid rgba(19,36,31,.07);display:flex;padding:8px 10px 26px">
+        <button onClick="{{ goHome }}" style="flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;padding:6px 0">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M4 11 L12 4 L20 11 v9 h-5 v-6 h-6 v6 H4 Z" stroke="{{ navHome }}" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <span style="font-size:10px;color:{{ navHome }};font-weight:500">{{ t.navHome }}</span>
+        </button>
+        <button onClick="{{ goSim }}" style="flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;padding:6px 0">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M5 5 h14 M5 12 h14 M5 19 h14" stroke="{{ navSim }}" stroke-width="1.7" stroke-linecap="round"/><circle cx="9" cy="5" r="2.4" fill="#fff" stroke="{{ navSim }}" stroke-width="1.7"/><circle cx="15" cy="12" r="2.4" fill="#fff" stroke="{{ navSim }}" stroke-width="1.7"/><circle cx="8" cy="19" r="2.4" fill="#fff" stroke="{{ navSim }}" stroke-width="1.7"/></svg>
+          <span style="font-size:10px;color:{{ navSim }};font-weight:500">{{ t.navSim }}</span>
+        </button>
+        <button onClick="{{ goRescue }}" style="flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;padding:6px 0;position:relative">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M12 21 C12 21 4 15 4 9 A4 4 0 0 1 12 7 A4 4 0 0 1 20 9 C20 15 12 21 12 21Z" stroke="{{ navRescue }}" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9 v4 M10 11 h4" stroke="{{ navRescue }}" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span style="font-size:10px;color:{{ navRescue }};font-weight:500">{{ t.navRescue }}</span>
+          <span style="position:absolute;top:4px;right:24px;width:7px;height:7px;border-radius:50%;background:#E0574F"></span>
+        </button>
+        <button onClick="{{ goGoals }}" style="flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;padding:6px 0">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.7 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z" stroke="{{ navGoals }}" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <span style="font-size:10px;color:{{ navGoals }};font-weight:500">{{ t.navGoals }}</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ BANK PORTAL (DESKTOP) ============ -->
+  <sc-if value="{{ isBank }}" hint-placeholder-val="{{ false }}">
+  <div style="width:100%;max-width:1180px;height:720px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.6);display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.08)">
+    <!-- window chrome -->
+    <div style="height:42px;background:#0a3d33;display:flex;align-items:center;padding:0 16px;gap:8px;flex:none">
+      <span style="width:11px;height:11px;border-radius:50%;background:#f0655e"></span>
+      <span style="width:11px;height:11px;border-radius:50%;background:#e5a63a"></span>
+      <span style="width:11px;height:11px;border-radius:50%;background:#1D9E63"></span>
+      <div style="flex:1;display:flex;justify-content:center"><div style="background:rgba(255,255,255,.1);color:#cfe0da;font-size:12px;padding:5px 16px;border-radius:8px">portal.baseerah.sa/underwriting</div></div>
+    </div>
+    <div dir="{{ dir }}" style="flex:1;display:flex;overflow:hidden">
+      <!-- sidebar -->
+      <div style="width:230px;background:#0c1512;flex:none;padding:22px 16px;display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:22px;padding:0 6px">
+          <div style="width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#0e6b54,#0a3d33);display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C4A24C" stroke-width="1.6"/><path d="M12 12 L17 15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="1.7" fill="#C4A24C"/></svg></div>
+          <div><div style="color:#fff;font-size:13px;font-weight:600">{{ t.bankName }}</div><div style="color:#7f938c;font-size:10px">{{ t.underwriting }}</div></div>
+        </div>
+        <button onClick="{{ goBankApps }}" style="{{ navAppsStyle }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>{{ t.applications }}</button>
+        <button onClick="{{ goBankPortfolio }}" style="{{ navPortfolioStyle }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14l6-4 4 3 6-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ t.portfolio }}</button>
+        <button onClick="{{ goBankSettings }}" style="{{ navSettingsStyle }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>{{ t.settings }}</button>
+        <div style="margin-top:auto;background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+          <div style="color:#7f938c;font-size:11px">{{ t.nplReduction }}</div>
+          <div style="color:#1D9E63;font-size:26px;font-weight:700;margin-top:2px">−23%</div>
+          <div style="color:#7f938c;font-size:10.5px;margin-top:2px">{{ t.vsBaseline }}</div>
+        </div>
+      </div>
+
+      <!-- main -->
+      <div style="flex:1;background:#F6F4EE;overflow-y:auto;padding:26px 30px">
+
+        <sc-if value="{{ isBankApps }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+          <div><div style="font-size:22px;font-weight:600;color:#13241F">{{ t.creditVerification }}</div><div style="font-size:13px;color:#6E7F78;margin-top:2px">{{ t.creditVerificationSub }}</div></div>
+          <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(19,36,31,.08);border-radius:10px;padding:8px 14px;font-size:12px;color:#6E7F78"><span style="width:7px;height:7px;border-radius:50%;background:#1D9E63"></span>{{ t.samaConnected }}</div>
+        </div>
+
+        <div style="display:flex;gap:22px;align-items:flex-start">
+          <!-- applicant list -->
+          <div style="width:340px;flex:none;display:flex;flex-direction:column;gap:11px">
+            <div style="font-size:12px;color:#6E7F78;font-weight:600;margin-bottom:2px">{{ t.pendingReview }}</div>
+            <sc-for list="{{ applicants }}" as="ap" hint-placeholder-count="3">
+              <button onClick="{{ ap.onSelect }}" style="{{ ap.cardStyle }}">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="width:40px;height:40px;border-radius:11px;background:#0e6b54;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex:none">{{ ap.initials }}</div>
+                  <div style="flex:1;text-align:{{ startAlign }}"><div style="font-size:14px;font-weight:600;color:#13241F">{{ ap.name }}</div><div style="font-size:11.5px;color:#6E7F78;margin-top:1px">{{ ap.purpose }} · {{ ap.amountFmt }}</div></div>
+                  <span style="{{ ap.riskBadge }}">{{ ap.riskLabel }}</span>
+                </div>
+              </button>
+            </sc-for>
+          </div>
+
+          <!-- detail -->
+          <div style="flex:1;min-width:0">
+            <sc-if value="{{ noSelection }}" hint-placeholder-val="{{ true }}">
+              <div style="background:#fff;border:1.5px dashed rgba(19,36,31,.14);border-radius:18px;padding:70px 20px;text-align:center;color:#9aa8a2">
+                <svg width="46" height="46" viewBox="0 0 24 24" fill="none" style="margin-bottom:14px"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#c3cec9" stroke-width="1.6"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#c3cec9" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <div style="font-size:14px;color:#6E7F78">{{ t.selectApplicant }}</div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ hasSelection }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#fff;border-radius:18px;border:1px solid rgba(19,36,31,.06);overflow:hidden">
+              <div style="padding:20px 22px;border-bottom:1px solid rgba(19,36,31,.06);display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:13px">
+                  <div style="width:48px;height:48px;border-radius:13px;background:#0e6b54;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">{{ selInitials }}</div>
+                  <div><div style="font-size:17px;font-weight:600;color:#13241F">{{ selName }}</div><div style="font-size:12px;color:#6E7F78;margin-top:1px">{{ selReq }}</div></div>
+                </div>
+                <sc-if value="{{ notGenerated }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ generateReport }}" style="background:#0e6b54;color:#fff;border:none;border-radius:11px;padding:11px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:8px">{{ generateLabel }}</button>
+                </sc-if>
+              </div>
+
+              <sc-if value="{{ generating }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:60px 20px;text-align:center">
+                  <div style="width:44px;height:44px;border:3px solid #e3e9e6;border-top-color:#0e6b54;border-radius:50%;margin:0 auto 16px;animation:bsr-spin .8s linear infinite"></div>
+                  <div style="font-size:13px;color:#6E7F78">{{ t.analyzing }}</div>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ reportReady }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:22px">
+                <div style="display:flex;gap:16px;margin-bottom:20px">
+                  <div style="flex:1;background:{{ verdictPanelBg }};border-radius:14px;padding:18px;color:#fff">
+                    <div style="font-size:12px;opacity:.85">{{ t.underwritingVerdict }}</div>
+                    <div style="font-size:19px;font-weight:700;margin-top:6px;line-height:1.25">{{ bankVerdictTitle }}</div>
+                    <div style="font-size:12px;opacity:.85;margin-top:6px;line-height:1.4">{{ bankVerdictSub }}</div>
+                  </div>
+                  <div style="width:150px;flex:none;background:#F6F4EE;border-radius:14px;padding:16px;text-align:center">
+                    <div style="font-size:11.5px;color:#6E7F78">{{ t.staminaScore }}</div>
+                    <div style="font-size:40px;font-weight:700;color:{{ staminaColor }};margin-top:2px">{{ selStamina }}</div>
+                    <div style="font-size:10.5px;color:#6E7F78">{{ t.outOf100 }}</div>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
+                  <div style="background:#F6F4EE;border-radius:12px;padding:14px"><div style="font-size:11px;color:#6E7F78">{{ t.forecastDti }}</div><div style="font-size:20px;font-weight:700;color:#13241F;margin-top:3px">{{ selDti }}</div></div>
+                  <div style="background:#F6F4EE;border-radius:12px;padding:14px"><div style="font-size:11px;color:#6E7F78">{{ t.incomeStability }}</div><div style="font-size:20px;font-weight:700;color:#13241F;margin-top:3px">{{ selStability }}</div></div>
+                  <div style="background:#F6F4EE;border-radius:12px;padding:14px"><div style="font-size:11px;color:#6E7F78">{{ t.defaultProb }}</div><div style="font-size:20px;font-weight:700;color:{{ staminaColor }};margin-top:3px">{{ selDefault }}</div></div>
+                </div>
+                <div style="background:#F6F4EE;border-radius:12px;padding:16px;margin-bottom:20px">
+                  <div style="font-size:12px;color:#6E7F78;font-weight:600;margin-bottom:10px">{{ t.cashflow12 }}</div>
+                  <div>{{ bankChart }}</div>
+                </div>
+                <div style="display:flex;gap:12px">
+                  <button onClick="{{ approve }}" style="{{ approveStyle }}">{{ approveLabel }}</button>
+                  <button onClick="{{ decline }}" style="{{ declineStyle }}">{{ t.decline }}</button>
+                </div>
+                <sc-if value="{{ decided }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin-top:14px;text-align:center;font-size:13px;color:{{ decisionColor }};font-weight:600">{{ decisionMsg }}</div>
+                </sc-if>
+              </div>
+              </sc-if>
+            </div>
+            </sc-if>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isBankPortfolio }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+          <div><div style="font-size:22px;font-weight:600;color:#13241F">{{ t.portfolioTitle }}</div><div style="font-size:13px;color:#6E7F78;margin-top:2px">{{ t.portfolioSub }}</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin-bottom:22px">
+          <sc-for list="{{ portfolioKpis }}" as="k" hint-placeholder-count="4">
+            <div style="background:#fff;border-radius:16px;padding:18px;border:1px solid rgba(19,36,31,.06)">
+              <div style="font-size:11.5px;color:#6E7F78">{{ k.label }}</div>
+              <div style="font-size:26px;font-weight:700;color:{{ k.color }};margin-top:6px">{{ k.value }}</div>
+              <div style="font-size:11px;color:#9aa8a2;margin-top:3px">{{ k.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#fff;border-radius:16px;border:1px solid rgba(19,36,31,.06);overflow:hidden">
+          <div style="padding:16px 20px;border-bottom:1px solid rgba(19,36,31,.06);display:flex;align-items:center;justify-content:space-between">
+            <div style="font-size:14px;font-weight:600;color:#13241F">{{ t.monitoringTitle }}</div>
+            <div style="font-size:11.5px;color:#6E7F78">{{ t.monitoringNote }}</div>
+          </div>
+          <div style="padding:6px 20px 12px">
+            <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.3fr;gap:12px;padding:12px 0;border-bottom:1px solid rgba(19,36,31,.06);font-size:11px;color:#9aa8a2;font-weight:600;text-transform:uppercase;letter-spacing:.4px">
+              <div style="text-align:{{ startAlign }}">{{ t.colBorrower }}</div><div>{{ t.colFacility }}</div><div>{{ t.colScore }}</div><div>{{ t.colStatus }}</div>
+            </div>
+            <sc-for list="{{ monitoring }}" as="m" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.3fr;gap:12px;padding:14px 0;border-bottom:1px solid rgba(19,36,31,.05);align-items:center">
+                <div style="display:flex;align-items:center;gap:11px;text-align:{{ startAlign }}"><div style="width:34px;height:34px;border-radius:9px;background:#0e6b54;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex:none">{{ m.initials }}</div><div><div style="font-size:13px;font-weight:600;color:#13241F">{{ m.name }}</div><div style="font-size:11px;color:#6E7F78">{{ m.purpose }}</div></div></div>
+                <div style="font-size:13px;color:#13241F;font-weight:500">{{ m.facility }}</div>
+                <div style="display:flex;align-items:center;gap:7px"><span style="font-size:15px;font-weight:700;color:{{ m.scoreColor }}">{{ m.score }}</span><span style="font-size:12px;color:{{ m.trendColor }}">{{ m.trend }}</span></div>
+                <div><span style="{{ m.statusBadge }}">{{ m.status }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isBankSettings }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+          <div><div style="font-size:22px;font-weight:600;color:#13241F">{{ t.settingsTitle }}</div><div style="font-size:13px;color:#6E7F78;margin-top:2px">{{ t.settingsSub }}</div></div>
+        </div>
+        <div style="display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap">
+          <div style="flex:1;min-width:340px;background:#fff;border-radius:16px;border:1px solid rgba(19,36,31,.06);overflow:hidden">
+            <div style="padding:16px 20px;border-bottom:1px solid rgba(19,36,31,.06);font-size:14px;font-weight:600;color:#13241F">{{ t.connectivity }}</div>
+            <div style="padding:8px 20px 14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(19,36,31,.05)"><div style="display:flex;align-items:center;gap:12px"><div style="width:38px;height:38px;border-radius:10px;background:rgba(29,158,99,.12);display:flex;align-items:center;justify-content:center"><span style="width:9px;height:9px;border-radius:50%;background:#1D9E63"></span></div><div><div style="font-size:13px;font-weight:600;color:#13241F">{{ t.samaFramework }}</div><div style="font-size:11.5px;color:#6E7F78">{{ t.lastSync }}</div></div></div><span style="font-size:11px;font-weight:700;color:#1D9E63;background:rgba(29,158,99,.1);padding:5px 11px;border-radius:9px">{{ t.connected }}</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(19,36,31,.05)"><div><div style="font-size:13px;font-weight:600;color:#13241F">{{ t.ndmoResidency }}</div><div style="font-size:11.5px;color:#6E7F78">{{ t.ndmoSub }}</div></div><button onClick="{{ toggleNdmo }}" style="{{ ndmoToggle }}"><span style="{{ ndmoKnob }}"></span></button></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0"><div><div style="font-size:13px;font-weight:600;color:#13241F">{{ t.tokenization }}</div><div style="font-size:11.5px;color:#6E7F78">{{ t.tokenizationSub }}</div></div><button onClick="{{ toggleToken }}" style="{{ tokenToggle }}"><span style="{{ tokenKnob }}"></span></button></div>
+            </div>
+          </div>
+          <div style="flex:1;min-width:340px;background:#fff;border-radius:16px;border:1px solid rgba(19,36,31,.06);overflow:hidden">
+            <div style="padding:16px 20px;border-bottom:1px solid rgba(19,36,31,.06);font-size:14px;font-weight:600;color:#13241F">{{ t.riskThresholds }}</div>
+            <div style="padding:18px 20px">
+              <div style="margin-bottom:22px">
+                <div style="display:flex;justify-content:space-between;margin-bottom:9px"><span style="font-size:13px;color:#13241F;font-weight:500">{{ t.staminaFloor }}</span><span style="font-size:14px;font-weight:700;color:#0e6b54">{{ staminaFloor }}</span></div>
+                <input type="range" min="40" max="80" step="1" value="{{ staminaFloorVal }}" onInput="{{ onStaminaFloor }}" style="{{ sliderStyle }}"/>
+                <div style="font-size:11px;color:#9aa8a2;margin-top:7px">{{ t.staminaFloorNote }}</div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:9px"><span style="font-size:13px;color:#13241F;font-weight:500">{{ t.autoDecline }}</span><span style="font-size:14px;font-weight:700;color:#0e6b54">{{ autoDecline }}</span></div>
+                <input type="range" min="5" max="30" step="1" value="{{ autoDeclineVal }}" onInput="{{ onAutoDecline }}" style="{{ sliderStyle }}"/>
+                <div style="font-size:11px;color:#9aa8a2;margin-top:7px">{{ t.autoDeclineNote }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    lang: 'en', view: 'app', tab: 'home', simTab: 'loan',
+    score: 62, displayScore: 0,
+    loan: { principal: 45000, rate: 5.5, term: 36 },
+    chat: [], chatInput: '', aiTyping: false,
+    rescueChoice: null, rescueDone: false,
+    points: 1240,
+    claimed: {},
+    bankSel: null, generating: false, reportReady: false, decision: null,
+    bankPage: 'apps', ndmoOn: true, tokenOn: true, staminaFloorVal: 60, autoDeclineVal: 15,
+  };
+
+  STR = {
+    en: {
+      brand:'Baseerah', tagline:'Early-Warning Financial Radar', consumerApp:'Consumer App', bankPortal:'Bank Portal',
+      greeting:'Assalamu alaikum,', personName:'Faisal Al-Harbi',
+      healthScore:'Financial Health Score', liveMultibank:'Live · 3 banks', critical:'Critical', optimal:'Optimal',
+      deficitTitle:'Liquidity deficit predicted', warningSub:'Projected balance goes negative before payday',
+      days13:'13 days', forecast30:'30-Day Cash Flow Forecast', projectedBalance:'Projected balance (SAR)',
+      incomeConsistency:'Income consistency', spendVelocity:'Spending velocity', elevated:'Elevated',
+      linkedAccounts:'Linked accounts',
+      simulate:'Simulate', simulateSub:'Test a decision before you commit', loanTab:'Loan Affordability', aiTab:'Ask Baseerah AI',
+      principal:'Loan principal', profitRate:'Bank profit rate', term:'Term',
+      monthlyInstallment:'Monthly installment', totalRepay:'Total repayment', dtiAfter:'Debt-to-income after loan',
+      scoreIfTaken:'Health score if taken', askPlaceholder:'e.g. Can I afford a 2,100 SAR car lease?', aiName:'Baseerah AI',
+      online:'Online · SAMA data linked',
+      smartRescue:'Smart Rescue Mode', rescueHead:'Bridge your shortfall before it hits',
+      predictedShortfall:'Predicted shortfall', expectedIn:'Expected in', rentTuition:'rent + tuition cycle',
+      chooseBridge:'Choose how to bridge it', murabahaTitle:'Micro-Finance (Murabaha)', murabahaSub:'Sharia-compliant · 1,500 SAR · 3 months',
+      preApproved:'Pre-approved', liquidateTitle:'Liquidate safe assets', liquidateSub:'From your Alinma investment fund',
+      instant:'Instant', shortfallBridged:'Shortfall bridged', scoreRecovered:'Projected health score', scoreRecoveredMsg:'',
+      runAgain:'Run rescue again',
+      goalsHead:'Savings Challenges', rewardPoints:'Reward points', akthar:'Alinma Akthar', activeChallenges:'Active challenges',
+      navHome:'Radar', navSim:'Simulate', navRescue:'Rescue', navGoals:'Goals',
+      bankName:'Alinma Bank', underwriting:'Underwriting', applications:'Applications', portfolio:'Portfolio', settings:'Settings',
+      nplReduction:'NPL reduction', vsBaseline:'vs. transactional baseline',
+      creditVerification:'Credit Verification Pipeline', creditVerificationSub:'Predictive affordability before sign-off',
+      samaConnected:'SAMA Open Banking · Connected', pendingReview:'Pending review',
+      selectApplicant:'Select an applicant to run predictive verification', analyzing:'Analyzing 24-month telemetry…',
+      underwritingVerdict:'Underwriting verdict', staminaScore:'Cash-flow stamina', outOf100:'out of 100',
+      forecastDti:'Forecast DTI', incomeStability:'Income stability', defaultProb:'12-mo default prob.',
+      cashflow12:'12-Month projected free cash flow', decline:'Decline', approve:'Approve loan',
+      lowRisk:'Low risk', medRisk:'Medium', highRisk:'High risk',
+      portfolioTitle:'Loan Portfolio', portfolioSub:'Post-disbursement telemetry monitoring',
+      monitoringTitle:'Active facility monitoring', monitoringNote:'Live health scores · updated hourly',
+      colBorrower:'Borrower', colFacility:'Facility', colScore:'Health', colStatus:'Status',
+      settingsTitle:'Settings', settingsSub:'Connectivity, compliance & risk policy',
+      connectivity:'Connectivity & compliance', samaFramework:'SAMA Open Banking Framework', lastSync:'Last sync · 2 min ago', connected:'Connected',
+      ndmoResidency:'NDMO data residency', ndmoSub:'Keep all data within the Kingdom', tokenization:'Payload tokenization', tokenizationSub:'Encrypt account identifiers at ingest',
+      riskThresholds:'Risk policy thresholds', staminaFloor:'Minimum stamina to approve', staminaFloorNote:'Applicants below this score need manual review.', autoDecline:'Auto-decline default prob.', autoDeclineNote:'Applications above this 12-mo probability are rejected automatically.',
+      healthy:'Healthy', watch:'Watch', atRisk:'At risk',
+    },
+    ar: {
+      brand:'بصيرة', tagline:'رادار مالي للإنذار المبكر', consumerApp:'تطبيق العميل', bankPortal:'بوابة البنك',
+      greeting:'السلام عليكم،', personName:'فيصل الحربي',
+      healthScore:'مؤشر الصحة المالية', liveMultibank:'مباشر · ٣ بنوك', critical:'حرِج', optimal:'مثالي',
+      deficitTitle:'عجز سيولة متوقع', warningSub:'الرصيد المتوقع يصبح سالبًا قبل الراتب',
+      days13:'١٣ يومًا', forecast30:'توقع التدفق النقدي ٣٠ يومًا', projectedBalance:'الرصيد المتوقع (ريال)',
+      incomeConsistency:'ثبات الدخل', spendVelocity:'سرعة الإنفاق', elevated:'مرتفعة',
+      linkedAccounts:'الحسابات المرتبطة',
+      simulate:'محاكاة', simulateSub:'اختبر قرارك قبل الالتزام', loanTab:'القدرة على السداد', aiTab:'اسأل بصيرة',
+      principal:'مبلغ التمويل', profitRate:'هامش ربح البنك', term:'المدة',
+      monthlyInstallment:'القسط الشهري', totalRepay:'إجمالي السداد', dtiAfter:'نسبة الدين للدخل بعد التمويل',
+      scoreIfTaken:'المؤشر بعد التمويل', askPlaceholder:'مثال: هل أستطيع تحمّل إيجار سيارة ٢٬١٠٠ ريال؟', aiName:'مساعد بصيرة',
+      online:'متصل · بيانات ساما',
+      smartRescue:'وضع الإنقاذ الذكي', rescueHead:'سُدّ العجز قبل وقوعه',
+      predictedShortfall:'العجز المتوقع', expectedIn:'خلال', rentTuition:'دورة الإيجار والرسوم',
+      chooseBridge:'اختر طريقة التغطية', murabahaTitle:'تمويل صغير (مرابحة)', murabahaSub:'متوافق مع الشريعة · ١٬٥٠٠ ريال · ٣ أشهر',
+      preApproved:'موافقة مسبقة', liquidateTitle:'تسييل أصول آمنة', liquidateSub:'من صندوق الإنماء الاستثماري',
+      instant:'فوري', shortfallBridged:'تمت تغطية العجز', scoreRecovered:'المؤشر المالي المتوقع', scoreRecoveredMsg:'',
+      runAgain:'تشغيل الإنقاذ مجددًا',
+      goalsHead:'تحديات الادخار', rewardPoints:'نقاط المكافآت', akthar:'الإنماء أكثر', activeChallenges:'التحديات النشطة',
+      navHome:'الرادار', navSim:'محاكاة', navRescue:'إنقاذ', navGoals:'الأهداف',
+      bankName:'مصرف الإنماء', underwriting:'الائتمان', applications:'الطلبات', portfolio:'المحفظة', settings:'الإعدادات',
+      nplReduction:'خفض التعثر', vsBaseline:'مقارنة بالمعتاد',
+      creditVerification:'خط التحقق الائتماني', creditVerificationSub:'تقييم القدرة على السداد قبل الموافقة',
+      samaConnected:'ساما المفتوحة · متصل', pendingReview:'قيد المراجعة',
+      selectApplicant:'اختر متقدمًا لتشغيل التحقق التنبؤي', analyzing:'تحليل بيانات ٢٤ شهرًا…',
+      underwritingVerdict:'قرار الائتمان', staminaScore:'قدرة التدفق النقدي', outOf100:'من ١٠٠',
+      forecastDti:'نسبة الدين المتوقعة', incomeStability:'استقرار الدخل', defaultProb:'احتمال التعثر ١٢ش',
+      cashflow12:'التدفق النقدي الحر المتوقع ١٢ شهرًا', decline:'رفض', approve:'الموافقة على التمويل',
+      lowRisk:'مخاطر منخفضة', medRisk:'متوسطة', highRisk:'مخاطر عالية',
+      portfolioTitle:'محفظة التمويل', portfolioSub:'مراقبة القياس عن بُعد بعد الصرف',
+      monitoringTitle:'مراقبة التسهيلات النشطة', monitoringNote:'مؤشرات حيّة · تُحدَّث كل ساعة',
+      colBorrower:'المقترض', colFacility:'التسهيل', colScore:'المؤشر', colStatus:'الحالة',
+      settingsTitle:'الإعدادات', settingsSub:'الاتصال والامتثال وسياسة المخاطر',
+      connectivity:'الاتصال والامتثال', samaFramework:'إطار ساما للخدمات المصرفية المفتوحة', lastSync:'آخر مزامنة · قبل دقيقتين', connected:'متصل',
+      ndmoResidency:'إقامة البيانات (NDMO)', ndmoSub:'إبقاء جميع البيانات داخل المملكة', tokenization:'ترميز الحمولات', tokenizationSub:'تشفير معرّفات الحسابات عند الإدخال',
+      riskThresholds:'حدود سياسة المخاطر', staminaFloor:'الحد الأدنى للموافقة', staminaFloorNote:'الطلبات دون هذا المؤشر تحتاج مراجعة يدوية.', autoDecline:'الرفض الآلي لاحتمال التعثر', autoDeclineNote:'الطلبات فوق هذا الاحتمال (١٢ش) تُرفض تلقائيًا.',
+      healthy:'سليم', watch:'مراقبة', atRisk:'معرّض للخطر',
+    }
+  };
+
+  componentDidMount(){ this.animateScore(0, this.state.score); }
+
+  animateScore(from, to){
+    if (this._raf) cancelAnimationFrame(this._raf);
+    const t0 = performance.now(), dur = 1000;
+    const step = (now)=>{
+      const p = Math.min(1,(now-t0)/dur);
+      const e = 1-Math.pow(1-p,3);
+      this.setState({ displayScore: Math.round(from + (to-from)*e) });
+      if (p<1) this._raf = requestAnimationFrame(step);
+    };
+    this._raf = requestAnimationFrame(step);
+  }
+
+  fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+
+  installment(){
+    const {principal:P, rate, term:n} = this.state.loan;
+    const r = rate/100/12;
+    return r>0 ? P*r/(1-Math.pow(1+r,-n)) : P/n;
+  }
+
+  aiReply(q){
+    const isAr = this.state.lang==='ar';
+    const low = (q||'').toLowerCase();
+    if (low.includes('lease')||low.includes('car')||low.includes('2100')||low.includes('2,100')||low.includes('vehicle')||q.includes('سيارة')||q.includes('إيجار')||q.includes('٢')){
+      return isAr
+        ? 'قسط ٢٬١٠٠ ريال يرفع نسبة الدين إلى ٨٩٪ من الفائض.\n\n• ٣ أشهر: يظهر عجز سيولة يوم ١٣ من كل شهر.\n• ٦ أشهر: يتقاطع مع موسم الرسوم الدراسية (أغسطس).\n• ١٢ شهرًا: مؤشرك يهبط من ٦٢ إلى ٣٤ (حرِج).\n\nالتوصية: التزم بأقل من ١٬٥٥٠ ريال شهريًا، أو أجّل ٦٠ يومًا.'
+        : 'A 2,100 SAR payment pushes your DTI to 89% of surplus.\n\n• 3 months: liquidity deficit appears on day 13 each cycle.\n• 6 months: collides with the August tuition surge.\n• 12 months: health score drops 62 → 34 (Critical).\n\nRecommendation: keep it under 1,550 SAR/mo, or delay 60 days.';
+    }
+    return isAr
+      ? 'حلّلت تدفقك النقدي لآخر ٢٤ شهرًا. هذا القرار يقلّل فائضك الشهري ويقرّب أول عجز إلى يوم ١١. جرّب محاكاة القدرة على السداد لرؤية الأثر الدقيق.'
+      : 'I analyzed your last 24 months of cash flow. This decision reduces your monthly surplus and pulls your first deficit forward to day 11. Try the Loan Affordability tab to see the exact impact.';
+  }
+
+  send(text){
+    if(!text || !text.trim()) return;
+    const msgs = this.state.chat.concat([{role:'user', text}]);
+    this.setState({ chat: msgs, chatInput:'', aiTyping:true });
+    clearTimeout(this._ai);
+    this._ai = setTimeout(()=>{
+      this.setState(s=>({ chat: s.chat.concat([{role:'ai', text:this.aiReply(text)}]), aiTyping:false }));
+    }, 1100);
+  }
+
+  resolveRescue(){
+    const target = this.state.rescueChoice==='liquidate' ? 78 : 74;
+    this.setState({ rescueDone:true, score: target });
+    this.animateScore(this.state.displayScore, target);
+  }
+
+  bankData(){
+    const isAr = this.state.lang==='ar';
+    const T = this.STR[this.state.lang];
+    return [
+      { id:'a1', name:isAr?'نورة القحطاني':'Noura Al-Qahtani', initials:isAr?'ن':'NQ', purpose:isAr?'تمويل سيارة':'Auto finance', amount:85000, stamina:82, dti:'34%', stability:'94%', def:'2.1%', verdict:'ok', risk:'low' },
+      { id:'a2', name:isAr?'خالد العتيبي':'Khalid Al-Otaibi', initials:isAr?'خ':'KO', purpose:isAr?'تمويل شخصي':'Personal', amount:60000, stamina:48, dti:'71%', stability:'62%', def:'18.4%', verdict:'bad', risk:'high' },
+      { id:'a3', name:isAr?'سارة الدوسري':'Sara Al-Dosari', initials:isAr?'س':'SD', purpose:isAr?'تجديد منزل':'Home renov.', amount:40000, stamina:66, dti:'52%', stability:'80%', def:'7.8%', verdict:'warn', risk:'med' },
+    ];
+  }
+
+  renderVals(){
+    const S = this.state, isAr = S.lang==='ar', t = this.STR[S.lang];
+    const dir = isAr ? 'rtl' : 'ltr';
+    const startAlign = isAr ? 'right':'left', endAlign = isAr?'left':'right';
+    const cur = isAr ? 'ر.س' : 'SAR';
+    const money = (n)=> isAr ? `${this.fmt(n)} ${cur}` : `${this.fmt(n)} ${cur}`;
+
+    const v = S.displayScore;
+    const needleDeg = (S.score/100 - 0.5)*180;
+    const _mf = Math.max(0, Math.min(100, v))/100, _ma = Math.PI*(1-_mf);
+    const markerCx = (120 + 100*Math.cos(_ma)).toFixed(1);
+    const markerCy = (120 - 100*Math.sin(_ma)).toFixed(1);
+    const zone = (x)=> x>=70 ? {c:'#1D9E63', l:isAr?'مثالي':'Optimal'} : x>=40 ? {c:'#E5A63A', l:isAr?'تحذير':'Warning'} : {c:'#E0574F', l:isAr?'حرِج':'Critical'};
+    const z = zone(S.score);
+
+    // finance
+    const income=18500, essential=14200, surplus=income-essential;
+    const inst = this.installment();
+    const total = inst*S.loan.term;
+    const dti = (essential+inst)/income;
+    const dtiPct = Math.round(dti*100);
+    const strain = inst/surplus;
+    let proj = Math.round(62 - Math.max(0,(strain-0.35))*90);
+    proj = Math.max(9, Math.min(84, proj));
+    const pz = zone(proj);
+    let verdict;
+    if (inst <= surplus*0.5) verdict = {t:isAr?'ميسور':'Comfortably affordable', s:isAr?'يبقى فائض صحي':'Healthy surplus retained', bg:'rgba(29,158,99,.9)', icon:'✅'};
+    else if (inst <= surplus*0.85) verdict = {t:isAr?'يضغط السيولة':'Strains liquidity', s:isAr?'هامش أمان ضعيف':'Thin safety margin', bg:'rgba(229,166,58,.92)', icon:'⚠️'};
+    else verdict = {t:isAr?'غير محتمل':'Not affordable', s:isAr?'يتجاوز فائضك الآمن':'Exceeds your safe surplus', bg:'rgba(224,87,79,.92)', icon:'⛔'};
+
+    // forecast chart
+    const forecastChart = this.buildForecast(false, 0);
+
+    // chat
+    const chatMsgs = S.chat.map(m=>({
+      text:m.text,
+      align: m.role==='user' ? 'flex-end':'flex-start',
+      bg: m.role==='user' ? '#0e6b54' : '#EEF2F0',
+      fg: m.role==='user' ? '#fff' : '#13241F',
+      radius: m.role==='user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
+    }));
+    const suggQ1 = isAr?'ماذا لو استأجرت سيارة بـ ٢٬١٠٠ ريال شهريًا؟':'What if I lease a car at 2,100 SAR/mo?';
+    const suggQ2 = isAr?'هل يمكنني تحمّل تمويل ٤٠٬٠٠٠ ريال؟':'Can I afford a 40,000 SAR loan?';
+    const suggestions = [
+      { label:suggQ1, onClick:()=>this.send(suggQ1) },
+      { label:suggQ2, onClick:()=>this.send(suggQ2) },
+    ];
+
+    // goals
+    const rawGoals = [
+      { id:'g1', icon:'☕', iconBg:'rgba(196,162,76,.15)', title:isAr?'أسبوع بلا قهوة مختصة':'No specialty-coffee week', sub:isAr?'وفّر ١٨٠ ريال':'Save 180 SAR', reward:120, pct:70, prog:isAr?'٥ من ٧ أيام':'5 of 7 days' },
+      { id:'g2', icon:'🛒', iconBg:'rgba(29,158,99,.13)', title:isAr?'خفّض توصيل الطعام ٣٠٪':'Cut food delivery 30%', sub:isAr?'شذوذ إنفاق مكتشَف':'Spending anomaly targeted', reward:200, pct:100, prog:isAr?'مكتمل':'Completed' },
+      { id:'g3', icon:'💧', iconBg:'rgba(46,120,214,.12)', title:isAr?'ادخار الدفعة الدقيقة':'Round-up micro-saving', sub:isAr?'٥ ريال لكل معاملة':'5 SAR per transaction', reward:90, pct:40, prog:isAr?'٤٠ من ١٠٠ ريال':'40 of 100 SAR' },
+    ];
+    const goalList = rawGoals.map(g=>{
+      const done = g.pct>=100;
+      const claimed = !!S.claimed[g.id];
+      return {
+        ...g,
+        barColor: done ? '#1D9E63' : '#C4A24C',
+        progressText: g.prog,
+        onClaim: (done && !claimed) ? (()=>this.claim(g.id, g.reward)) : (()=>{}),
+        btnLabel: claimed ? (isAr?'تم':'Claimed ✓') : done ? (isAr?'استلم':'Claim') : (isAr?'قيد التقدم':'In progress'),
+        btnStyle: (done && !claimed)
+          ? 'font-family:inherit;font-size:12px;font-weight:600;color:#fff;background:#1D9E63;border:none;border-radius:9px;padding:7px 14px;cursor:pointer'
+          : claimed
+          ? 'font-family:inherit;font-size:12px;font-weight:600;color:#1D9E63;background:rgba(29,158,99,.12);border:none;border-radius:9px;padding:7px 14px;cursor:default'
+          : 'font-family:inherit;font-size:12px;font-weight:500;color:#9aa8a2;background:transparent;border:none;padding:7px 4px;cursor:default',
+      };
+    });
+
+    // rescue card styles
+    const cardSel = 'width:100%;font-family:inherit;background:#fff;border:2px solid #0e6b54;border-radius:18px;padding:16px;cursor:pointer;margin-bottom:12px;box-shadow:0 8px 22px -14px rgba(14,107,84,.5)';
+    const cardIdle = 'width:100%;font-family:inherit;background:#fff;border:2px solid rgba(19,36,31,.08);border-radius:18px;padding:16px;cursor:pointer;margin-bottom:12px';
+    const murabahaCardStyle = S.rescueChoice==='murabaha' ? cardSel : cardIdle;
+    const liquidateCardStyle = S.rescueChoice==='liquidate' ? cardSel : cardIdle;
+    const canConfirm = !!S.rescueChoice;
+    const confirmBtnStyle = `width:100%;margin-top:8px;font-family:inherit;font-size:15px;font-weight:600;border:none;border-radius:15px;padding:16px;cursor:${canConfirm?'pointer':'default'};color:#fff;background:${canConfirm?'linear-gradient(135deg,#0e6b54,#0a3d33)':'#c3cec9'}`;
+    const confirmLabel = isAr ? 'تأكيد وسدّ العجز' : 'Confirm & bridge shortfall';
+    const resolvedMsg = S.rescueChoice==='liquidate'
+      ? (isAr?'تم تسييل ١٬٢٤٠ ريال من صندوقك الاستثماري الآمن ودُفعت إلى حسابك الجاري.':'1,240 SAR liquidated from your safe investment fund and moved to your current account.')
+      : (isAr?'تم اعتماد مرابحة بقيمة ١٬٥٠٠ ريال — متوافقة مع الشريعة، تُسدّد على ٣ أشهر.':'A 1,500 SAR Murabaha was approved — Sharia-compliant, repaid over 3 months.');
+
+    // segmented / lang buttons
+    const segOn = 'padding:8px 15px;border-radius:9px;border:none;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;background:#0e6b54;color:#fff';
+    const segOff = 'padding:8px 15px;border-radius:9px;border:none;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:#9fb3ac';
+    const isApp = S.view==='app';
+
+    // tabs
+    const tabOn='flex:1;padding:9px;border-radius:9px;border:none;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;background:#fff;color:#0e6b54;box-shadow:0 2px 6px rgba(0,0,0,.06)';
+    const tabOff='flex:1;padding:9px;border-radius:9px;border:none;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;background:transparent;color:#8a9c95';
+    const sliderStyle='width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:4px;background:#dfe6e2;outline:none;accent-color:#0e6b54';
+
+    const navColor = (k)=> S.tab===k ? '#0e6b54' : '#9aa8a2';
+
+    // BANK
+    const applicants = this.bankData().map(a=>{
+      const sel = S.bankSel===a.id;
+      const rb = a.risk==='low'?{bg:'rgba(29,158,99,.12)',c:'#1D9E63',l:t.lowRisk}: a.risk==='med'?{bg:'rgba(229,166,58,.15)',c:'#b9852a',l:t.medRisk}:{bg:'rgba(224,87,79,.12)',c:'#c94c46',l:t.highRisk};
+      return {
+        ...a, amountFmt: money(a.amount), initials:a.initials,
+        onSelect: ()=>this.setState({bankSel:a.id, reportReady:false, generating:false, decision:null}),
+        cardStyle: `width:100%;font-family:inherit;text-align:${startAlign};background:#fff;border:2px solid ${sel?'#0e6b54':'rgba(19,36,31,.06)'};border-radius:14px;padding:14px;cursor:pointer;transition:border-color .2s`,
+        riskLabel: rb.l,
+        riskBadge: `font-size:10.5px;font-weight:700;color:${rb.c};background:${rb.bg};padding:4px 9px;border-radius:8px;white-space:nowrap`,
+      };
+    });
+    const selA = this.bankData().find(a=>a.id===S.bankSel);
+    const selVerdict = selA ? (selA.verdict==='ok'?{bg:'linear-gradient(135deg,#0e6b54,#0a3d33)',t:isAr?'يتحمّل الدين':'Sustains the debt',s:isAr?'تدفق نقدي مستقر خلال ١٢ شهرًا':'Stable free cash flow across 12 months',col:'#1D9E63'}
+      : selA.verdict==='warn'?{bg:'linear-gradient(135deg,#c78a1e,#9a6a13)',t:isAr?'قابل بشروط':'Approvable with conditions',s:isAr?'يُنصح بمدة أطول أو مبلغ أقل':'Recommend longer term or lower amount',col:'#b9852a'}
+      :{bg:'linear-gradient(135deg,#c0433c,#8f2f2a)',t:isAr?'خطر تعثّر':'Risk of non-performance',s:isAr?'التدفق لا يكفي لخدمة الدين':'Cash flow insufficient to service debt',col:'#E0574F'}) : {};
+    const approveDisabled = selA && selA.verdict==='bad';
+
+    // BANK PAGES (sidebar nav)
+    const bankNav = (k)=> `width:100%;font-family:inherit;text-align:${startAlign};border:none;cursor:pointer;font-size:13px;padding:11px 12px;border-radius:10px;display:flex;align-items:center;gap:10px;${S.bankPage===k?'background:rgba(14,107,84,.35);color:#fff':'background:transparent;color:#8a9c95'}`;
+    const portfolioKpis = [
+      { label:isAr?'إجمالي التسهيلات':'Active facilities', value:isAr?'٢٫٤ مليار':'2.4B', note:isAr?'ريال سعودي':'SAR outstanding', color:'#13241F' },
+      { label:isAr?'متوسط قدرة التدفق':'Avg. stamina', value:'71', note:isAr?'من ١٠٠':'across book', color:'#0e6b54' },
+      { label:isAr?'معدل التعثر':'NPL rate', value:'1.8%', note:isAr?'−٢٣٪ مقابل المعتاد':'−23% vs baseline', color:'#1D9E63' },
+      { label:isAr?'حسابات معرّضة':'At-risk accounts', value:'7', note:isAr?'إنذار مبكر نشط':'early-warning active', color:'#c94c46' },
+    ];
+    const monRaw = [
+      { initials:isAr?'ن':'NQ', name:isAr?'نورة القحطاني':'Noura Al-Qahtani', purpose:isAr?'تمويل سيارة':'Auto finance', facility:money(85000), score:82, trend:'▲', st:'healthy' },
+      { initials:isAr?'م':'MA', name:isAr?'محمد الشمري':'Mohammed Al-Shammari', purpose:isAr?'تمويل شخصي':'Personal', facility:money(120000), score:64, trend:'▼', st:'watch' },
+      { initials:isAr?'ه':'HZ', name:isAr?'هند الزهراني':'Hind Al-Zahrani', purpose:isAr?'تجديد منزل':'Home renov.', facility:money(55000), score:38, trend:'▼', st:'risk' },
+      { initials:isAr?'ع':'AA', name:isAr?'عبدالله العمري':'Abdullah Al-Amri', purpose:isAr?'تمويل تجاري':'SME finance', facility:money(240000), score:76, trend:'▲', st:'healthy' },
+    ];
+    const stMap = { healthy:{c:'#1D9E63',bg:'rgba(29,158,99,.12)',l:t.healthy}, watch:{c:'#b9852a',bg:'rgba(229,166,58,.15)',l:t.watch}, risk:{c:'#c94c46',bg:'rgba(224,87,79,.12)',l:t.atRisk} };
+    const monitoring = monRaw.map(m=>{
+      const sc = m.score>=70?'#1D9E63':m.score>=50?'#b9852a':'#c94c46';
+      const s = stMap[m.st];
+      return { ...m, scoreColor:sc, trendColor: m.trend==='▲'?'#1D9E63':'#c94c46',
+        status:s.l, statusBadge:`font-size:11px;font-weight:700;color:${s.c};background:${s.bg};padding:5px 11px;border-radius:9px` };
+    });
+    const toggleStyle = (on)=> `width:42px;height:24px;border-radius:13px;border:none;cursor:pointer;position:relative;padding:0;background:${on?'#0e6b54':'#c8d2ce'};transition:background .2s`;
+    const knobStyle = (on)=> `position:absolute;top:3px;${on?(isAr?'left:3px':'right:3px'):(isAr?'right:3px':'left:3px')};width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:all .2s`;
+
+    return {
+      portfolioKpis, monitoring,
+      isBankApps:S.bankPage==='apps', isBankPortfolio:S.bankPage==='portfolio', isBankSettings:S.bankPage==='settings',
+      goBankApps:()=>this.setState({bankPage:'apps'}), goBankPortfolio:()=>this.setState({bankPage:'portfolio'}), goBankSettings:()=>this.setState({bankPage:'settings'}),
+      navAppsStyle:bankNav('apps'), navPortfolioStyle:bankNav('portfolio'), navSettingsStyle:bankNav('settings'),
+      ndmoToggle:toggleStyle(S.ndmoOn), ndmoKnob:knobStyle(S.ndmoOn), toggleNdmo:()=>this.setState({ndmoOn:!S.ndmoOn}),
+      tokenToggle:toggleStyle(S.tokenOn), tokenKnob:knobStyle(S.tokenOn), toggleToken:()=>this.setState({tokenOn:!S.tokenOn}),
+      staminaFloorVal:S.staminaFloorVal, staminaFloor:`${S.staminaFloorVal} / 100`, onStaminaFloor:(e)=>this.setState({staminaFloorVal:+e.target.value}),
+      autoDeclineVal:S.autoDeclineVal, autoDecline:`${S.autoDeclineVal}%`, onAutoDecline:(e)=>this.setState({autoDeclineVal:+e.target.value}),
+      dir, startAlign, endAlign, t, fontStack:"'IBM Plex Sans','IBM Plex Sans Arabic',system-ui,sans-serif",
+      langBtn: isAr ? 'EN' : 'ع',
+      toggleLang: ()=>this.setState({lang: isAr?'en':'ar'}),
+      setApp: ()=>this.setState({view:'app'}), setBank: ()=>this.setState({view:'bank'}),
+      segAppStyle: isApp?segOn:segOff, segBankStyle: isApp?segOff:segOn,
+      isApp, isBank: !isApp,
+
+      isHome:S.tab==='home', isSim:S.tab==='simulate', isRescue:S.tab==='rescue', isGoals:S.tab==='goals',
+      goHome:()=>this.setState({tab:'home'}), goSim:()=>this.setState({tab:'simulate'}),
+      goRescue:()=>this.setState({tab:'rescue'}), goGoals:()=>this.setState({tab:'goals'}),
+      navHome:navColor('home'), navSim:navColor('simulate'), navRescue:navColor('rescue'), navGoals:navColor('goals'),
+
+      displayScore:v, needleDeg, markerCx, markerCy, scoreColor:z.c, scoreLabel:z.l,
+      warningSub: isAr?'الرصيد المتوقع يصبح سالبًا قبل الراتب':'Balance dips to −1,240 SAR before payday',
+      forecastChart,
+      accounts:[
+        { tag:isAr?'إ':'AL', name:isAr?'مصرف الإنماء':'Alinma Bank', type:isAr?'حساب جاري':'Current', balance:money(6200), color:'#0e6b54' },
+        { tag:isAr?'را':'RB', name:isAr?'الراجحي':'Al Rajhi', type:isAr?'توفير':'Savings', balance:money(2400), color:'#C4A24C' },
+        { tag:isAr?'ا':'SN', name:isAr?'البنك الأهلي':'SNB', type:isAr?'بطاقة ائتمان':'Credit card', balance:isAr?`−${this.fmt(1800)} ${cur}`:`−${this.fmt(1800)} ${cur}`, color:'#13241F' },
+      ],
+
+      // simulate
+      setLoanTab:()=>this.setState({simTab:'loan'}), setChatTab:()=>this.setState({simTab:'chat'}),
+      isLoanTab:S.simTab==='loan', isChatTab:S.simTab==='chat',
+      loanTabStyle:S.simTab==='loan'?tabOn:tabOff, chatTabStyle:S.simTab==='chat'?tabOn:tabOff,
+      loanPrincipal:S.loan.principal, loanRate:S.loan.rate, loanTerm:S.loan.term,
+      principalFmt:money(S.loan.principal), rateFmt:`${S.loan.rate}%`, termFmt: isAr?`${S.loan.term} شهرًا`:`${S.loan.term} mo`,
+      onPrincipal:(e)=>this.setState({loan:{...S.loan, principal:+e.target.value}}),
+      onRate:(e)=>this.setState({loan:{...S.loan, rate:+e.target.value}}),
+      onTerm:(e)=>this.setState({loan:{...S.loan, term:+e.target.value}}),
+      sliderStyle,
+      installmentFmt:money(inst), totalFmt:money(total), dtiFmt:`${dtiPct}%`,
+      dtiBar:Math.min(100,dtiPct), dtiColor: dtiPct<70?'#7fdcae': dtiPct<90?'#ffd27a':'#ff9d97',
+      verdictBg:verdict.bg, verdictIcon:verdict.icon, verdictTitle:verdict.t, verdictSub:verdict.s,
+      projScore:proj, projColor:pz.c,
+
+      chatMsgs, aiTyping:S.aiTyping, showSuggest:S.chat.length===0, suggestions,
+      chatInput:S.chatInput, onChatInput:(e)=>this.setState({chatInput:e.target.value}),
+      onChatKey:(e)=>{ if(e.key==='Enter') this.send(S.chatInput); },
+      sendChat:()=>this.send(S.chatInput),
+
+      // rescue
+      rescueOpen:!S.rescueDone, rescueDone:S.rescueDone,
+      shortfallFmt:isAr?`−${this.fmt(1240)} ${cur}`:`−${this.fmt(1240)} ${cur}`,
+      murabahaCardStyle, liquidateCardStyle, confirmBtnStyle, confirmLabel,
+      pickMurabaha:()=>this.setState({rescueChoice:'murabaha'}),
+      pickLiquidate:()=>this.setState({rescueChoice:'liquidate'}),
+      confirmRescue:()=>{ if(S.rescueChoice) this.resolveRescue(); },
+      resetRescue:()=>{ this.setState({rescueDone:false, rescueChoice:null, score:62}); this.animateScore(this.state.displayScore,62); },
+      resolvedMsg,
+
+      // goals
+      pointsFmt:this.fmt(S.points), riskTier:isAr?'الطبقة B':'Risk Tier B', goalList,
+
+      // bank
+      applicants,
+      noSelection:!selA, hasSelection:!!selA,
+      selInitials:selA?selA.initials:'', selName:selA?selA.name:'', selReq:selA?`${selA.purpose} · ${money(selA.amount)} · ${selA.dti} DTI`:'',
+      notGenerated:selA&&!S.reportReady&&!S.generating, generating:S.generating, reportReady:S.reportReady,
+      generateLabel:isAr?'توليد التقرير التنبؤي':'Generate predictive report',
+      generateReport:()=>{ this.setState({generating:true}); clearTimeout(this._gen); this._gen=setTimeout(()=>this.setState({generating:false, reportReady:true}),1500); },
+      verdictPanelBg:selVerdict.bg, bankVerdictTitle:selVerdict.t, bankVerdictSub:selVerdict.s,
+      staminaColor:selVerdict.col, selStamina:selA?selA.stamina:'', selDti:selA?selA.dti:'', selStability:selA?selA.stability:'', selDefault:selA?selA.def:'',
+      bankChart: selA ? this.buildForecast(true, selA.verdict==='bad'?-1:selA.verdict==='warn'?0:1) : null,
+      approve:()=>{ if(!approveDisabled) this.setState({decision:'approved'}); },
+      decline:()=>this.setState({decision:'declined'}),
+      approveLabel:t.approve,
+      approveStyle:`flex:1;font-family:inherit;font-size:14px;font-weight:600;border:none;border-radius:12px;padding:13px;cursor:${approveDisabled?'not-allowed':'pointer'};color:#fff;background:${approveDisabled?'#c3cec9':'#0e6b54'}`,
+      declineStyle:'flex:1;font-family:inherit;font-size:14px;font-weight:600;border:1.5px solid rgba(224,87,79,.4);border-radius:12px;padding:13px;cursor:pointer;color:#c94c46;background:#fff',
+      decided:!!S.decision,
+      decisionMsg: S.decision==='approved'?(isAr?'تمت الموافقة على التمويل وأُرسل للعميل ✓':'Loan approved and dispatched to applicant ✓'):(isAr?'تم رفض الطلب وإخطار العميل':'Application declined and applicant notified'),
+      decisionColor: S.decision==='approved'?'#1D9E63':'#c94c46',
+    };
+  }
+
+  claim(id, reward){
+    if (this.state.claimed[id]) return;
+    this.setState(s=>({ claimed:{...s.claimed,[id]:true}, points: s.points+reward }));
+  }
+
+  buildForecast(isBank, trend){
+    // trend: -1 declining/negative, 0 flat-ish, 1 healthy (bank). For consumer, dips negative.
+    const W=300, H=isBank?90:118, pad=6;
+    const pts=[];
+    if(!isBank){
+      let bal=9600;
+      for(let d=0; d<=30; d++){
+        bal -= 175 + Math.sin(d*0.7)*40;
+        if(d===13) bal -= 8100;
+        if(d===27) bal += 18500;
+        pts.push(bal);
+      }
+    } else {
+      let base = trend>0?12000: trend<0?9000:10000;
+      for(let m=0;m<=12;m++){
+        const drift = trend>0? m*350 : trend<0? -m*900 : m*40;
+        base = (trend>0?9000:trend<0?11000:9500) + drift + Math.sin(m*1.1)*700;
+        pts.push(base);
+      }
+    }
+    const min=Math.min(...pts,0), max=Math.max(...pts);
+    const range=(max-min)||1;
+    const x=(i)=> pad + i/(pts.length-1)*(W-2*pad);
+    const y=(val)=> pad + (1-(val-min)/range)*(H-2*pad);
+    const y0=y(0);
+    const line = pts.map((p,i)=>`${i===0?'M':'L'}${x(i).toFixed(1)},${y(p).toFixed(1)}`).join(' ');
+    const area = `${line} L${x(pts.length-1).toFixed(1)},${H-pad} L${x(0).toFixed(1)},${H-pad} Z`;
+    const negIdx = pts.findIndex(p=>p<0);
+    const stroke = (!isBank && negIdx>=0) ? '#E0574F' : trend<0?'#E0574F': trend===0?'#E5A63A':'#1D9E63';
+    const h = React.createElement;
+    const gid = 'fg'+(isBank?'b':'c')+(trend||0);
+    return h('svg',{width:'100%',viewBox:`0 0 ${W} ${H}`,preserveAspectRatio:'none',style:{display:'block'}},
+      h('defs',null, h('linearGradient',{id:gid,x1:'0',y1:'0',x2:'0',y2:'1'},
+        h('stop',{offset:'0%',stopColor:stroke,stopOpacity:'0.22'}),
+        h('stop',{offset:'100%',stopColor:stroke,stopOpacity:'0'}))),
+      h('path',{d:area, fill:`url(#${gid})`}),
+      (y0>pad && y0<H-pad) ? h('line',{x1:pad,y1:y0,x2:W-pad,y2:y0,stroke:'#c3cec9',strokeWidth:'1',strokeDasharray:'4 4'}) : null,
+      h('path',{d:line, fill:'none', stroke, strokeWidth:'2.4', strokeLinejoin:'round', strokeLinecap:'round'}),
+      (!isBank && negIdx>=0) ? h('g',null,
+        h('circle',{cx:x(negIdx), cy:y(pts[negIdx]), r:'4.5', fill:'#E0574F'}),
+        h('circle',{cx:x(negIdx), cy:y(pts[negIdx]), r:'4.5', fill:'none', stroke:'#fff', strokeWidth:'1.5'})
+      ) : null
+    );
+  }
+}
+</script>
+</body>
+</html>

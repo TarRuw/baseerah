@@ -1,0 +1,1798 @@
+{
+  "status": "OK",
+  "timestamp": "2026-06-30T23:18:03Z",
+  "data": {
+    "type": "transactions",
+    "client_profile": "رائد الأعمال المستقل",
+    "transactions": [
+      {
+        "transaction_id": "tx-client_003_freelancer-78",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 70.62
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-06-17T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 239048.86
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-77",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 86.93
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-06-13T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 239119.48
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-76",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 56.81
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-06-09T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 239206.41
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-75",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 850.0
+        },
+        "transaction_information": "شراء من مساحة عمل سيرفكورب",
+        "booking_date_time": "2026-06-09T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مساحة عمل سيرفكورب",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 239263.22
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-74",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 58.75
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-06-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 240113.22
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-73",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 112.5
+        },
+        "transaction_information": "شراء من ADOBE SYSTEMS SUBSCRIPTION",
+        "booking_date_time": "2026-06-01T00:00:00Z",
+        "insights": {
+          "description_cleansed": "ADOBE SYSTEMS SUBSCRIPTION",
+          "category": "SOFTWARE_SUBSCRIPTIONS",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 240171.97
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-72",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 75.12
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-05-30T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 240284.47
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-71",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 44.29
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-05-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 240359.59
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-70",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 52.66
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-05-25T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 240403.88
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-69",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 63.11
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-05-23T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 240456.54
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-68",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 850.0
+        },
+        "transaction_information": "شراء من مساحة عمل سيرفكورب",
+        "booking_date_time": "2026-05-23T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مساحة عمل سيرفكورب",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 240519.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-67",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 800.59
+        },
+        "transaction_information": "شراء من جرير للخدمات المكتبية",
+        "booking_date_time": "2026-05-17T00:00:00Z",
+        "insights": {
+          "description_cleansed": "جرير للخدمات المكتبية",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 241369.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-66",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 850.0
+        },
+        "transaction_information": "شراء من مساحة عمل سيرفكورب",
+        "booking_date_time": "2026-05-15T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مساحة عمل سيرفكورب",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 242170.24
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-65",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 39.1
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-05-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 243020.24
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-64",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 850.0
+        },
+        "transaction_information": "شراء من مساحة عمل سيرفكورب",
+        "booking_date_time": "2026-05-13T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مساحة عمل سيرفكورب",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 243059.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-63",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 15112.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 243909.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-62",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 50.5
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-05-10T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 228797.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-61",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 71.5
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-05-03T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 228847.84
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-60",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 9900.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 228919.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-59",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 850.0
+        },
+        "transaction_information": "شراء من مساحة عمل سيرفكورب",
+        "booking_date_time": "2026-04-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مساحة عمل سيرفكورب",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 219019.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-58",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 69.72
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-28T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 219869.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-57",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 47.42
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-26T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 219939.06
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-56",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 50.86
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-24T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 219986.48
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-55",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 16582.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 220037.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-54",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 54.7
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-22T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 203455.34
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-53",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 112.5
+        },
+        "transaction_information": "شراء من ADOBE SYSTEMS SUBSCRIPTION",
+        "booking_date_time": "2026-04-19T00:00:00Z",
+        "insights": {
+          "description_cleansed": "ADOBE SYSTEMS SUBSCRIPTION",
+          "category": "SOFTWARE_SUBSCRIPTIONS",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 203510.04
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-52",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 61.42
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 203622.54
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-51",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 75.62
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-13T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 203683.96
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-50",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 112.5
+        },
+        "transaction_information": "شراء من ADOBE SYSTEMS SUBSCRIPTION",
+        "booking_date_time": "2026-04-12T00:00:00Z",
+        "insights": {
+          "description_cleansed": "ADOBE SYSTEMS SUBSCRIPTION",
+          "category": "SOFTWARE_SUBSCRIPTIONS",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 203759.58
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-49",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 63.85
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-11T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 203872.08
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-48",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 37.28
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 203935.93
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-47",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 64.43
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-04-07T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 203973.21
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-46",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 19874.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 204037.64
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-45",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 836.0
+        },
+        "transaction_information": "شراء من جرير للخدمات المكتبية",
+        "booking_date_time": "2026-03-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "جرير للخدمات المكتبية",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 184163.64
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-44",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 76.36
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 184999.64
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-43",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 59.88
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-22T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 185076.0
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-42",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 86.75
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-20T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 185135.88
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-41",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 877.95
+        },
+        "transaction_information": "شراء من جرير للخدمات المكتبية",
+        "booking_date_time": "2026-03-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "جرير للخدمات المكتبية",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 185222.63
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-40",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 73.96
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 186100.58
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-39",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 83.65
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-12T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 186174.54
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-38",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 80.55
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-11T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 186258.19
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-37",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 56.94
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 186338.74
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-36",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 21042.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 186395.68
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-35",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 62.4
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-03T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 165353.68
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-34",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 10864.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 165416.08
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-33",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 846.53
+        },
+        "transaction_information": "شراء من جرير للخدمات المكتبية",
+        "booking_date_time": "2026-03-01T00:00:00Z",
+        "insights": {
+          "description_cleansed": "جرير للخدمات المكتبية",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 154552.08
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-32",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 39.07
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-03-01T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 155398.61
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-31",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 58.89
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-02-28T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 155437.68
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-30",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 35.87
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-02-25T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 155496.57
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-29",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 112.5
+        },
+        "transaction_information": "شراء من ADOBE SYSTEMS SUBSCRIPTION",
+        "booking_date_time": "2026-02-23T00:00:00Z",
+        "insights": {
+          "description_cleansed": "ADOBE SYSTEMS SUBSCRIPTION",
+          "category": "SOFTWARE_SUBSCRIPTIONS",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 155532.44
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-28",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 22326.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 155644.94
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-27",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1476.71
+        },
+        "transaction_information": "شراء من جرير للخدمات المكتبية",
+        "booking_date_time": "2026-02-21T00:00:00Z",
+        "insights": {
+          "description_cleansed": "جرير للخدمات المكتبية",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 133318.94
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-26",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 8182.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 134795.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-25",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 75.28
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-02-20T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 126613.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-24",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 58.39
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-02-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 126688.93
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-23",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 13788.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 126747.32
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-22",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 67.01
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-02-09T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 112959.32
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-21",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 43.34
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-02-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 113026.33
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-20",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 74.25
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-02-04T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 113069.67
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-19",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 77.84
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-30T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 113143.92
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-18",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 39.41
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 113221.76
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-17",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 112.5
+        },
+        "transaction_information": "شراء من ADOBE SYSTEMS SUBSCRIPTION",
+        "booking_date_time": "2026-01-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "ADOBE SYSTEMS SUBSCRIPTION",
+          "category": "SOFTWARE_SUBSCRIPTIONS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 113261.17
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-16",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 11782.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 113373.67
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-15",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 112.5
+        },
+        "transaction_information": "شراء من ADOBE SYSTEMS SUBSCRIPTION",
+        "booking_date_time": "2026-01-26T00:00:00Z",
+        "insights": {
+          "description_cleansed": "ADOBE SYSTEMS SUBSCRIPTION",
+          "category": "SOFTWARE_SUBSCRIPTIONS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 101591.67
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-14",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1161.71
+        },
+        "transaction_information": "شراء من جرير للخدمات المكتبية",
+        "booking_date_time": "2026-01-25T00:00:00Z",
+        "insights": {
+          "description_cleansed": "جرير للخدمات المكتبية",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 101704.17
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-13",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 112.5
+        },
+        "transaction_information": "شراء من ADOBE SYSTEMS SUBSCRIPTION",
+        "booking_date_time": "2026-01-24T00:00:00Z",
+        "insights": {
+          "description_cleansed": "ADOBE SYSTEMS SUBSCRIPTION",
+          "category": "SOFTWARE_SUBSCRIPTIONS",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 102865.88
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-12",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 11856.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 102978.38
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-11",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 67.44
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-22T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 91122.38
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-10",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 850.0
+        },
+        "transaction_information": "شراء من مساحة عمل سيرفكورب",
+        "booking_date_time": "2026-01-21T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مساحة عمل سيرفكورب",
+          "category": "BUSINESS_EXPENSES",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 91189.82
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-9",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 66.07
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-19T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92039.82
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-8",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 73.08
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-17T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92105.89
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-7",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 49.36
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92178.97
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-6",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 52.62
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-11T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92228.33
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-5",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 45.0
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-09T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92280.95
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-4",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 49.53
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92325.95
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-3",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 82.88
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-07T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92375.48
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-2",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 24096.0
+        },
+        "transaction_information": "تحويل سريع: مستحقات خدمات استشارية",
+        "insights": {
+          "description_cleansed": "Freelance Inflow",
+          "category": "INFLOW_BUSINESS",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 92458.36
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_003_freelancer-1",
+        "account_id": "acc-client_003_freelancer",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 37.64
+        },
+        "transaction_information": "شراء من أوبر السعودية",
+        "booking_date_time": "2026-01-04T00:00:00Z",
+        "insights": {
+          "description_cleansed": "أوبر السعودية",
+          "category": "TRANSPORTATION",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 68362.36
+          }
+        }
+      }
+    ],
+    "page": {
+      "number": 0,
+      "size": 78,
+      "total_elements": 78,
+      "total_pages": 1
+    }
+  }
+}

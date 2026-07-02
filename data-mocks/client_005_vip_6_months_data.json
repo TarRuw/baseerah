@@ -1,0 +1,1212 @@
+{
+  "status": "OK",
+  "timestamp": "2026-06-30T23:18:03Z",
+  "data": {
+    "type": "transactions",
+    "client_profile": "العميل عالي الملاءة المالية",
+    "transactions": [
+      {
+        "transaction_id": "tx-client_005_vip-52",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1147.2
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-06-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1491408.8
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-51",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 65000.0
+        },
+        "transaction_information": "تحويل أرباح ومكافأة مجلس إدارة",
+        "booking_date_time": "2026-06-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "تحويل أرباح ومكافأة مجلس إدارة",
+          "category": "INVESTMENT_INFLOW",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1492556.0
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-50",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2231.73
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-06-26T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1427556.0
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-49",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2136.92
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-06-24T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1429787.73
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-48",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 5648.87
+        },
+        "transaction_information": "شراء من فندق فورسيزونز الرياض",
+        "booking_date_time": "2026-06-20T00:00:00Z",
+        "insights": {
+          "description_cleansed": "فندق فورسيزونز الرياض",
+          "category": "TRAVEL_HOTELS",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1431924.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-47",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1195.83
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-06-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1437573.52
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-46",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1493.6
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-06-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1438769.35
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-45",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2345.68
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-06-13T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1440262.95
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-44",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1307.27
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-06-12T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1442608.63
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-43",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 945.14
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-06-03T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1443915.9
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-42",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1348.07
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-05-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1444861.04
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-41",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2225.54
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-05-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1446209.11
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-40",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 65000.0
+        },
+        "transaction_information": "تحويل أرباح ومكافأة مجلس إدارة",
+        "booking_date_time": "2026-05-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "تحويل أرباح ومكافأة مجلس إدارة",
+          "category": "INVESTMENT_INFLOW",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1448434.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-39",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 11530.41
+        },
+        "transaction_information": "شراء من الخطوط الجوية السعودية",
+        "booking_date_time": "2026-05-15T00:00:00Z",
+        "insights": {
+          "description_cleansed": "الخطوط الجوية السعودية",
+          "category": "TRAVEL_FLIGHTS",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1383434.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-38",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2096.45
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-05-11T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1394965.06
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-37",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2329.29
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-05-10T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1397061.51
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-36",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1676.73
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-05-09T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1399390.8
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-35",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1857.77
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-05-07T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1401067.53
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-34",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 65000.0
+        },
+        "transaction_information": "تحويل أرباح ومكافأة مجلس إدارة",
+        "booking_date_time": "2026-04-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "تحويل أرباح ومكافأة مجلس إدارة",
+          "category": "INVESTMENT_INFLOW",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1402925.3
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-33",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 895.56
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-04-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1337925.3
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-32",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 4634.74
+        },
+        "transaction_information": "شراء من فندق فورسيزونز الرياض",
+        "booking_date_time": "2026-04-11T00:00:00Z",
+        "insights": {
+          "description_cleansed": "فندق فورسيزونز الرياض",
+          "category": "TRAVEL_HOTELS",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1338820.86
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-31",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 6084.5
+        },
+        "transaction_information": "شراء من الخطوط الجوية السعودية",
+        "booking_date_time": "2026-04-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "الخطوط الجوية السعودية",
+          "category": "TRAVEL_FLIGHTS",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1343455.6
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-30",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 842.27
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-04-02T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1349540.1
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-29",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1797.06
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-29T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1350382.37
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-28",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1201.31
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-27T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1352179.43
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-27",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 65000.0
+        },
+        "transaction_information": "تحويل أرباح ومكافأة مجلس إدارة",
+        "booking_date_time": "2026-03-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "تحويل أرباح ومكافأة مجلس إدارة",
+          "category": "INVESTMENT_INFLOW",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1353380.74
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-26",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 5566.91
+        },
+        "transaction_information": "شراء من فندق فورسيزونز الرياض",
+        "booking_date_time": "2026-03-25T00:00:00Z",
+        "insights": {
+          "description_cleansed": "فندق فورسيزونز الرياض",
+          "category": "TRAVEL_HOTELS",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1288380.74
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-25",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2052.18
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-24T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1293947.65
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-24",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1610.22
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-23T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1295999.83
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-23",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1546.36
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-21T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1297610.05
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-22",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 895.8
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.9
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1299156.41
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-21",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1693.83
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-17T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1300052.21
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-20",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 12513.98
+        },
+        "transaction_information": "شراء من الخطوط الجوية السعودية",
+        "booking_date_time": "2026-03-14T00:00:00Z",
+        "insights": {
+          "description_cleansed": "الخطوط الجوية السعودية",
+          "category": "TRAVEL_FLIGHTS",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1301746.04
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-19",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1995.66
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-06T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1314260.02
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-18",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2090.75
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-04T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1316255.68
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-17",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1537.62
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-03-03T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.96
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1318346.43
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-16",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 3261.97
+        },
+        "transaction_information": "شراء من فندق فورسيزونز الرياض",
+        "booking_date_time": "2026-02-28T00:00:00Z",
+        "insights": {
+          "description_cleansed": "فندق فورسيزونز الرياض",
+          "category": "TRAVEL_HOTELS",
+          "category_confidence": 0.98
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1319884.05
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-15",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 65000.0
+        },
+        "transaction_information": "تحويل أرباح ومكافأة مجلس إدارة",
+        "booking_date_time": "2026-02-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "تحويل أرباح ومكافأة مجلس إدارة",
+          "category": "INVESTMENT_INFLOW",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1323146.02
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-14",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 6685.69
+        },
+        "transaction_information": "شراء من الخطوط الجوية السعودية",
+        "booking_date_time": "2026-02-22T00:00:00Z",
+        "insights": {
+          "description_cleansed": "الخطوط الجوية السعودية",
+          "category": "TRAVEL_FLIGHTS",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1258146.02
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-13",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2429.6
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-02-21T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1264831.71
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-12",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2807.79
+        },
+        "transaction_information": "شراء من فندق فورسيزونز الرياض",
+        "booking_date_time": "2026-02-13T00:00:00Z",
+        "insights": {
+          "description_cleansed": "فندق فورسيزونز الرياض",
+          "category": "TRAVEL_HOTELS",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1267261.31
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-11",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2030.71
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-02-08T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1270069.1
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-10",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "CREDIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 65000.0
+        },
+        "transaction_information": "تحويل أرباح ومكافأة مجلس إدارة",
+        "booking_date_time": "2026-01-27T10:00:00Z",
+        "insights": {
+          "description_cleansed": "تحويل أرباح ومكافأة مجلس إدارة",
+          "category": "INVESTMENT_INFLOW",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1272099.81
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-9",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1991.39
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-01-25T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1207099.81
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-8",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 806.8
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-01-24T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1209091.2
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-7",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1127.08
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-01-20T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.99
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1209898.0
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-6",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2234.24
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-01-18T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.94
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1211025.08
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-5",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 15515.44
+        },
+        "transaction_information": "شراء من بوتيك ديور - مركز المملكة",
+        "booking_date_time": "2026-01-17T00:00:00Z",
+        "insights": {
+          "description_cleansed": "بوتيك ديور - مركز المملكة",
+          "category": "SHOPPING_LUXURY",
+          "category_confidence": 0.92
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1213259.32
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-4",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 2441.82
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-01-13T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.97
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1228774.76
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-3",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 5024.51
+        },
+        "transaction_information": "شراء من فندق فورسيزونز الرياض",
+        "booking_date_time": "2026-01-13T00:00:00Z",
+        "insights": {
+          "description_cleansed": "فندق فورسيزونز الرياض",
+          "category": "TRAVEL_HOTELS",
+          "category_confidence": 0.95
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1231216.58
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-2",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 1305.18
+        },
+        "transaction_information": "شراء من مطعم إل بي إم الرياض (LPM)",
+        "booking_date_time": "2026-01-07T00:00:00Z",
+        "insights": {
+          "description_cleansed": "مطعم إل بي إم الرياض (LPM)",
+          "category": "RESTAURANTS_LUXURY",
+          "category_confidence": 0.91
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1236241.09
+          }
+        }
+      },
+      {
+        "transaction_id": "tx-client_005_vip-1",
+        "account_id": "acc-client_005_vip",
+        "credit_debit_indicator": "DEBIT",
+        "amount": {
+          "currency": "SAR",
+          "amount": 12854.48
+        },
+        "transaction_information": "شراء من الخطوط الجوية السعودية",
+        "booking_date_time": "2026-01-03T00:00:00Z",
+        "insights": {
+          "description_cleansed": "الخطوط الجوية السعودية",
+          "category": "TRAVEL_FLIGHTS",
+          "category_confidence": 0.93
+        },
+        "balance": {
+          "type": "CLOSING_AVAILABLE",
+          "amount": {
+            "currency": "SAR",
+            "amount": 1237546.27
+          }
+        }
+      }
+    ],
+    "page": {
+      "number": 0,
+      "size": 52,
+      "total_elements": 52,
+      "total_pages": 1
+    }
+  }
+}
