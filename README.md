@@ -43,12 +43,15 @@ Bloc was the considered alternative; per DESIGN.md §2 the team picked one in Ph
 
 ## Running the backend
 
-The exact commands are finalized in Step 0.2, which populates `backend/`:
+Both commands run from `backend/` (that's where `docker-compose.yml` and the Gradle wrapper live):
 
 ```bash
-docker-compose up -d          # start PostgreSQL for local dev
-cd backend && ./gradlew bootRun
+cd backend
+docker compose up -d          # start PostgreSQL 16 for local dev
+./gradlew bootRun             # start the API on http://localhost:8080
 ```
+
+Verify it's up: `curl http://localhost:8080/actuator/health` → `{"status":"UP"}`.
 
 ## Running the app
 
