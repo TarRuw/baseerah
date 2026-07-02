@@ -18,6 +18,13 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
+baseerah:
+  seed:
+    # Directory of data-mocks/*.json SAMA payloads. Resolved relative to the working dir; the seeder
+    # also searches parent dirs, so running from backend/ still finds the repo-root data-mocks/.
+    data-mocks-path: data-mocks
+    enabled: true
+
 management:
   endpoints:
     web:
