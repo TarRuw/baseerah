@@ -2,12 +2,12 @@
   "project": {
     "name": "Baseerah",
     "started_at": "2026-07-02 00:00:00",
-    "last_updated": "2026-07-02 16:05:00"
+    "last_updated": "2026-07-02 16:35:00"
   },
   "current_step": {
     "phase": 2,
-    "step": 1,
-    "file": ".mado/steps/step-02-01.md",
+    "step": 2,
+    "file": ".mado/steps/step-02-02.md",
     "status": "pending"
   },
   "phases": [
@@ -38,7 +38,7 @@
       "name": "Financial Stress Score",
       "status": "in_progress",
       "steps": [
-        { "number": 1, "name": "StressScoreCalculator + Liquibase stress_scores + snapshots", "file": ".mado/steps/step-02-01.md", "status": "pending" },
+        { "number": 1, "name": "StressScoreCalculator + Liquibase stress_scores + snapshots", "file": ".mado/steps/step-02-01.md", "status": "completed" },
         { "number": 2, "name": "Stress-score endpoint (score, zone, sub-scores)", "file": ".mado/steps/step-02-02.md", "status": "pending" },
         { "number": 3, "name": "Flutter Home/Radar screen: gauge, chart, accounts", "file": ".mado/steps/step-02-03.md", "status": "pending" }
       ]
@@ -100,7 +100,7 @@
   ],
   "stats": {
     "total_steps": 30,
-    "completed_steps": 8,
-    "completion_percentage": 26.67
+    "completed_steps": 9,
+    "completion_percentage": 30.0
   }
 }
