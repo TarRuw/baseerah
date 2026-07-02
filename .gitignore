@@ -1,15 +1,32 @@
-# Build outputs (populated during implementation phases)
+# --- Java / Gradle ---
+.gradle/
+build/
 backend/build/
 backend/.gradle/
+*.class
+out/
+# Keep the Gradle wrapper jar (needed for a fresh checkout to build)
+!gradle/wrapper/gradle-wrapper.jar
+
+# --- Flutter / Dart ---
+.dart_tool/
+.packages
 frontend/build/
 frontend/.dart_tool/
-*.class
-# IDE
+.flutter-plugins
+.flutter-plugins-dependencies
+frontend/ios/Pods/
+frontend/**/GeneratedPluginRegistrant.*
+
+# --- IDE / editor ---
 .idea/
-.vscode/
 *.iml
-# Env / secrets
-.env
-*.key
-# OS
+.vscode/
+*.swp
 .DS_Store
+
+# --- Secrets / env ---
+.env
+*.env
+*.key
+**/local.properties
