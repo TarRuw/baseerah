@@ -1,0 +1,30 @@
+{
+  "@@locale": "en",
+  "appTitle": "Baseerah",
+  "@appTitle": {
+    "description": "Application name shown in the shell toolbar."
+  },
+  "shellConsumer": "Consumer",
+  "@shellConsumer": {
+    "description": "Segmented control label for the consumer shell."
+  },
+  "shellBank": "Bank",
+  "@shellBank": {
+    "description": "Segmented control label for the bank portal shell."
+  },
+  "languageToggle": "ع",
+  "@languageToggle": {
+    "description": "Language toggle label; shows the target language's glyph (Arabic here)."
+  },
+  "navHome": "Home",
+  "navSimulate": "Simulate",
+  "navRescue": "Rescue",
+  "navGoals": "Goals",
+  "navBankApplications": "Applications",
+  "navBankPortfolio": "Portfolio",
+  "navBankSettings": "Settings",
+  "comingSoon": "Coming soon",
+  "@comingSoon": {
+    "description": "Placeholder body text for screens implemented in later phases."
+  }
+}

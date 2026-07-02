@@ -1,0 +1,7 @@
+# gen-l10n config. ARB templates live in lib/l10n; Arabic is the primary locale
+# but the template (source of keys) is English for readability.
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false

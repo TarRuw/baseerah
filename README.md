@@ -55,10 +55,17 @@ Verify it's up: `curl http://localhost:8080/actuator/health` → `{"status":"UP"
 
 ## Running the app
 
-The exact commands are finalized in Step 0.3, which populates `frontend/`:
+Requires the Flutter 3.x / Dart 3 SDK (see Prerequisites). With the backend running:
 
 ```bash
 cd frontend
-flutter pub get
-flutter run
+flutter pub get   # also generates localizations (l10n)
+flutter run       # pick a device: chrome (web), an emulator, or desktop
+```
+
+The app is **Arabic-first (RTL)** by default; the toolbar language toggle flips to English (LTR).
+It talks to the backend at `http://localhost:8080/api/v1`. On an Android emulator, override the host:
+
+```bash
+flutter run --dart-define=BASEERAH_API_BASE_URL=http://10.0.2.2:8080/api/v1
 ```

@@ -1,0 +1,15 @@
+{
+  "@@locale": "ar",
+  "appTitle": "بصيرة",
+  "shellConsumer": "المستخدم",
+  "shellBank": "البنك",
+  "languageToggle": "EN",
+  "navHome": "الرئيسية",
+  "navSimulate": "المحاكاة",
+  "navRescue": "الإنقاذ",
+  "navGoals": "الأهداف",
+  "navBankApplications": "الطلبات",
+  "navBankPortfolio": "المحفظة",
+  "navBankSettings": "الإعدادات",
+  "comingSoon": "قريباً"
+}

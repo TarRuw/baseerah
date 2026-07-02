@@ -1,0 +1,39 @@
+name: baseerah
+description: "Baseerah (بصيرة) — proactive FinTech early-warning app (consumer + bank shells)."
+# Prevent accidental publication to pub.dev — this is a private app package.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Localization delegates (Arabic-first, RTL) — SDK package.
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # State management (locked project-wide — see README "State-management decision").
+  flutter_riverpod: ^2.6.1
+  # HTTP client for the local backend API.
+  dio: ^5.7.0
+  # Declarative routing for the two shells.
+  go_router: ^14.6.2
+  # Message/number/date formatting; backs gen-l10n. Pinned by flutter_localizations.
+  intl: ^0.20.2
+  # IBM Plex Sans + IBM Plex Sans Arabic fonts, fetched at runtime.
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  # Generate the localized AppLocalizations from lib/l10n/*.arb (see l10n.yaml).
+  generate: true

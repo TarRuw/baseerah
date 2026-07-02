@@ -2,12 +2,12 @@
   "project": {
     "name": "Baseerah",
     "started_at": "2026-07-02 00:00:00",
-    "last_updated": "2026-07-02 10:50:28"
+    "last_updated": "2026-07-02 11:35:00"
   },
   "current_step": {
     "phase": 0,
-    "step": 3,
-    "file": ".mado/steps/step-00-03.md",
+    "step": 4,
+    "file": ".mado/steps/step-00-04.md",
     "status": "pending"
   },
   "phases": [
@@ -18,7 +18,7 @@
       "steps": [
         { "number": 1, "name": "Repo layout, monorepo tooling & README", "file": ".mado/steps/step-00-01.md", "status": "completed" },
         { "number": 2, "name": "Spring Boot + Postgres + Liquibase skeleton, docker-compose", "file": ".mado/steps/step-00-02.md", "status": "completed" },
-        { "number": 3, "name": "Flutter skeleton: theme, i18n/RTL, routing, dio client", "file": ".mado/steps/step-00-03.md", "status": "pending" },
+        { "number": 3, "name": "Flutter skeleton: theme, i18n/RTL, routing, dio client", "file": ".mado/steps/step-00-03.md", "status": "completed" },
         { "number": 4, "name": "Shared API envelope, error handling & health endpoint", "file": ".mado/steps/step-00-04.md", "status": "pending" }
       ]
     },
@@ -100,7 +100,7 @@
   ],
   "stats": {
     "total_steps": 30,
-    "completed_steps": 2,
-    "completion_percentage": 6.7
+    "completed_steps": 3,
+    "completion_percentage": 10.0
   }
 }
