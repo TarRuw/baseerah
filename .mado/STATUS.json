@@ -2,12 +2,12 @@
   "project": {
     "name": "Baseerah",
     "started_at": "2026-07-02 00:00:00",
-    "last_updated": "2026-07-02 15:45:00"
+    "last_updated": "2026-07-02 16:05:00"
   },
   "current_step": {
-    "phase": 1,
-    "step": 4,
-    "file": ".mado/steps/step-01-04.md",
+    "phase": 2,
+    "step": 1,
+    "file": ".mado/steps/step-02-01.md",
     "status": "pending"
   },
   "phases": [
@@ -25,18 +25,18 @@
     {
       "number": 1,
       "name": "Domain & Data",
-      "status": "in_progress",
+      "status": "completed",
       "steps": [
         { "number": 1, "name": "Liquibase: clients, accounts, transactions schema", "file": ".mado/steps/step-01-01.md", "status": "completed" },
         { "number": 2, "name": "JPA entities & repositories (Client, Account, Transaction)", "file": ".mado/steps/step-01-02.md", "status": "completed" },
         { "number": 3, "name": "MockDataSeeder: load 5 clients on boot (idempotent)", "file": ".mado/steps/step-01-03.md", "status": "completed" },
-        { "number": 4, "name": "Core DTOs + client/account/transaction endpoints", "file": ".mado/steps/step-01-04.md", "status": "pending" }
+        { "number": 4, "name": "Core DTOs + client/account/transaction endpoints", "file": ".mado/steps/step-01-04.md", "status": "completed" }
       ]
     },
     {
       "number": 2,
       "name": "Financial Stress Score",
-      "status": "pending",
+      "status": "in_progress",
       "steps": [
         { "number": 1, "name": "StressScoreCalculator + Liquibase stress_scores + snapshots", "file": ".mado/steps/step-02-01.md", "status": "pending" },
         { "number": 2, "name": "Stress-score endpoint (score, zone, sub-scores)", "file": ".mado/steps/step-02-02.md", "status": "pending" },
@@ -100,7 +100,7 @@
   ],
   "stats": {
     "total_steps": 30,
-    "completed_steps": 7,
-    "completion_percentage": 23.33
+    "completed_steps": 8,
+    "completion_percentage": 26.67
   }
 }
