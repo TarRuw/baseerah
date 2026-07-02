@@ -26,5 +26,77 @@
   "comingSoon": "Coming soon",
   "@comingSoon": {
     "description": "Placeholder body text for screens implemented in later phases."
+  },
+  "homeGreeting": "Assalamu alaikum",
+  "@homeGreeting": {
+    "description": "Home screen greeting shown above the client's profile label."
+  },
+  "healthScore": "Financial Health Score",
+  "@healthScore": {
+    "description": "Label under the stress-score gauge."
+  },
+  "outOf100": "out of 100",
+  "@outOf100": {
+    "description": "Suffix clarifying the 0-100 stress-score scale."
+  },
+  "liveLabel": "Live",
+  "@liveLabel": {
+    "description": "Prefix of the live-multibank badge (e.g. 'Live · 3 banks')."
+  },
+  "banksUnit": "banks",
+  "@banksUnit": {
+    "description": "Unit word for the linked-bank count in the multibank badge."
+  },
+  "deficitTitle": "Liquidity deficit predicted",
+  "@deficitTitle": {
+    "description": "Title of the pulsing liquidity-deficit warning card."
+  },
+  "deficitSub": "Projected balance goes negative before payday",
+  "@deficitSub": {
+    "description": "Body of the liquidity-deficit warning card."
+  },
+  "incomeConsistency": "Income consistency",
+  "@incomeConsistency": {
+    "description": "Stat-card label bound to the income-consistency sub-score."
+  },
+  "spendingVelocity": "Spending velocity",
+  "@spendingVelocity": {
+    "description": "Stat-card label bound to the spending-velocity sub-score."
+  },
+  "linkedAccounts": "Linked accounts",
+  "@linkedAccounts": {
+    "description": "Section header for the client's linked bank accounts."
+  },
+  "forecast30Title": "30-Day Cash Flow Forecast",
+  "@forecast30Title": {
+    "description": "Header of the 30-day forecast chart slot."
+  },
+  "forecastComingSoon": "Your 30-day forecast will appear here",
+  "@forecastComingSoon": {
+    "description": "Empty-state text for the forecast slot pending Phase 3."
+  },
+  "zoneOptimal": "Optimal",
+  "@zoneOptimal": {
+    "description": "Label for the OPTIMAL stress-score zone."
+  },
+  "zoneWarning": "Warning",
+  "@zoneWarning": {
+    "description": "Label for the WARNING stress-score zone."
+  },
+  "zoneCritical": "Critical",
+  "@zoneCritical": {
+    "description": "Label for the CRITICAL stress-score zone."
+  },
+  "currencySar": "SAR",
+  "@currencySar": {
+    "description": "Currency unit appended by the money() formatter."
+  },
+  "loadError": "Couldn't load your data",
+  "@loadError": {
+    "description": "Shown when a Home API call fails."
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Button that re-runs a failed API call."
   }
 }

@@ -79,6 +79,30 @@ class BaseerahTokens {
     radius: 1.4,
     colors: [desktopBackdropInner, desktopBackdropOuter],
   );
+
+  // ── Motion (DESIGN §8) ──────────────────────────────────────────────────────
+  /// Stress-score gauge marker animation: "1000ms cubic ease-out".
+  static const Duration scoreAnimation = Duration(milliseconds: 1000);
+  static const Curve scoreAnimationCurve = Curves.easeOutCubic;
+
+  /// `bsr-pulse` — 2.4s attention pulse on the liquidity-deficit warning card.
+  static const Duration pulse = Duration(milliseconds: 2400);
+
+  // ── Spacing ─────────────────────────────────────────────────────────────────
+  /// Default gutter between stacked cards on the phone screens.
+  static const double gap = 16;
+  static const double screenPadding = 20;
+
+  /// Parse a `#RRGGBB` hex (as served by the stress-score API `color` field) to a
+  /// [Color]. Falls back to [muted] for anything malformed so the UI never throws
+  /// on an unexpected payload.
+  static Color hex(String value) {
+    final cleaned = value.replaceFirst('#', '').trim();
+    if (cleaned.length != 6) return muted;
+    final parsed = int.tryParse(cleaned, radix: 16);
+    if (parsed == null) return muted;
+    return Color(0xFF000000 | parsed);
+  }
 }
 
 /// Builds the [ThemeData] both shells share. Fonts come from google_fonts

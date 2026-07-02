@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/home/home_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/locale_provider.dart';
+import '../shell/bottom_nav.dart';
 import '../theme/baseerah_theme.dart';
 
 /// Consumer shell routes (bottom nav order: Home · Simulate · Rescue · Goals).
@@ -30,7 +32,16 @@ GoRouter createRouter() {
         builder: (context, state, navShell) =>
             _ConsumerShell(navigationShell: navShell),
         branches: [
-          _branch(_consumerHome, (l) => l.navHome, Icons.home_outlined),
+          // Home is the first real screen (Step 2.3); the rest stay placeholders
+          // until their phases land.
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _consumerHome,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
           _branch(
             _consumerSimulate,
             (l) => l.navSimulate,
@@ -172,31 +183,12 @@ class _ConsumerShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context);
     return Scaffold(
       appBar: const _ShellToolbar(isBank: false),
       body: navigationShell,
-      bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: ConsumerBottomNav(
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: navigationShell.goBranch,
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            label: l.navHome,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.tune_outlined),
-            label: l.navSimulate,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.health_and_safety_outlined),
-            label: l.navRescue,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.flag_outlined),
-            label: l.navGoals,
-          ),
-        ],
       ),
     );
   }
