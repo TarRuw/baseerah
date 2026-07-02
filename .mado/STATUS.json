@@ -2,30 +2,30 @@
   "project": {
     "name": "Baseerah",
     "started_at": "2026-07-02 00:00:00",
-    "last_updated": "2026-07-02 11:35:00"
+    "last_updated": "2026-07-02 12:00:00"
   },
   "current_step": {
-    "phase": 0,
-    "step": 4,
-    "file": ".mado/steps/step-00-04.md",
+    "phase": 1,
+    "step": 1,
+    "file": ".mado/steps/step-01-01.md",
     "status": "pending"
   },
   "phases": [
     {
       "number": 0,
       "name": "Foundations",
-      "status": "in_progress",
+      "status": "completed",
       "steps": [
         { "number": 1, "name": "Repo layout, monorepo tooling & README", "file": ".mado/steps/step-00-01.md", "status": "completed" },
         { "number": 2, "name": "Spring Boot + Postgres + Liquibase skeleton, docker-compose", "file": ".mado/steps/step-00-02.md", "status": "completed" },
         { "number": 3, "name": "Flutter skeleton: theme, i18n/RTL, routing, dio client", "file": ".mado/steps/step-00-03.md", "status": "completed" },
-        { "number": 4, "name": "Shared API envelope, error handling & health endpoint", "file": ".mado/steps/step-00-04.md", "status": "pending" }
+        { "number": 4, "name": "Shared API envelope, error handling & health endpoint", "file": ".mado/steps/step-00-04.md", "status": "completed" }
       ]
     },
     {
       "number": 1,
       "name": "Domain & Data",
-      "status": "pending",
+      "status": "in_progress",
       "steps": [
         { "number": 1, "name": "Liquibase: clients, accounts, transactions schema", "file": ".mado/steps/step-01-01.md", "status": "pending" },
         { "number": 2, "name": "JPA entities & repositories (Client, Account, Transaction)", "file": ".mado/steps/step-01-02.md", "status": "pending" },
@@ -100,7 +100,7 @@
   ],
   "stats": {
     "total_steps": 30,
-    "completed_steps": 3,
-    "completion_percentage": 10.0
+    "completed_steps": 4,
+    "completion_percentage": 13.3
   }
 }
