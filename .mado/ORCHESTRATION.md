@@ -15,12 +15,17 @@ GenAI (`MockGenAi` default, `RemoteGenAi` optional).
 
 ## Goals
 
+**Primary goal — a fully functional system on a single local machine.** Success = a fresh checkout runs
+end-to-end locally (`docker-compose up` → `./gradlew bootRun` → `flutter run`) with all 5 seeded personas
+and every feature working. Preparing other/hosted environments (deploy, CI/CD, orchestration, prod
+hardening) is **explicitly out of scope for now** — see DESIGN.md §10. Do not add steps for it.
+
 1. A running Spring Boot API that seeds the 5 `data-mocks/` clients into Postgres and serves every
-   endpoint in DESIGN.md §6, with analytics responses under 2.5 s.
+   endpoint in DESIGN.md §6, with analytics responses under 2.5 s — all on localhost.
 2. A Flutter app faithfully reproducing `design/Baseerah.dc.html` — all 7 screens, RTL/Arabic + EN,
-   dark-green/gold theme — driven entirely by the API.
+   dark-green/gold theme — driven entirely by the local API.
 3. Full FR coverage: Stress Score (FR-01/02), GenAI + Loan Sim (FR-03/04/05), Smart Rescue (FR-06/07),
-   B2B credit verification (FR-08), gamified saving (FR-09/10), plus NFR compliance/perf.
+   B2B credit verification (FR-08), gamified saving (FR-09/10), plus NFR compliance/perf — verified locally.
 
 ## Phases
 

@@ -259,10 +259,20 @@ Design tokens must live in one Flutter theme file so the two shells stay consist
 
 ---
 
-## 10. Out of scope (per BRD §3.2)
+## 10. Scope & target runtime
 
-Live SIMAH/SAMA real-time sync; direct cross-bank clearing/settlement. Everything runs on the seeded
-mock datasets.
+**Target runtime (in scope): a single local developer machine.** "Done" means the whole system runs
+end-to-end locally — `docker-compose up` for PostgreSQL, `./gradlew bootRun` for the API, `flutter run`
+for the app — with the 5 seeded personas and every feature working. Optimise every decision for a
+frictionless local run, not for any hosted environment.
+
+**Explicitly out of scope for now** (deferred, not designed against): deployment to any cloud/hosted
+environment, CI/CD pipelines, container orchestration (k8s/Helm), reverse proxies/TLS termination,
+multi-environment config promotion, secrets managers, and production hardening/observability. These come
+in a later, separate scope. Do not add steps or infrastructure for them.
+
+**Out of scope per BRD §3.2:** live SIMAH/SAMA real-time sync; direct cross-bank clearing/settlement.
+Everything runs on the seeded mock datasets; SAMA/NDMO/encryption controls are *simulated* locally.
 
 ---
 
