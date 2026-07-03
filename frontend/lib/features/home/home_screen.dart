@@ -9,7 +9,7 @@ import 'data/client.dart';
 import 'data/stress_score.dart';
 import 'state/home_providers.dart';
 import 'widgets/deficit_warning_card.dart';
-import 'widgets/forecast_chart_placeholder.dart';
+import 'widgets/forecast_chart.dart';
 import 'widgets/linked_accounts_list.dart';
 import 'widgets/stat_card.dart';
 import 'widgets/stress_gauge.dart';
@@ -95,8 +95,8 @@ class HomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: BaseerahTokens.gap),
 
-            // ── Forecast slot (Phase 3 Step 3.2) ───────────────────────────
-            const ForecastChartPlaceholder(),
+            // ── Forecast chart (Phase 3 Step 3.2) ──────────────────────────
+            const ForecastChart(),
             const SizedBox(height: BaseerahTokens.gap),
 
             // ── Linked accounts ────────────────────────────────────────────
