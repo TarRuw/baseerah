@@ -98,5 +98,98 @@
   "retry": "Retry",
   "@retry": {
     "description": "Button that re-runs a failed API call."
+  },
+  "simulateTitle": "Simulate",
+  "@simulateTitle": {
+    "description": "Simulate screen title."
+  },
+  "simulateSubtitle": "Test a decision before you commit",
+  "@simulateSubtitle": {
+    "description": "Simulate screen subtitle under the title."
+  },
+  "loanTab": "Loan Affordability",
+  "@loanTab": {
+    "description": "Tab label for the loan-affordability simulator."
+  },
+  "aiTab": "Ask Baseerah AI",
+  "@aiTab": {
+    "description": "Tab label for the conversational-AI assistant."
+  },
+  "loanPrincipal": "Loan principal",
+  "@loanPrincipal": {
+    "description": "Slider label for the loan amount."
+  },
+  "loanRate": "Bank profit rate",
+  "@loanRate": {
+    "description": "Slider label for the annual profit/interest rate."
+  },
+  "loanTerm": "Term",
+  "@loanTerm": {
+    "description": "Slider label for the repayment term."
+  },
+  "loanTermMonths": "{count} months",
+  "@loanTermMonths": {
+    "description": "Repayment term value formatted with its unit.",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "monthlyInstallment": "Monthly installment",
+  "@monthlyInstallment": {
+    "description": "Label above the computed monthly installment."
+  },
+  "totalRepayment": "Total repayment",
+  "@totalRepayment": {
+    "description": "Label above the computed total repayment."
+  },
+  "dtiAfter": "Debt-to-income after loan",
+  "@dtiAfter": {
+    "description": "Label above the debt-to-income bar."
+  },
+  "scoreIfTaken": "Health score if taken",
+  "@scoreIfTaken": {
+    "description": "Label preceding the projected-vs-current score impact."
+  },
+  "aiName": "Baseerah AI",
+  "@aiName": {
+    "description": "Assistant name in the chat header."
+  },
+  "aiOnline": "Online · SAMA data linked",
+  "@aiOnline": {
+    "description": "Assistant status line in the chat header."
+  },
+  "askPlaceholder": "e.g. Can I afford a 2,100 SAR car lease?",
+  "@askPlaceholder": {
+    "description": "Placeholder text for the chat input field."
+  },
+  "chatSend": "Send",
+  "@chatSend": {
+    "description": "Accessibility label for the chat send button."
+  },
+  "chatAttachInvoice": "Attach invoice",
+  "@chatAttachInvoice": {
+    "description": "Accessibility label for the invoice-image upload button."
+  },
+  "suggestionLease": "What if I lease a car at 2,100 SAR/mo?",
+  "@suggestionLease": {
+    "description": "Suggestion chip: car-lease scenario question."
+  },
+  "suggestionAfford": "Can I afford a 40,000 SAR loan?",
+  "@suggestionAfford": {
+    "description": "Suggestion chip: affordability question."
+  },
+  "invoiceParsed": "Invoice scanned",
+  "@invoiceParsed": {
+    "description": "Prefix for the parsed-invoice AI bubble."
+  },
+  "invoiceParsedBody": "{merchant} · {amount} · {category}\n{action}",
+  "@invoiceParsedBody": {
+    "description": "Body of the parsed-invoice AI bubble.",
+    "placeholders": {
+      "merchant": { "type": "String" },
+      "amount": { "type": "String" },
+      "category": { "type": "String" },
+      "action": { "type": "String" }
+    }
   }
 }

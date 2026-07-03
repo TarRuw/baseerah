@@ -27,6 +27,10 @@ dependencies:
   intl: ^0.20.2
   # IBM Plex Sans + IBM Plex Sans Arabic fonts, fetched at runtime.
   google_fonts: ^6.2.1
+  # Invoice-image capture for the "Ask Baseerah AI" chat tab (Step 3.5). Endorsed
+  # federated plugins cover mobile, web and desktop, so the local demo runs
+  # everywhere `flutter run` targets.
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

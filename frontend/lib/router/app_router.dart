@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/home/home_screen.dart';
+import '../features/simulate/simulate_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/locale_provider.dart';
 import '../shell/bottom_nav.dart';
@@ -42,10 +43,14 @@ GoRouter createRouter() {
               ),
             ],
           ),
-          _branch(
-            _consumerSimulate,
-            (l) => l.navSimulate,
-            Icons.tune_outlined,
+          // Simulate is a real screen from Step 3.5 (loan sliders + AI chat).
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _consumerSimulate,
+                builder: (context, state) => const SimulateScreen(),
+              ),
+            ],
           ),
           _branch(
             _consumerRescue,
