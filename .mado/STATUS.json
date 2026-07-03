@@ -2,12 +2,12 @@
   "project": {
     "name": "Baseerah",
     "started_at": "2026-07-02 00:00:00",
-    "last_updated": "2026-07-03 10:10:00"
+    "last_updated": "2026-07-03 10:30:00"
   },
   "current_step": {
     "phase": 3,
-    "step": 4,
-    "file": ".mado/steps/step-03-04.md",
+    "step": 5,
+    "file": ".mado/steps/step-03-05.md",
     "status": "pending"
   },
   "phases": [
@@ -51,7 +51,7 @@
         { "number": 1, "name": "ForecastEngine interface + HeuristicForecast + Liquibase forecasts", "file": ".mado/steps/step-03-01.md", "status": "completed" },
         { "number": 2, "name": "Forecast endpoints (30-day + 3/6/12-month horizons)", "file": ".mado/steps/step-03-02.md", "status": "completed" },
         { "number": 3, "name": "LoanCalculator + loan-simulate endpoint", "file": ".mado/steps/step-03-03.md", "status": "completed" },
-        { "number": 4, "name": "GenAiClient interface + MockGenAi + chat/invoice endpoints", "file": ".mado/steps/step-03-04.md", "status": "pending" },
+        { "number": 4, "name": "GenAiClient interface + MockGenAi + chat/invoice endpoints", "file": ".mado/steps/step-03-04.md", "status": "completed" },
         { "number": 5, "name": "Flutter Simulate screen: loan sliders + AI chat tabs", "file": ".mado/steps/step-03-05.md", "status": "pending" }
       ]
     },
@@ -100,7 +100,7 @@
   ],
   "stats": {
     "total_steps": 30,
-    "completed_steps": 14,
-    "completion_percentage": 46.7
+    "completed_steps": 15,
+    "completion_percentage": 50.0
   }
 }

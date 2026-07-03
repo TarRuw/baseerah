@@ -24,6 +24,10 @@ baseerah:
     # also searches parent dirs, so running from backend/ still finds the repo-root data-mocks/.
     data-mocks-path: data-mocks
     enabled: true
+  genai:
+    # GenAiClient provider (DESIGN §2): mock (default, deterministic, needs no API key) | remote (Phase 7).
+    # Overridable via the GENAI_PROVIDER env var; falls back to mock so the demo runs offline.
+    provider: ${GENAI_PROVIDER:mock}
 
 management:
   endpoints:
