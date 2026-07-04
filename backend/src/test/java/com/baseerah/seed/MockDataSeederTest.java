@@ -6,8 +6,10 @@ import com.baseerah.account.Account;
 import com.baseerah.account.AccountRepository;
 import com.baseerah.client.Client;
 import com.baseerah.client.ClientRepository;
+import com.baseerah.rescue.RescueEventRepository;
 import com.baseerah.seed.dto.SeedEnvelope;
 import com.baseerah.seed.dto.SeedTransaction;
+import com.baseerah.stress.StressScoreRepository;
 import com.baseerah.transaction.TransactionRepository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -65,12 +67,26 @@ class MockDataSeederTest {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    // Sibling aggregate tables whose FK to clients is NO ACTION (they are computed/audit rows, never
+    // JPA-cascaded from Client): clearing them is required before a persona delete can succeed.
+    @Autowired
+    private StressScoreRepository stressScoreRepository;
+
+    @Autowired
+    private RescueEventRepository rescueEventRepository;
+
     @Test
     void freshLoadThenIdempotentReseed() throws IOException {
         List<ExpectedClient> expected = loadExpected();
         assertThat(expected).hasSize(5);
 
-        // Start from a clean slate for exactly the five personas (cascade removes their accounts + txns).
+        // Start from a clean slate. Deleting a Client cascades to its accounts + transactions (JPA), but the
+        // stress_scores / rescue_events aggregates reference clients with a NO ACTION FK and are not cascaded,
+        // so a snapshot lazily computed (and committed) by another test would otherwise block the delete —
+        // a test-isolation hazard independent of the seeder. Clear those computed/audit rows first; they hold
+        // no seeded reference data, so a full clear is correct for this "clean slate" reseed.
+        stressScoreRepository.deleteAllInBatch();
+        rescueEventRepository.deleteAllInBatch();
         expected.forEach(e -> clientRepository.findByExternalId(e.externalId).ifPresent(clientRepository::delete));
 
         // ── First load ──────────────────────────────────────────────────────────────────────────
