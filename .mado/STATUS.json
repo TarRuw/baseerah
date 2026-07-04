@@ -2,12 +2,12 @@
   "project": {
     "name": "Baseerah",
     "started_at": "2026-07-02 00:00:00",
-    "last_updated": "2026-07-04 00:00:00"
+    "last_updated": "2026-07-04 11:35:00"
   },
   "current_step": {
     "phase": 5,
-    "step": 1,
-    "file": ".mado/steps/step-05-01.md",
+    "step": 2,
+    "file": ".mado/steps/step-05-02.md",
     "status": "pending"
   },
   "phases": [
@@ -70,7 +70,7 @@
       "name": "Gamified Micro-Saving",
       "status": "pending",
       "steps": [
-        { "number": 1, "name": "ChallengeService + RewardsService + Liquibase + seed challenges", "file": ".mado/steps/step-05-01.md", "status": "pending" },
+        { "number": 1, "name": "ChallengeService + RewardsService + Liquibase + seed challenges", "file": ".mado/steps/step-05-01.md", "status": "completed" },
         { "number": 2, "name": "Challenge/rewards endpoints (list, claim, balance)", "file": ".mado/steps/step-05-02.md", "status": "pending" },
         { "number": 3, "name": "Flutter Goals screen: points card, challenges, claim flow", "file": ".mado/steps/step-05-03.md", "status": "pending" }
       ]
@@ -100,7 +100,7 @@
   ],
   "stats": {
     "total_steps": 30,
-    "completed_steps": 19,
-    "completion_percentage": 63.3
+    "completed_steps": 20,
+    "completion_percentage": 66.7
   }
 }
