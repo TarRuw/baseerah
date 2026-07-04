@@ -1,5 +1,6 @@
 package com.baseerah.gamification;
 
+import com.baseerah.common.ConflictException;
 import com.baseerah.common.NotFoundException;
 import java.time.Clock;
 import java.util.UUID;
@@ -58,7 +59,7 @@ public class RewardsService {
      * @param challengeId the completed challenge being claimed
      * @return the awarded points and the client's new balance/tier
      * @throws NotFoundException  if the challenge does not exist or does not belong to {@code clientId}
-     * @throws IllegalStateException if the challenge is not complete, or has already been claimed
+     * @throws ConflictException  if the challenge is not complete, or has already been claimed (→ 409)
      */
     @Transactional
     public ClaimResult claimChallenge(UUID clientId, UUID challengeId) {
@@ -73,10 +74,10 @@ public class RewardsService {
                 .orElseThrow(() -> new IllegalStateException(
                         "Challenge has no progress to claim: " + challengeId));
         if (progress.isClaimed()) {
-            throw new IllegalStateException("Challenge already claimed: " + challengeId);
+            throw new ConflictException("Challenge already claimed: " + challengeId);
         }
         if (!progress.isComplete()) {
-            throw new IllegalStateException("Challenge not complete: " + challengeId);
+            throw new ConflictException("Challenge not complete: " + challengeId);
         }
 
         progress.markClaimed(clock.instant());

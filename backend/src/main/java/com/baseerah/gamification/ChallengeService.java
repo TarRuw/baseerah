@@ -2,6 +2,8 @@ package com.baseerah.gamification;
 
 import com.baseerah.client.Client;
 import com.baseerah.client.ClientService;
+import com.baseerah.common.NotFoundException;
+import com.baseerah.gamification.dto.ChallengeDto;
 import com.baseerah.transaction.Category;
 import com.baseerah.transaction.Direction;
 import com.baseerah.transaction.Transaction;
@@ -19,6 +21,7 @@ import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -84,6 +87,10 @@ public class ChallengeService {
     private static final int MAX_POINTS = 250;
 
     private static final ZoneOffset UTC = ZoneOffset.UTC;
+
+    /** Currency label for progress text — English default and Arabic ({@code Accept-Language: ar}). */
+    private static final String SAR_LABEL_EN = "SAR";
+    private static final String SAR_LABEL_AR = "ريال";
 
     /**
      * Discretionary categories eligible for a spending cap (DESIGN §4.1 modelled set). Essentials
@@ -163,6 +170,80 @@ public class ChallengeService {
                     .orElseGet(() -> new ChallengeProgress(saved, spec.currentValue(), spec.pct()));
             challengeProgressRepository.save(progress);
         }
+    }
+
+    // ── Read / mapping (Step 5.2 endpoints) ─────────────────────────────────────────────────────────
+
+    /**
+     * A client's generated challenges as {@link ChallengeDto}s, each joined with its current progress. Backs
+     * {@code GET /api/v1/clients/{id}/challenges}. Resolves the client first (reusing the shared 404 contract
+     * from {@link ClientService#requireClient}), so an unknown or malformed id yields the standard
+     * {@code NOT_FOUND} envelope rather than an empty list. Entities never leave the service — the mapping
+     * happens here (ORCHESTRATION Global Rules).
+     *
+     * @param clientId the client whose challenges to list
+     * @param locale   the request locale (from {@code Accept-Language}) for the SAR label in progress text
+     * @return the client's challenges as DTOs (empty when none were generated)
+     */
+    @Transactional(readOnly = true)
+    public List<ChallengeDto> listForClient(UUID clientId, Locale locale) {
+        clientService.requireClient(clientId.toString());
+        return challengeRepository.findByClient_Id(clientId).stream()
+                .map(challenge -> toDto(challenge, locale))
+                .toList();
+    }
+
+    /**
+     * One of a client's challenges as a {@link ChallengeDto}. Used by the claim endpoint to return the goal
+     * in its post-claim state ({@code claimed = true}). Scoped to the client — a challenge that does not
+     * exist or belongs to another client is reported as {@link NotFoundException} (never leaking a foreign
+     * goal), matching {@link RewardsService#claimChallenge}.
+     *
+     * @param clientId    the owning client
+     * @param challengeId the challenge to project
+     * @param locale      the request locale for the SAR label in progress text
+     * @return the challenge as a DTO
+     * @throws NotFoundException if the challenge does not exist or does not belong to {@code clientId}
+     */
+    @Transactional(readOnly = true)
+    public ChallengeDto challengeDtoFor(UUID clientId, UUID challengeId, Locale locale) {
+        Challenge challenge = challengeRepository.findById(challengeId)
+                .filter(c -> c.getClient().getId().equals(clientId))
+                .orElseThrow(() -> new NotFoundException("Challenge not found: " + challengeId));
+        return toDto(challenge, locale);
+    }
+
+    /** Project a challenge + its (0..1) progress row into the client-facing DTO. */
+    private ChallengeDto toDto(Challenge challenge, Locale locale) {
+        ChallengeProgress progress = challengeProgressRepository.findByChallenge_Id(challenge.getId())
+                .orElse(null);
+        BigDecimal current = progress == null ? BigDecimal.ZERO : progress.getCurrentValue();
+        int pct = progress == null ? 0 : progress.getPct();
+        boolean claimed = progress != null && progress.isClaimed();
+        boolean claimable = progress != null && progress.isClaimable();
+        return new ChallengeDto(challenge.getId(), challenge.getIcon(), challenge.getTitle(),
+                challenge.getSubtitle(), challenge.getRewardPoints(), pct,
+                progressText(current, challenge.getTargetValue(), locale), claimable, claimed);
+    }
+
+    /**
+     * Human-readable progress, e.g. {@code "541 / 2,000 SAR"} — thousands-grouped whole SAR to match the
+     * DESIGN §8 {@code fmt(n)} number helper, with the currency label localised for the request:
+     * {@code "SAR"} by default and {@code "ريال"} when the {@code Accept-Language} header is Arabic. Digits
+     * stay Western (the Goals screen re-formats for full RTL display in Step 5.3).
+     */
+    static String progressText(BigDecimal current, BigDecimal target, Locale locale) {
+        String label = isArabic(locale) ? SAR_LABEL_AR : SAR_LABEL_EN;
+        return grouped(current) + " / " + grouped(target) + " " + label;
+    }
+
+    private static boolean isArabic(Locale locale) {
+        return locale != null && "ar".equalsIgnoreCase(locale.getLanguage());
+    }
+
+    private static String grouped(BigDecimal value) {
+        long whole = (value == null ? BigDecimal.ZERO : value).setScale(0, RoundingMode.HALF_UP).longValue();
+        return String.format(Locale.US, "%,d", whole);
     }
 
     // ── Pure detection ─────────────────────────────────────────────────────────────────────────────

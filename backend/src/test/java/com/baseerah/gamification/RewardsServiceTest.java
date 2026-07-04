@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.baseerah.client.ClientRepository;
 import com.baseerah.client.ClientService;
+import com.baseerah.common.ConflictException;
 import com.baseerah.gamification.RewardsService.ClaimResult;
 import com.baseerah.transaction.TransactionRepository;
 import java.io.IOException;
@@ -109,7 +110,7 @@ class RewardsServiceTest {
         Challenge incomplete = challengeMatching(p -> !p.isComplete());
         int rowsBefore = ledgerRowCount();
 
-        assertThatExceptionOfType(IllegalStateException.class)
+        assertThatExceptionOfType(ConflictException.class)
                 .isThrownBy(() -> rewardsService.claimChallenge(studentId, incomplete.getId()));
 
         assertThat(ledgerRowCount()).as("no reward written for an incomplete claim").isEqualTo(rowsBefore);
@@ -121,7 +122,7 @@ class RewardsServiceTest {
         rewardsService.claimChallenge(studentId, completed.getId()); // first claim succeeds
         int rowsAfterFirst = ledgerRowCount();
 
-        assertThatExceptionOfType(IllegalStateException.class)
+        assertThatExceptionOfType(ConflictException.class)
                 .isThrownBy(() -> rewardsService.claimChallenge(studentId, completed.getId()));
 
         assertThat(ledgerRowCount()).as("re-claim writes no second reward").isEqualTo(rowsAfterFirst);

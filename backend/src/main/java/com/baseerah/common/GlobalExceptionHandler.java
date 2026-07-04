@@ -21,6 +21,7 @@ public class GlobalExceptionHandler {
 
     static final String VALIDATION_ERROR = "VALIDATION_ERROR";
     static final String NOT_FOUND = "NOT_FOUND";
+    static final String CONFLICT = "CONFLICT";
     static final String INTERNAL_ERROR = "INTERNAL_ERROR";
 
     /** Bean-validation failures on {@code @RequestBody @Valid} arguments → 400. */
@@ -53,6 +54,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiErrorResponse> handleNotFound(NotFoundException ex) {
         return build(HttpStatus.NOT_FOUND, NOT_FOUND, ex.getMessage());
+    }
+
+    /** Request conflicts with the resource's current state (e.g. a double/incomplete claim) → 409. */
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ApiErrorResponse> handleConflict(ConflictException ex) {
+        return build(HttpStatus.CONFLICT, CONFLICT, ex.getMessage());
     }
 
     /** Anything uncaught → 500, without leaking the stack trace to the client. */
