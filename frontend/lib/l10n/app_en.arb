@@ -242,5 +242,65 @@
   "rescueRunAgain": "Run again",
   "@rescueRunAgain": {
     "description": "Action that resets the Rescue screen back to the open state."
+  },
+  "goalsTitle": "Savings Challenges",
+  "@goalsTitle": {
+    "description": "Goals screen title (prototype head)."
+  },
+  "goalsSubtitle": "Save smarter, earn rewards",
+  "@goalsSubtitle": {
+    "description": "Goals screen subtitle under the title."
+  },
+  "goalsPointsLabel": "Reward points",
+  "@goalsPointsLabel": {
+    "description": "Label on the gold reward-points card, above the points total."
+  },
+  "goalsPointsCaption": "Alinma Akthar",
+  "@goalsPointsCaption": {
+    "description": "Loyalty-programme caption under the points total on the gold card."
+  },
+  "goalsChallengesHeader": "Active challenges",
+  "@goalsChallengesHeader": {
+    "description": "Section header above the challenge cards."
+  },
+  "goalsPointsShort": "pts",
+  "@goalsPointsShort": {
+    "description": "Short points unit shown on a challenge's reward chip (e.g. '120 pts')."
+  },
+  "goalsClaim": "Claim",
+  "@goalsClaim": {
+    "description": "Enabled button that claims a completed challenge's reward."
+  },
+  "goalsClaimed": "Claimed ✓",
+  "@goalsClaimed": {
+    "description": "Disabled button state after a challenge's reward has been claimed."
+  },
+  "goalsInProgress": "In progress",
+  "@goalsInProgress": {
+    "description": "Disabled button state for a challenge that isn't complete yet."
+  },
+  "goalsClaimError": "Couldn't claim this reward. Please try again.",
+  "@goalsClaimError": {
+    "description": "Snackbar shown when a claim is rejected or fails."
+  },
+  "goalsEmpty": "No challenges yet — keep spending mindfully and we'll set goals for you.",
+  "@goalsEmpty": {
+    "description": "Calm empty state when the client has no active challenges."
+  },
+  "tierBronze": "Bronze",
+  "@tierBronze": {
+    "description": "Reward-tier badge label: BRONZE."
+  },
+  "tierSilver": "Silver",
+  "@tierSilver": {
+    "description": "Reward-tier badge label: SILVER."
+  },
+  "tierGold": "Gold",
+  "@tierGold": {
+    "description": "Reward-tier badge label: GOLD."
+  },
+  "tierPlatinum": "Platinum",
+  "@tierPlatinum": {
+    "description": "Reward-tier badge label: PLATINUM."
   }
 }

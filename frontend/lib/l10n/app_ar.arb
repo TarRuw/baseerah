@@ -62,5 +62,20 @@
   "rescueNoDeficitBody": "لا يوجد عجز نقدي متوقع. سننبّهك فور تغيّر ذلك.",
   "rescueSuccessTitle": "تم تنفيذ الإنقاذ",
   "rescueRecoveryLabel": "تعافي المؤشر",
-  "rescueRunAgain": "إعادة"
+  "rescueRunAgain": "إعادة",
+  "goalsTitle": "تحديات الادخار",
+  "goalsSubtitle": "ادّخر بذكاء واكسب المكافآت",
+  "goalsPointsLabel": "نقاط المكافآت",
+  "goalsPointsCaption": "الإنماء أكثر",
+  "goalsChallengesHeader": "التحديات النشطة",
+  "goalsPointsShort": "نقطة",
+  "goalsClaim": "استلام",
+  "goalsClaimed": "تم الاستلام ✓",
+  "goalsInProgress": "قيد التقدم",
+  "goalsClaimError": "تعذّر استلام هذه المكافأة. حاول مرة أخرى.",
+  "goalsEmpty": "لا توجد تحديات بعد — واصل الإنفاق بوعي وسنضع لك أهدافًا.",
+  "tierBronze": "برونزي",
+  "tierSilver": "فضي",
+  "tierGold": "ذهبي",
+  "tierPlatinum": "بلاتيني"
 }

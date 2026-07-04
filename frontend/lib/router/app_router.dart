@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/goals/goals_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/rescue/rescue_screen.dart';
 import '../features/simulate/simulate_screen.dart';
@@ -63,7 +64,16 @@ GoRouter createRouter() {
               ),
             ],
           ),
-          _branch(_consumerGoals, (l) => l.navGoals, Icons.flag_outlined),
+          // Goals is a real screen from Step 5.3 (gold points card, challenge
+          // cards, live claim flow).
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _consumerGoals,
+                builder: (context, state) => const GoalsScreen(),
+              ),
+            ],
+          ),
         ],
       ),
       // ── Bank portal shell: sidebar navigation ─────────────────────────────
