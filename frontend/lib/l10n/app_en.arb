@@ -191,5 +191,56 @@
       "category": { "type": "String" },
       "action": { "type": "String" }
     }
+  },
+  "rescueTitle": "Smart Rescue",
+  "@rescueTitle": {
+    "description": "Rescue screen title."
+  },
+  "rescueSubtitle": "Bridge a predicted cash-flow gap",
+  "@rescueSubtitle": {
+    "description": "Rescue screen subtitle under the title."
+  },
+  "rescueShortfallLabel": "Predicted shortfall",
+  "@rescueShortfallLabel": {
+    "description": "Label on the dark-red shortfall banner, above the amount."
+  },
+  "rescueInDays": "in {days} days",
+  "@rescueInDays": {
+    "description": "Lead-time line on the shortfall banner; days is pre-formatted for locale digits.",
+    "placeholders": {
+      "days": { "type": "String" }
+    }
+  },
+  "rescueChooseBridge": "Choose a bridge option",
+  "@rescueChooseBridge": {
+    "description": "Section header above the two selectable bridge cards."
+  },
+  "rescueConfirm": "Confirm rescue",
+  "@rescueConfirm": {
+    "description": "Button that confirms the selected bridge option."
+  },
+  "rescueConfirmError": "Couldn't confirm the rescue. Please try again.",
+  "@rescueConfirmError": {
+    "description": "Snackbar shown when the confirm call fails."
+  },
+  "rescueNoDeficitTitle": "You're in the clear",
+  "@rescueNoDeficitTitle": {
+    "description": "Title of the calm no-deficit (healthy) state."
+  },
+  "rescueNoDeficitBody": "No cash-flow deficit is predicted. We'll alert you the moment that changes.",
+  "@rescueNoDeficitBody": {
+    "description": "Body of the calm no-deficit (healthy) state."
+  },
+  "rescueSuccessTitle": "Rescue applied",
+  "@rescueSuccessTitle": {
+    "description": "Title of the complete state after a bridge is confirmed."
+  },
+  "rescueRecoveryLabel": "Score recovery",
+  "@rescueRecoveryLabel": {
+    "description": "Label above the before-after recovery gauge."
+  },
+  "rescueRunAgain": "Run again",
+  "@rescueRunAgain": {
+    "description": "Action that resets the Rescue screen back to the open state."
   }
 }

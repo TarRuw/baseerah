@@ -50,5 +50,17 @@
   "suggestionLease": "ماذا لو استأجرت سيارة بـ ٢٬١٠٠ ريال شهريًا؟",
   "suggestionAfford": "هل يمكنني تحمّل تمويل ٤٠٬٠٠٠ ريال؟",
   "invoiceParsed": "تم مسح الفاتورة",
-  "invoiceParsedBody": "{merchant} · {amount} · {category}\n{action}"
+  "invoiceParsedBody": "{merchant} · {amount} · {category}\n{action}",
+  "rescueTitle": "الإنقاذ الذكي",
+  "rescueSubtitle": "تجاوز عجزًا نقديًا متوقعًا",
+  "rescueShortfallLabel": "العجز المتوقع",
+  "rescueInDays": "خلال {days} يومًا",
+  "rescueChooseBridge": "اختر خيار التجسير",
+  "rescueConfirm": "تأكيد الإنقاذ",
+  "rescueConfirmError": "تعذّر تأكيد الإنقاذ. حاول مرة أخرى.",
+  "rescueNoDeficitTitle": "وضعك سليم",
+  "rescueNoDeficitBody": "لا يوجد عجز نقدي متوقع. سننبّهك فور تغيّر ذلك.",
+  "rescueSuccessTitle": "تم تنفيذ الإنقاذ",
+  "rescueRecoveryLabel": "تعافي المؤشر",
+  "rescueRunAgain": "إعادة"
 }

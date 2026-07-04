@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/home/home_screen.dart';
+import '../features/rescue/rescue_screen.dart';
 import '../features/simulate/simulate_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/locale_provider.dart';
@@ -52,10 +53,15 @@ GoRouter createRouter() {
               ),
             ],
           ),
-          _branch(
-            _consumerRescue,
-            (l) => l.navRescue,
-            Icons.health_and_safety_outlined,
+          // Rescue is a real screen from Step 4.3 (shortfall banner, bridge
+          // cards, before→after recovery).
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _consumerRescue,
+                builder: (context, state) => const RescueScreen(),
+              ),
+            ],
           ),
           _branch(_consumerGoals, (l) => l.navGoals, Icons.flag_outlined),
         ],

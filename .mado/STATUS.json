@@ -5,9 +5,9 @@
     "last_updated": "2026-07-04 00:00:00"
   },
   "current_step": {
-    "phase": 4,
-    "step": 3,
-    "file": ".mado/steps/step-04-03.md",
+    "phase": 5,
+    "step": 1,
+    "file": ".mado/steps/step-05-01.md",
     "status": "pending"
   },
   "phases": [
@@ -58,11 +58,11 @@
     {
       "number": 4,
       "name": "Smart Rescue & Cross-sell",
-      "status": "in_progress",
+      "status": "completed",
       "steps": [
         { "number": 1, "name": "Deficit alert + RescueService + Liquibase rescue_events", "file": ".mado/steps/step-04-01.md", "status": "completed" },
         { "number": 2, "name": "Rescue endpoints (shortfall/options, confirm → recovery)", "file": ".mado/steps/step-04-02.md", "status": "completed" },
-        { "number": 3, "name": "Flutter Rescue screen: banner, bridge cards, recovery", "file": ".mado/steps/step-04-03.md", "status": "pending" }
+        { "number": 3, "name": "Flutter Rescue screen: banner, bridge cards, recovery", "file": ".mado/steps/step-04-03.md", "status": "completed" }
       ]
     },
     {
@@ -100,7 +100,7 @@
   ],
   "stats": {
     "total_steps": 30,
-    "completed_steps": 18,
-    "completion_percentage": 60.0
+    "completed_steps": 19,
+    "completion_percentage": 63.3
   }
 }
