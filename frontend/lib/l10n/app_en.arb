@@ -302,5 +302,117 @@
   "tierPlatinum": "Platinum",
   "@tierPlatinum": {
     "description": "Reward-tier badge label: PLATINUM."
+  },
+  "bankApplicationsTitle": "Applications",
+  "@bankApplicationsTitle": {
+    "description": "Title of the bank Applications screen."
+  },
+  "bankPendingReview": "Pending review",
+  "@bankPendingReview": {
+    "description": "Header above the applicant queue."
+  },
+  "bankRiskLow": "Low risk",
+  "@bankRiskLow": {
+    "description": "Risk badge for an OK verdict."
+  },
+  "bankRiskMed": "Medium",
+  "@bankRiskMed": {
+    "description": "Risk badge for a WARN verdict."
+  },
+  "bankRiskHigh": "High risk",
+  "@bankRiskHigh": {
+    "description": "Risk badge for a BAD verdict."
+  },
+  "bankRiskUnscored": "Unscored",
+  "@bankRiskUnscored": {
+    "description": "Risk badge for an applicant not yet underwritten."
+  },
+  "bankQueueEmpty": "No applicants in the queue.",
+  "@bankQueueEmpty": {
+    "description": "Empty state when the applicant queue is empty."
+  },
+  "bankSelectApplicant": "Select an applicant to run predictive verification",
+  "@bankSelectApplicant": {
+    "description": "Detail empty state — no applicant selected."
+  },
+  "bankGenerateReport": "Generate predictive report",
+  "@bankGenerateReport": {
+    "description": "Button to generate the predictive report."
+  },
+  "bankAnalyzing": "Analyzing 24-month telemetry…",
+  "@bankAnalyzing": {
+    "description": "bsr-spin loader copy while the report is generated."
+  },
+  "bankUnderwritingVerdict": "Underwriting verdict",
+  "@bankUnderwritingVerdict": {
+    "description": "Verdict panel heading."
+  },
+  "bankStaminaScore": "Cash-flow stamina",
+  "@bankStaminaScore": {
+    "description": "Stamina box label."
+  },
+  "bankOutOf100": "out of 100",
+  "@bankOutOf100": {
+    "description": "Stamina box 'out of 100' caption."
+  },
+  "bankForecastDti": "Forecast DTI",
+  "@bankForecastDti": {
+    "description": "KPI label — forecast DTI."
+  },
+  "bankIncomeStability": "Income stability",
+  "@bankIncomeStability": {
+    "description": "KPI label — income stability."
+  },
+  "bankDefaultProb": "12-mo default prob.",
+  "@bankDefaultProb": {
+    "description": "KPI label — 12-month default probability."
+  },
+  "bankCashflow12": "12-Month projected free cash flow",
+  "@bankCashflow12": {
+    "description": "Cash-flow chart title."
+  },
+  "bankApprove": "Approve loan",
+  "@bankApprove": {
+    "description": "Approve action label."
+  },
+  "bankDecline": "Decline",
+  "@bankDecline": {
+    "description": "Decline action label."
+  },
+  "bankVerdictOkTitle": "Sustains the debt",
+  "@bankVerdictOkTitle": {
+    "description": "Verdict panel title — OK."
+  },
+  "bankVerdictOkSub": "Stable free cash flow across 12 months",
+  "@bankVerdictOkSub": {
+    "description": "Verdict panel subtitle — OK."
+  },
+  "bankVerdictWarnTitle": "Approvable with conditions",
+  "@bankVerdictWarnTitle": {
+    "description": "Verdict panel title — WARN."
+  },
+  "bankVerdictWarnSub": "Recommend longer term or lower amount",
+  "@bankVerdictWarnSub": {
+    "description": "Verdict panel subtitle — WARN."
+  },
+  "bankVerdictBadTitle": "Risk of non-performance",
+  "@bankVerdictBadTitle": {
+    "description": "Verdict panel title — BAD."
+  },
+  "bankVerdictBadSub": "Cash flow insufficient to service debt",
+  "@bankVerdictBadSub": {
+    "description": "Verdict panel subtitle — BAD."
+  },
+  "bankApprovedMsg": "Loan approved and dispatched to applicant ✓",
+  "@bankApprovedMsg": {
+    "description": "Decision confirmation — approved."
+  },
+  "bankDeclinedMsg": "Application declined and applicant notified",
+  "@bankDeclinedMsg": {
+    "description": "Decision confirmation — declined."
+  },
+  "bankDecisionError": "Couldn't record the decision. Please try again.",
+  "@bankDecisionError": {
+    "description": "Snackbar when the decision call fails."
   }
 }

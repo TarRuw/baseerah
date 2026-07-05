@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/bank/applications/applications_screen.dart';
 import '../features/goals/goals_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/rescue/rescue_screen.dart';
@@ -81,10 +82,16 @@ GoRouter createRouter() {
         builder: (context, state, navShell) =>
             _BankShell(navigationShell: navShell),
         branches: [
-          _branch(
-            _bankApps,
-            (l) => l.navBankApplications,
-            Icons.assignment_outlined,
+          // Applications is the first real bank screen (Step 6.3): split-pane
+          // applicant queue ↔ predictive report. Portfolio + Settings stay
+          // placeholders until Step 6.4.
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _bankApps,
+                builder: (context, state) => const ApplicationsScreen(),
+              ),
+            ],
           ),
           _branch(
             _bankPortfolio,

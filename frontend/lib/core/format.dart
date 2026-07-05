@@ -23,4 +23,14 @@ class Fmt {
 
   /// [fmt] suffixed with the localized currency unit (`SAR` / `ر.س`).
   String money(num n) => '${fmt(n)} ${l10n.currencySar}';
+
+  /// A percentage with locale grouping/digits and at most one decimal, suffixed
+  /// with `%` — e.g. `34%` / `2.1%` / `٩٤٪`. The backend ships ratio metrics
+  /// (forecast DTI, income stability, default probability) already scaled to a
+  /// percentage, so this only formats them for display.
+  String percent(num n) {
+    final f = NumberFormat.decimalPattern(locale.toLanguageTag())
+      ..maximumFractionDigits = 1;
+    return '${f.format(n)}%';
+  }
 }
