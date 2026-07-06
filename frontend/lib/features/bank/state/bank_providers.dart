@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../api/api_client.dart';
 import '../data/applicant_models.dart';
 import '../data/bank_repository.dart';
+import '../data/portfolio_models.dart';
+import '../data/risk_policy_model.dart';
 
 // ── Repository ───────────────────────────────────────────────────────────────
 
@@ -19,6 +21,99 @@ final bankRepositoryProvider = Provider<BankRepository>(
 final bankApplicantsProvider = FutureProvider.autoDispose<List<Applicant>>(
   (ref) => ref.watch(bankRepositoryProvider).applicants(),
 );
+
+// ── Portfolio (read-only) ────────────────────────────────────────────────────
+
+/// The monitored portfolio (`GET /bank/portfolio`, Step 6.4). Read-only, so a
+/// plain [FutureProvider] like the applicant queue: the Portfolio screen shows a
+/// spinner while loading and an inline retry on failure via [ref.invalidate].
+/// autoDispose so a fresh visit re-fetches the live figures.
+final bankPortfolioProvider = FutureProvider.autoDispose<Portfolio>(
+  (ref) => ref.watch(bankRepositoryProvider).portfolio(),
+);
+
+// ── Risk policy (read + write) ───────────────────────────────────────────────
+
+/// Where the Settings screen's policy load sits: *loading* the initial GET,
+/// *ready* with the live [RiskPolicy], or *error* if the GET failed (retryable).
+enum RiskPolicyPhase { loading, ready, error }
+
+/// Immutable snapshot of the Settings risk-policy state. [policy] is meaningful
+/// only in the *ready* phase; [saving] is true while a `PUT` is in flight so the
+/// screen can disable inputs and show progress without losing the shown values.
+class RiskPolicyState {
+  const RiskPolicyState({
+    this.phase = RiskPolicyPhase.loading,
+    this.policy,
+    this.saving = false,
+  });
+
+  final RiskPolicyPhase phase;
+  final RiskPolicy? policy;
+  final bool saving;
+
+  RiskPolicyState copyWith({
+    RiskPolicyPhase? phase,
+    RiskPolicy? policy,
+    bool? saving,
+  }) {
+    return RiskPolicyState(
+      phase: phase ?? this.phase,
+      policy: policy ?? this.policy,
+      saving: saving ?? this.saving,
+    );
+  }
+}
+
+/// Owns the Settings risk-policy load/save cycle (Step 6.4). Loads the singleton
+/// on creation; [save] persists an edited copy and replaces the state with the
+/// server's round-tripped result so the UI always reflects what was actually
+/// stored. A failed save leaves the last-saved policy in place and returns false
+/// so the screen can surface a retry snackbar (never a silent failure).
+class RiskPolicyController extends StateNotifier<RiskPolicyState> {
+  RiskPolicyController(this._ref) : super(const RiskPolicyState()) {
+    load();
+  }
+
+  final Ref _ref;
+
+  /// (Re)load the singleton policy — moves loading → ready, or → error on fail.
+  Future<void> load() async {
+    state = const RiskPolicyState(phase: RiskPolicyPhase.loading);
+    try {
+      final policy = await _ref.read(bankRepositoryProvider).riskPolicy();
+      if (!mounted) return;
+      state = RiskPolicyState(phase: RiskPolicyPhase.ready, policy: policy);
+    } catch (_) {
+      if (mounted) state = const RiskPolicyState(phase: RiskPolicyPhase.error);
+    }
+  }
+
+  /// Persist [edited] via `PUT`. Returns true and adopts the round-tripped result
+  /// on success; on failure clears [saving], keeps the prior policy, returns
+  /// false so the screen can revert the control and show a retry.
+  Future<bool> save(RiskPolicy edited) async {
+    if (state.phase != RiskPolicyPhase.ready || state.saving) return false;
+    state = state.copyWith(saving: true);
+    try {
+      final saved =
+          await _ref.read(bankRepositoryProvider).updateRiskPolicy(edited);
+      if (!mounted) return true;
+      state = RiskPolicyState(phase: RiskPolicyPhase.ready, policy: saved);
+      return true;
+    } catch (_) {
+      if (mounted) state = state.copyWith(saving: false);
+      return false;
+    }
+  }
+}
+
+/// Recreated per Settings visit (autoDispose) so it always starts from a fresh
+/// GET of the live policy.
+final riskPolicyProvider =
+    StateNotifierProvider.autoDispose<RiskPolicyController, RiskPolicyState>(
+      (ref) => RiskPolicyController(ref),
+    );
 
 // ── Applications detail state machine ────────────────────────────────────────
 

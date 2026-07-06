@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/bank/applications/applications_screen.dart';
+import '../features/bank/portfolio/portfolio_screen.dart';
+import '../features/bank/settings/settings_screen.dart';
 import '../features/goals/goals_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/rescue/rescue_screen.dart';
@@ -83,8 +85,8 @@ GoRouter createRouter() {
             _BankShell(navigationShell: navShell),
         branches: [
           // Applications is the first real bank screen (Step 6.3): split-pane
-          // applicant queue ↔ predictive report. Portfolio + Settings stay
-          // placeholders until Step 6.4.
+          // applicant queue ↔ predictive report. Portfolio + Settings become
+          // real screens in Step 6.4.
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -93,67 +95,29 @@ GoRouter createRouter() {
               ),
             ],
           ),
-          _branch(
-            _bankPortfolio,
-            (l) => l.navBankPortfolio,
-            Icons.pie_chart_outline,
+          // Portfolio (Step 6.4): 4 live KPI cards + monitoring table.
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _bankPortfolio,
+                builder: (context, state) => const PortfolioScreen(),
+              ),
+            ],
           ),
-          _branch(
-            _bankSettings,
-            (l) => l.navBankSettings,
-            Icons.settings_outlined,
+          // Settings (Step 6.4): SAMA status, NDMO/tokenization toggles, risk
+          // thresholds — reads/persists the singleton risk policy.
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _bankSettings,
+                builder: (context, state) => const SettingsScreen(),
+              ),
+            ],
           ),
         ],
       ),
     ],
   );
-}
-
-/// Label resolver for a route — reads the localized nav label at build time.
-typedef _LabelOf = String Function(AppLocalizations l);
-
-/// A single-route branch rendering a [_PlaceholderScreen]. The [labelOf] and
-/// [icon] are stashed on the route so the shells can build their nav items.
-StatefulShellBranch _branch(String path, _LabelOf labelOf, IconData icon) {
-  return StatefulShellBranch(
-    routes: [
-      GoRoute(
-        path: path,
-        builder: (context, state) =>
-            _PlaceholderScreen(labelOf: labelOf, icon: icon),
-      ),
-    ],
-  );
-}
-
-/// Minimal placeholder shown for every route until real screens land.
-class _PlaceholderScreen extends StatelessWidget {
-  const _PlaceholderScreen({required this.labelOf, required this.icon});
-
-  final _LabelOf labelOf;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context);
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 48, color: BaseerahTokens.teal),
-          const SizedBox(height: 12),
-          Text(labelOf(l), style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 8),
-          Text(
-            l.comingSoon,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium?.copyWith(color: BaseerahTokens.muted),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 /// Shared toolbar: logo, Consumer/Bank switch, language toggle. Present on both

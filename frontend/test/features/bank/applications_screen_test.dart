@@ -7,6 +7,8 @@
 import 'package:baseerah/features/bank/applications/applications_screen.dart';
 import 'package:baseerah/features/bank/data/applicant_models.dart';
 import 'package:baseerah/features/bank/data/bank_repository.dart';
+import 'package:baseerah/features/bank/data/portfolio_models.dart';
+import 'package:baseerah/features/bank/data/risk_policy_model.dart';
 import 'package:baseerah/features/bank/state/bank_providers.dart';
 import 'package:baseerah/l10n/app_localizations.dart';
 import 'package:baseerah/theme/baseerah_theme.dart';
@@ -78,6 +80,30 @@ class _FakeRepo implements BankRepository {
     final bad = applicationId == _badId;
     return _report(applicationId, bad ? Verdict.bad : Verdict.ok, bad ? 30 : 82);
   }
+
+  // Portfolio + risk-policy aren't exercised by this Applications-screen test,
+  // but the fake must satisfy the full BankRepository surface (Step 6.4).
+  @override
+  Future<Portfolio> portfolio() async => const Portfolio(
+    activeFacilities: 0,
+    avgStamina: 0,
+    nplRate: 0,
+    nplBaselineDelta: 0,
+    atRiskAccounts: 0,
+    monitoring: [],
+  );
+
+  @override
+  Future<RiskPolicy> riskPolicy() async => const RiskPolicy(
+    staminaFloor: 60,
+    autoDeclineThreshold: 15,
+    ndmoResidency: true,
+    tokenization: true,
+    samaLastSync: null,
+  );
+
+  @override
+  Future<RiskPolicy> updateRiskPolicy(RiskPolicy policy) async => policy;
 
   @override
   Future<Applicant> decide(String applicationId, Decision decision) async {

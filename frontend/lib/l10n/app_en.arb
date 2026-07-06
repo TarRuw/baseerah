@@ -414,5 +414,153 @@
   "bankDecisionError": "Couldn't record the decision. Please try again.",
   "@bankDecisionError": {
     "description": "Snackbar when the decision call fails."
+  },
+  "bankPortfolioTitle": "Loan Portfolio",
+  "@bankPortfolioTitle": {
+    "description": "Title of the bank Portfolio screen."
+  },
+  "bankPortfolioSub": "Post-disbursement telemetry monitoring",
+  "@bankPortfolioSub": {
+    "description": "Subtitle under the Portfolio screen title."
+  },
+  "bankPortfolioError": "Couldn't load the portfolio.",
+  "@bankPortfolioError": {
+    "description": "Inline error when the portfolio GET fails."
+  },
+  "bankKpiActiveFacilities": "Active facilities",
+  "@bankKpiActiveFacilities": {
+    "description": "KPI card label: count of monitored facilities."
+  },
+  "bankKpiActiveNote": "in the active book",
+  "@bankKpiActiveNote": {
+    "description": "KPI note under active facilities."
+  },
+  "bankKpiAvgStamina": "Avg. stamina",
+  "@bankKpiAvgStamina": {
+    "description": "KPI card label: mean stamina across the book."
+  },
+  "bankKpiStaminaNote": "across the book",
+  "@bankKpiStaminaNote": {
+    "description": "KPI note under average stamina."
+  },
+  "bankKpiNplRate": "NPL rate",
+  "@bankKpiNplRate": {
+    "description": "KPI card label: modelled NPL rate of the screened book."
+  },
+  "bankVsBaseline": "vs baseline",
+  "@bankVsBaseline": {
+    "description": "Suffix on the NPL baseline-delta note (e.g. '-23% vs baseline')."
+  },
+  "bankKpiAtRisk": "At-risk accounts",
+  "@bankKpiAtRisk": {
+    "description": "KPI card label: count of flagged accounts."
+  },
+  "bankKpiAtRiskNote": "early-warning active",
+  "@bankKpiAtRiskNote": {
+    "description": "KPI note under at-risk accounts."
+  },
+  "bankMonitoringTitle": "Active facility monitoring",
+  "@bankMonitoringTitle": {
+    "description": "Header of the portfolio monitoring table."
+  },
+  "bankMonitoringNote": "Live health scores",
+  "@bankMonitoringNote": {
+    "description": "Subtitle under the monitoring table header."
+  },
+  "bankMonitoringEmpty": "No active facilities to monitor.",
+  "@bankMonitoringEmpty": {
+    "description": "Empty state when the monitoring table has no rows."
+  },
+  "bankColBorrower": "Borrower",
+  "@bankColBorrower": {
+    "description": "Monitoring table column header: borrower."
+  },
+  "bankColFacility": "Facility",
+  "@bankColFacility": {
+    "description": "Monitoring table column header: facility."
+  },
+  "bankColHealth": "Health",
+  "@bankColHealth": {
+    "description": "Monitoring table column header: health score + trend."
+  },
+  "bankColStatus": "Status",
+  "@bankColStatus": {
+    "description": "Monitoring table column header: status badge."
+  },
+  "bankStatusHealthy": "Healthy",
+  "@bankStatusHealthy": {
+    "description": "Monitoring status badge: healthy."
+  },
+  "bankStatusWatch": "Watch",
+  "@bankStatusWatch": {
+    "description": "Monitoring status badge: watch."
+  },
+  "bankStatusAtRisk": "At risk",
+  "@bankStatusAtRisk": {
+    "description": "Monitoring status badge: at risk."
+  },
+  "bankSettingsConnectivity": "Connectivity & compliance",
+  "@bankSettingsConnectivity": {
+    "description": "Settings card title: SAMA status + compliance toggles."
+  },
+  "bankSettingsThresholds": "Risk policy thresholds",
+  "@bankSettingsThresholds": {
+    "description": "Settings card title: stamina + auto-decline sliders."
+  },
+  "bankSettingsError": "Couldn't load settings.",
+  "@bankSettingsError": {
+    "description": "Inline error when the risk-policy GET fails."
+  },
+  "bankSettingsSaveError": "Couldn't save the change. Please try again.",
+  "@bankSettingsSaveError": {
+    "description": "Snackbar when a risk-policy PUT fails."
+  },
+  "bankSamaFramework": "SAMA Open Banking Framework",
+  "@bankSamaFramework": {
+    "description": "SAMA status row title."
+  },
+  "bankSamaConnected": "Connected",
+  "@bankSamaConnected": {
+    "description": "SAMA status badge."
+  },
+  "bankLastSync": "Last sync",
+  "@bankLastSync": {
+    "description": "Prefix for the SAMA last-sync timestamp."
+  },
+  "bankNeverSynced": "Never synced",
+  "@bankNeverSynced": {
+    "description": "SAMA sync subtitle when no sync has occurred."
+  },
+  "bankNdmoResidency": "NDMO data residency",
+  "@bankNdmoResidency": {
+    "description": "Toggle label: NDMO data-residency compliance."
+  },
+  "bankNdmoSub": "Keep all data within the Kingdom",
+  "@bankNdmoSub": {
+    "description": "NDMO toggle subtitle."
+  },
+  "bankTokenization": "Payload tokenization",
+  "@bankTokenization": {
+    "description": "Toggle label: SAMA account tokenization."
+  },
+  "bankTokenizationSub": "Encrypt account identifiers at ingest",
+  "@bankTokenizationSub": {
+    "description": "Tokenization toggle subtitle."
+  },
+  "bankStaminaFloor": "Minimum stamina to approve",
+  "@bankStaminaFloor": {
+    "description": "Slider label: stamina floor (0-100)."
+  },
+  "bankStaminaFloorNote": "Applicants below this score need manual review.",
+  "@bankStaminaFloorNote": {
+    "description": "Stamina-floor slider help text."
+  },
+  "bankAutoDecline": "Auto-decline DTI threshold",
+  "@bankAutoDecline": {
+    "description": "Slider label: forecast-DTI auto-decline threshold (percent)."
+  },
+  "bankAutoDeclineNote": "Applications with a forecast DTI at or above this are declined automatically.",
+  "@bankAutoDeclineNote": {
+    "description": "Auto-decline slider help text."
   }
 }

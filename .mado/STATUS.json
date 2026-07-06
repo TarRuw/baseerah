@@ -2,12 +2,12 @@
   "project": {
     "name": "Baseerah",
     "started_at": "2026-07-02 00:00:00",
-    "last_updated": "2026-07-05 00:00:00"
+    "last_updated": "2026-07-06 00:00:00"
   },
   "current_step": {
-    "phase": 6,
-    "step": 4,
-    "file": ".mado/steps/step-06-04.md",
+    "phase": 7,
+    "step": 1,
+    "file": ".mado/steps/step-07-01.md",
     "status": "pending"
   },
   "phases": [
@@ -78,12 +78,12 @@
     {
       "number": 6,
       "name": "Bank Portal",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         { "number": 1, "name": "UnderwritingService + loan_applications + seed applicants", "file": ".mado/steps/step-06-01.md", "status": "completed" },
         { "number": 2, "name": "Bank endpoints (applicants, report, decision, portfolio, risk-policy)", "file": ".mado/steps/step-06-02.md", "status": "completed" },
         { "number": 3, "name": "Flutter Bank shell + Applications pipeline screen", "file": ".mado/steps/step-06-03.md", "status": "completed" },
-        { "number": 4, "name": "Flutter Bank Portfolio + Settings screens", "file": ".mado/steps/step-06-04.md", "status": "pending" }
+        { "number": 4, "name": "Flutter Bank Portfolio + Settings screens", "file": ".mado/steps/step-06-04.md", "status": "completed" }
       ]
     },
     {
