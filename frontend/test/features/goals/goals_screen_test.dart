@@ -11,6 +11,7 @@ import 'package:baseerah/features/goals/data/rewards.dart';
 import 'package:baseerah/features/goals/goals_screen.dart';
 import 'package:baseerah/features/goals/state/goals_providers.dart';
 import 'package:baseerah/l10n/app_localizations.dart';
+import 'package:baseerah/theme/baseerah_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -75,6 +76,7 @@ Widget _app(Locale locale, {required List<Override> overrides}) {
     overrides: overrides,
     child: MaterialApp(
       locale: locale,
+      theme: BaseerahTheme.light(locale),
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
         AppLocalizations.delegate,

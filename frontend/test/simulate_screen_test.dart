@@ -61,6 +61,7 @@ Widget _app(Locale locale, {required List<Override> overrides}) {
     overrides: overrides,
     child: MaterialApp(
       locale: locale,
+      theme: BaseerahTheme.light(locale),
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
         AppLocalizations.delegate,

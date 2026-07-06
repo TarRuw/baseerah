@@ -13,20 +13,21 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: BaseerahApp()));
     await tester.pumpAndSettle();
 
-    // Default locale is Arabic → title in Arabic, direction RTL.
-    expect(find.text('بصيرة'), findsOneWidget);
-    expect(Directionality.of(tester.element(find.text('بصيرة'))),
+    // Default locale is Arabic → the brand name renders in Arabic (it appears
+    // both in the toolbar title and the Home header), direction RTL.
+    expect(find.text('بصيرة'), findsWidgets);
+    expect(Directionality.of(tester.element(find.text('بصيرة').first)),
         TextDirection.rtl);
 
     // Toggle language (button shows the target language: "EN" while in Arabic).
     await tester.tap(find.text('EN'));
     await tester.pumpAndSettle();
 
-    // Now English → title "Baseerah", direction LTR.
-    final l = AppLocalizations.of(tester.element(find.byType(Scaffold)));
+    // Now English → brand "Baseerah", direction LTR.
+    final l = AppLocalizations.of(tester.element(find.byType(Scaffold).first));
     expect(l.appTitle, 'Baseerah');
-    expect(find.text('Baseerah'), findsOneWidget);
-    expect(Directionality.of(tester.element(find.text('Baseerah'))),
+    expect(find.text('Baseerah'), findsWidgets);
+    expect(Directionality.of(tester.element(find.text('Baseerah').first)),
         TextDirection.ltr);
   });
 }

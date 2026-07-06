@@ -140,6 +140,10 @@ class BaseerahTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: BaseerahTokens.lightBg,
+      // Pin the classic ripple splash: InkSparkle (the M3 Android-12 default) is
+      // Android-specific and fails to load its shader under `flutter test`, so
+      // InkRipple gives a consistent cross-platform splash and a testable UI.
+      splashFactory: InkRipple.splashFactory,
       textTheme: _textTheme(Brightness.light, locale),
       appBarTheme: const AppBarTheme(
         backgroundColor: BaseerahTokens.teal,

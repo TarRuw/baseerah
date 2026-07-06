@@ -9,6 +9,7 @@ import 'package:baseerah/features/bank/data/applicant_models.dart';
 import 'package:baseerah/features/bank/data/bank_repository.dart';
 import 'package:baseerah/features/bank/state/bank_providers.dart';
 import 'package:baseerah/l10n/app_localizations.dart';
+import 'package:baseerah/theme/baseerah_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -71,6 +72,9 @@ class _FakeRepo implements BankRepository {
   @override
   Future<UnderwritingReport> report(String applicationId) async {
     reportCalls++;
+    // A small delay so the generating (bsr-spin) state renders a real frame
+    // before the report resolves — tests advance time to move past it.
+    await Future<void>.delayed(const Duration(milliseconds: 50));
     final bad = applicationId == _badId;
     return _report(applicationId, bad ? Verdict.bad : Verdict.ok, bad ? 30 : 82);
   }
@@ -97,6 +101,7 @@ Widget _app(Locale locale, {required List<Override> overrides}) {
     overrides: overrides,
     child: MaterialApp(
       locale: locale,
+      theme: BaseerahTheme.light(locale),
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -118,6 +123,16 @@ void main() {
 
   setUp(() => repo = _FakeRepo());
 
+  /// The bank portal is a desktop-only shell (sidebar + split pane), so drive the
+  /// tests at a desktop viewport rather than the 800×600 default — otherwise the
+  /// split pane is too narrow/short and the report legitimately overflows.
+  void useDesktopSurface(WidgetTester tester) {
+    tester.view.physicalSize = const Size(1440, 1024);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+  }
+
   /// Pump past the initial applicant-queue fetch.
   Future<void> settleLoad(WidgetTester tester) async {
     await tester.pump(); // build → FutureProvider fires
@@ -125,6 +140,7 @@ void main() {
   }
 
   testWidgets('renders the applicant queue with risk badges', (tester) async {
+    useDesktopSurface(tester);
     await tester.pumpWidget(_app(const Locale('en'), overrides: overrides()));
     await settleLoad(tester);
 
@@ -141,6 +157,7 @@ void main() {
 
   testWidgets('selecting an applicant runs the empty → generating → report flow',
       (tester) async {
+    useDesktopSurface(tester);
     await tester.pumpWidget(_app(const Locale('en'), overrides: overrides()));
     await settleLoad(tester);
 
@@ -151,7 +168,7 @@ void main() {
     await tester.tap(find.text('Generate predictive report'));
     await tester.pump(); // → generating (spinner + analyzing copy)
     expect(find.text('Analyzing 24-month telemetry…'), findsOneWidget);
-    await tester.pump(); // resolve report() → report state
+    await tester.pump(const Duration(milliseconds: 100)); // resolve report()
 
     expect(repo.reportCalls, 1);
     expect(find.text('Sustains the debt'), findsOneWidget); // OK verdict panel
@@ -162,14 +179,15 @@ void main() {
 
   testWidgets('approving a report records the decision and shows confirmation',
       (tester) async {
+    useDesktopSurface(tester);
     await tester.pumpWidget(_app(const Locale('en'), overrides: overrides()));
     await settleLoad(tester);
 
     await tester.tap(find.text('Noura Al-Qahtani'));
     await tester.pump();
     await tester.tap(find.text('Generate predictive report'));
-    await tester.pump();
-    await tester.pump();
+    await tester.pump(); // → generating
+    await tester.pump(const Duration(milliseconds: 100)); // resolve report()
 
     await tester.tap(find.text('Approve loan'));
     await tester.pump(); // register → deciding
@@ -183,14 +201,15 @@ void main() {
   });
 
   testWidgets('Approve is disabled for a BAD verdict', (tester) async {
+    useDesktopSurface(tester);
     await tester.pumpWidget(_app(const Locale('en'), overrides: overrides()));
     await settleLoad(tester);
 
     await tester.tap(find.text('Khalid Al-Otaibi'));
     await tester.pump();
     await tester.tap(find.text('Generate predictive report'));
-    await tester.pump();
-    await tester.pump();
+    await tester.pump(); // → generating
+    await tester.pump(const Duration(milliseconds: 100)); // resolve report()
 
     expect(find.text('Risk of non-performance'), findsOneWidget);
     final approve = tester.widget<ElevatedButton>(
@@ -203,6 +222,7 @@ void main() {
   });
 
   testWidgets('renders right-to-left under Arabic', (tester) async {
+    useDesktopSurface(tester);
     await tester.pumpWidget(_app(const Locale('ar'), overrides: overrides()));
     await settleLoad(tester);
 
