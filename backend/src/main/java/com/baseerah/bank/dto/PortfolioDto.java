@@ -24,6 +24,8 @@ import java.util.List;
  * @param nplBaselineDelta  {@code nplRate} minus the un-screened baseline (≤ 0 = a reduction), percentage points
  * @param atRiskAccounts    count of active-book facilities flagged for attention (status not {@code HEALTHY})
  * @param monitoring        one row per active-book facility
+ * @param dataResidency     NDMO residency marker for this payload ({@code KSA} when local residency is enforced)
+ * @param exportAllowed     whether this payload may leave the residency boundary — {@code false} while NDMO is on
  */
 public record PortfolioDto(
         int activeFacilities,
@@ -31,19 +33,24 @@ public record PortfolioDto(
         BigDecimal nplRate,
         BigDecimal nplBaselineDelta,
         int atRiskAccounts,
-        List<MonitoringRow> monitoring) {
+        List<MonitoringRow> monitoring,
+        String dataResidency,
+        boolean exportAllowed) {
 
     /**
      * One row of the portfolio monitoring table (DESIGN §7.6): a borrower, their facility, a health score,
      * a trend arrow, and a status badge.
      *
-     * @param borrower borrower display name
-     * @param facility the facility descriptor (loan purpose)
-     * @param health   the facility's health score (its stamina, 0–100)
-     * @param trend    health trend relative to the portfolio (drives the ↑/→/↓ arrow)
-     * @param status   monitoring status badge
+     * @param borrower          borrower display name
+     * @param facility          the facility descriptor (loan purpose)
+     * @param health            the facility's health score (its stamina, 0–100)
+     * @param trend             health trend relative to the portfolio (drives the ↑/→/↓ arrow)
+     * @param status            monitoring status badge
+     * @param tokenizedAccounts the borrower's accounts as non-reversible SAMA tokens (§9); empty when the
+     *                          {@code tokenization} policy toggle is off — a raw account id never appears here
      */
-    public record MonitoringRow(String borrower, String facility, int health, Trend trend, Status status) {
+    public record MonitoringRow(String borrower, String facility, int health, Trend trend, Status status,
+            List<String> tokenizedAccounts) {
     }
 
     /** Health trend relative to the portfolio mean — the table's ↑ / → / ↓ arrow (DESIGN §7.6). */

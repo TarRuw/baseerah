@@ -46,7 +46,18 @@ class UnderwritingServiceTest {
     /** Service whose forecast engine and repositories are unused by the pure {@code assemble} path. */
     private UnderwritingService pureService() {
         return new UnderwritingService(mock(ForecastEngine.class), new StressScoreCalculator(),
-                mock(TransactionRepository.class), mock(LoanApplicationRepository.class));
+                mock(TransactionRepository.class), mock(LoanApplicationRepository.class),
+                mock(RiskPolicyRepository.class));
+    }
+
+    /** A live risk policy with the given guardrails (same package, so the JPA constructor is reachable). */
+    private static RiskPolicy policy(int staminaFloor, int autoDeclineThreshold) {
+        RiskPolicy p = new RiskPolicy();
+        p.setStaminaFloor(staminaFloor);
+        p.setAutoDeclineThreshold(autoDeclineThreshold);
+        p.setNdmoResidency(true);
+        p.setTokenization(true);
+        return p;
     }
 
     // ── Verdict bands via the pure core ────────────────────────────────────────────────────────────
@@ -127,6 +138,37 @@ class UnderwritingServiceTest {
         assertThat(UnderwritingService.verdictFor(90, new BigDecimal("71"))).isEqualTo(Verdict.BAD);
     }
 
+    // ── Risk-policy overlay (Step 7.1 auto-decline guardrail) ────────────────────────────────────────
+
+    /** A minimal report carrying only the fields {@code enforcePolicy} inspects (stamina, DTI, verdict). */
+    private static UnderwritingReport reportWith(int stamina, String dtiPercent, Verdict verdict) {
+        return new UnderwritingReport(UUID.randomUUID(), "Test", "T", "Working capital",
+                new BigDecimal("50000.00"), UUID.randomUUID(), stamina, new BigDecimal(dtiPercent),
+                new BigDecimal("80.00"), new BigDecimal("10.00"), verdict, UnderwritingService.tierFor(verdict));
+    }
+
+    @Test
+    void policyForcesAutoDeclineBelowStaminaFloorOrAtDtiThreshold() {
+        // A comfortably-OK report (stamina 60, DTI 20%) with a stricter policy floor of 65 → auto-declined.
+        UnderwritingReport belowFloor = reportWith(60, "20", Verdict.WARN);
+        UnderwritingReport declinedByFloor = UnderwritingService.enforcePolicy(belowFloor, 65, 71);
+        assertThat(declinedByFloor.verdict()).isEqualTo(Verdict.BAD);
+        assertThat(declinedByFloor.riskTier()).isEqualTo("C");
+
+        // A report whose DTI meets the auto-decline ceiling → auto-declined regardless of stamina.
+        UnderwritingReport atThreshold = reportWith(90, "60", Verdict.WARN);
+        assertThat(UnderwritingService.enforcePolicy(atThreshold, 50, 60).verdict()).isEqualTo(Verdict.BAD);
+    }
+
+    @Test
+    void policyLeavesCompliantReportUnchanged() {
+        // Above the floor and below the ceiling → the §5.5 verdict stands.
+        UnderwritingReport ok = reportWith(80, "20", Verdict.OK);
+        UnderwritingReport screened = UnderwritingService.enforcePolicy(ok, 50, 71);
+        assertThat(screened.verdict()).isEqualTo(Verdict.OK);
+        assertThat(screened).isSameAs(ok);
+    }
+
     // ── Shell: forecast reuse + persistence ────────────────────────────────────────────────────────
 
     @Test
@@ -134,8 +176,10 @@ class UnderwritingServiceTest {
         ForecastEngine forecastEngine = mock(ForecastEngine.class);
         TransactionRepository txRepo = mock(TransactionRepository.class);
         LoanApplicationRepository appRepo = mock(LoanApplicationRepository.class);
+        RiskPolicyRepository policyRepo = mock(RiskPolicyRepository.class);
+        when(policyRepo.loadPolicy()).thenReturn(policy(50, 71));
         UnderwritingService service =
-                new UnderwritingService(forecastEngine, new StressScoreCalculator(), txRepo, appRepo);
+                new UnderwritingService(forecastEngine, new StressScoreCalculator(), txRepo, appRepo, policyRepo);
 
         UUID applicationId = UUID.randomUUID();
         UUID clientId = UUID.randomUUID();
@@ -170,7 +214,8 @@ class UnderwritingServiceTest {
     void generateReportRejectsUnlinkedApplicant() {
         LoanApplicationRepository appRepo = mock(LoanApplicationRepository.class);
         UnderwritingService service = new UnderwritingService(mock(ForecastEngine.class),
-                new StressScoreCalculator(), mock(TransactionRepository.class), appRepo);
+                new StressScoreCalculator(), mock(TransactionRepository.class), appRepo,
+                mock(RiskPolicyRepository.class));
 
         UUID applicationId = UUID.randomUUID();
         LoanApplication synthetic = new LoanApplication("APP-SYN", "Synthetic", "SY",

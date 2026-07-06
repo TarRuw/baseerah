@@ -106,13 +106,16 @@ public class UnderwritingService {
     private final StressScoreCalculator stressScoreCalculator;
     private final TransactionRepository transactionRepository;
     private final LoanApplicationRepository loanApplicationRepository;
+    private final RiskPolicyRepository riskPolicyRepository;
 
     public UnderwritingService(ForecastEngine forecastEngine, StressScoreCalculator stressScoreCalculator,
-            TransactionRepository transactionRepository, LoanApplicationRepository loanApplicationRepository) {
+            TransactionRepository transactionRepository, LoanApplicationRepository loanApplicationRepository,
+            RiskPolicyRepository riskPolicyRepository) {
         this.forecastEngine = forecastEngine;
         this.stressScoreCalculator = stressScoreCalculator;
         this.transactionRepository = transactionRepository;
         this.loanApplicationRepository = loanApplicationRepository;
+        this.riskPolicyRepository = riskPolicyRepository;
     }
 
     /**
@@ -142,10 +145,44 @@ public class UnderwritingService {
         List<Transaction> window = trailingWindow(clientId, today);
 
         UnderwritingReport report = assemble(app, window, projection);
+        // Overlay the bank's configurable risk policy on top of the §5.5 verdict (§5.5 thresholds are fixed by
+        // DESIGN and computed in the pure core; the policy is the bank's own, tunable auto-decline guardrail).
+        RiskPolicy policy = riskPolicyRepository.loadPolicy();
+        report = enforcePolicy(report, policy.getStaminaFloor(), policy.getAutoDeclineThreshold());
+
         app.applyReport(report.staminaScore(), report.forecastDti(), report.incomeStability(),
                 report.defaultProb12mo(), report.verdict(), report.riskTier());
         loanApplicationRepository.save(app);
         return report;
+    }
+
+    /**
+     * Overlay the bank's persisted risk policy on a computed report: force an auto-decline (verdict
+     * {@link Verdict#BAD}, tier {@code C}) when the applicant's stamina falls below {@code staminaFloor} or the
+     * forecast DTI meets/exceeds {@code autoDeclineThreshold} (%). This is the bank's own tunable guardrail on
+     * top of the DESIGN §5.5 bands — the same stamina-floor / DTI-ceiling contract {@code BankService} uses to
+     * screen the portfolio — so raising the floor or lowering the ceiling via {@code PUT /api/v1/bank/risk-policy}
+     * turns a borderline OK/WARN applicant into an auto-decline on the next {@code report}/{@code decision} call.
+     * Package-visible and pure so the threshold behaviour is unit-tested without Spring. A report already at
+     * {@code BAD} is returned unchanged.
+     *
+     * @param report               the §5.5 report to screen
+     * @param staminaFloor         minimum acceptable stamina (0–100); below it → auto-decline
+     * @param autoDeclineThreshold forecast-DTI ceiling (%); at/above it → auto-decline
+     * @return the report, forced to a declining verdict if the policy is breached; otherwise unchanged
+     */
+    static UnderwritingReport enforcePolicy(UnderwritingReport report, int staminaFloor,
+            int autoDeclineThreshold) {
+        boolean belowFloor = report.staminaScore() < staminaFloor;
+        boolean atOrOverThreshold =
+                report.forecastDti().compareTo(BigDecimal.valueOf(autoDeclineThreshold)) >= 0;
+        if (report.verdict() == Verdict.BAD || (!belowFloor && !atOrOverThreshold)) {
+            return report;
+        }
+        return new UnderwritingReport(report.applicationId(), report.applicantName(), report.initials(),
+                report.purpose(), report.amount(), report.clientRef(), report.staminaScore(),
+                report.forecastDti(), report.incomeStability(), report.defaultProb12mo(), Verdict.BAD,
+                tierFor(Verdict.BAD));
     }
 
     /**

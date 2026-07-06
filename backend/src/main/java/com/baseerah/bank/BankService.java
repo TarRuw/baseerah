@@ -69,13 +69,16 @@ public class BankService {
     private final ForecastEngine forecastEngine;
     private final LoanApplicationRepository loanApplicationRepository;
     private final RiskPolicyRepository riskPolicyRepository;
+    private final BankComplianceMapper complianceMapper;
 
     public BankService(UnderwritingService underwritingService, ForecastEngine forecastEngine,
-            LoanApplicationRepository loanApplicationRepository, RiskPolicyRepository riskPolicyRepository) {
+            LoanApplicationRepository loanApplicationRepository, RiskPolicyRepository riskPolicyRepository,
+            BankComplianceMapper complianceMapper) {
         this.underwritingService = underwritingService;
         this.forecastEngine = forecastEngine;
         this.loanApplicationRepository = loanApplicationRepository;
         this.riskPolicyRepository = riskPolicyRepository;
+        this.complianceMapper = complianceMapper;
     }
 
     // ── Queue ────────────────────────────────────────────────────────────────────────────────────────
@@ -111,7 +114,13 @@ public class BankService {
 
         UnderwritingReport report = underwritingService.generateReport(applicationId);
         List<ForecastPoint> cashFlow = monthlyCashFlow(app.getClientRef());
-        return UnderwritingReportDto.from(report, cashFlow);
+
+        // Compliance surface (SAMA tokenization + NDMO residency, §9) — resolved through the central mapper so
+        // only tokenized account references, never a raw account id, reach the bank-side DTO.
+        RiskPolicy policy = riskPolicyRepository.loadPolicy();
+        List<String> tokens = complianceMapper.accountTokensFor(app.getClientRef(), policy);
+        return UnderwritingReportDto.from(report, cashFlow, tokens,
+                complianceMapper.residencyMarker(policy), complianceMapper.exportAllowed(policy));
     }
 
     /**
@@ -171,14 +180,14 @@ public class BankService {
         BigDecimal nplBaselineDelta = nplRate.subtract(baselineNpl);
 
         List<MonitoringRow> monitoring = activeBook.stream()
-                .map(app -> monitoringRow(app, avgStamina))
+                .map(app -> monitoringRow(app, avgStamina, policy))
                 .toList();
         int atRiskAccounts = (int) monitoring.stream()
                 .filter(row -> row.status() == Status.AT_RISK)
                 .count();
 
         return new PortfolioDto(activeFacilities, avgStamina, nplRate, nplBaselineDelta, atRiskAccounts,
-                monitoring);
+                monitoring, complianceMapper.residencyMarker(policy), complianceMapper.exportAllowed(policy));
     }
 
     /** Whether an underwritten application passes the risk policy (stamina floor and DTI auto-decline). */
@@ -187,8 +196,11 @@ public class BankService {
                 && app.getForecastDti().compareTo(BigDecimal.valueOf(policy.getAutoDeclineThreshold())) < 0;
     }
 
-    /** One monitoring row for a facility, with its trend taken relative to the portfolio's mean stamina. */
-    private static MonitoringRow monitoringRow(LoanApplication app, int portfolioMeanStamina) {
+    /**
+     * One monitoring row for a facility, with its trend taken relative to the portfolio's mean stamina and the
+     * borrower's accounts carried as tokenized references only (via {@link BankComplianceMapper}).
+     */
+    private MonitoringRow monitoringRow(LoanApplication app, int portfolioMeanStamina, RiskPolicy policy) {
         int health = app.getStaminaScore();
         Trend trend;
         if (health > portfolioMeanStamina + TREND_DEADBAND) {
@@ -198,7 +210,8 @@ public class BankService {
         } else {
             trend = Trend.FLAT;
         }
-        return new MonitoringRow(app.getApplicantName(), app.getPurpose(), health, trend, statusFor(app.getVerdict()));
+        return new MonitoringRow(app.getApplicantName(), app.getPurpose(), health, trend,
+                statusFor(app.getVerdict()), complianceMapper.accountTokensFor(app.getClientRef(), policy));
     }
 
     /** Monitoring status aligned to the §5.5 verdict: OK→Healthy, WARN→Watch, BAD→At-risk. */

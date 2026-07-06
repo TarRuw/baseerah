@@ -33,6 +33,10 @@ import java.util.List;
  * @param verdict         the §5.5 verdict (also the report's headline risk badge)
  * @param riskTier        tier label (A/B/C) consistent with the verdict
  * @param cashFlow        the 12-month projected month-end balance series driving the report chart
+ * @param tokenizedAccounts the applicant's linked accounts as non-reversible SAMA tokens (§9); empty when the
+ *                          {@code tokenization} policy toggle is off — a raw account id never appears here
+ * @param dataResidency   NDMO residency marker for this payload ({@code KSA} when local residency is enforced)
+ * @param exportAllowed   whether this payload may leave the residency boundary — {@code false} while NDMO is on
  */
 public record UnderwritingReportDto(
         java.util.UUID applicationId,
@@ -46,7 +50,10 @@ public record UnderwritingReportDto(
         BigDecimal defaultProb12mo,
         Verdict verdict,
         String riskTier,
-        List<CashFlowPoint> cashFlow) {
+        List<CashFlowPoint> cashFlow,
+        List<String> tokenizedAccounts,
+        String dataResidency,
+        boolean exportAllowed) {
 
     /** One month-end point on the report's cash-flow chart: the {@code date} and the projected {@code balance}. */
     public record CashFlowPoint(LocalDate date, BigDecimal balance) {
@@ -58,15 +65,18 @@ public record UnderwritingReportDto(
     }
 
     /**
-     * Stitch an internal {@link UnderwritingReport} together with its 12-month cash-flow projection into the
-     * wire report. {@code monthlyPoints} is the month-end-sampled projection (empty for a synthetic applicant
-     * with no linked telemetry).
+     * Stitch an internal {@link UnderwritingReport} together with its 12-month cash-flow projection and the
+     * compliance surface into the wire report. {@code monthlyPoints} is the month-end-sampled projection
+     * (empty for a synthetic applicant with no linked telemetry); {@code tokenizedAccounts} /
+     * {@code dataResidency} / {@code exportAllowed} come from the {@code com.baseerah.bank.BankComplianceMapper}
+     * so no raw account id is ever passed in.
      */
-    public static UnderwritingReportDto from(UnderwritingReport report, List<ForecastPoint> monthlyPoints) {
+    public static UnderwritingReportDto from(UnderwritingReport report, List<ForecastPoint> monthlyPoints,
+            List<String> tokenizedAccounts, String dataResidency, boolean exportAllowed) {
         List<CashFlowPoint> cashFlow = monthlyPoints.stream().map(CashFlowPoint::from).toList();
         return new UnderwritingReportDto(report.applicationId(), report.applicantName(), report.initials(),
                 report.purpose(), report.amount(), report.staminaScore(), report.forecastDti(),
                 report.incomeStability(), report.defaultProb12mo(), report.verdict(), report.riskTier(),
-                cashFlow);
+                cashFlow, tokenizedAccounts, dataResidency, exportAllowed);
     }
 }
