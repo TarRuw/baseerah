@@ -7,16 +7,13 @@ import com.baseerah.genai.GenAiClient.ChatReply;
 import com.baseerah.genai.GenAiClient.InvoiceParseResult;
 import com.baseerah.stress.Zone;
 import java.math.BigDecimal;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
 /**
  * Unit tests for {@link MockGenAi} (DESIGN §9) — no Spring, no database. Verifies keyword routing (car /
  * lease / vehicle / {@code 2100} and an Arabic equivalent → scenario; anything else → 24-month analysis),
  * that replies are grounded in the supplied {@link ChatContext}, and that identical input yields identical
- * output. A nested {@link ApplicationContextRunner} test proves the {@code mock} bean resolves with no
- * property and no API key configured, and that {@code remote} resolves the reserved placeholder.
+ * output. Provider selection and keyless fallback live in {@code GenAiProviderSelectionTest}.
  */
 class MockGenAiTest {
 
@@ -84,34 +81,5 @@ class MockGenAiTest {
         assertThat(first.merchant()).isNotBlank();
         assertThat(first.amount()).isNotNull();
         assertThat(first.suggestedAction()).isNotBlank();
-    }
-
-    /**
-     * Bean-selection tests for {@link GenAiConfig}. The runner sets no {@code GENAI_PROVIDER} and no API key,
-     * so a resolving {@code mock} bean proves the default provider needs neither.
-     */
-    @Nested
-    class ProviderSelection {
-
-        private final ApplicationContextRunner runner =
-                new ApplicationContextRunner().withUserConfiguration(GenAiConfig.class);
-
-        @Test
-        void defaultsToMockWithNoProviderAndNoApiKey() {
-            runner.run(context -> assertThat(context.getBean(GenAiClient.class)).isInstanceOf(MockGenAi.class));
-        }
-
-        @Test
-        void explicitMockResolvesMock() {
-            runner.withPropertyValues("baseerah.genai.provider=mock")
-                    .run(context -> assertThat(context.getBean(GenAiClient.class)).isInstanceOf(MockGenAi.class));
-        }
-
-        @Test
-        void remoteResolvesReservedPlaceholderViaSameSwitch() {
-            runner.withPropertyValues("baseerah.genai.provider=remote")
-                    .run(context -> assertThat(context.getBean(GenAiClient.class))
-                            .isInstanceOf(GenAiConfig.RemoteGenAiPlaceholder.class));
-        }
     }
 }

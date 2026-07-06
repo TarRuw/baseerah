@@ -19,6 +19,7 @@ import java.time.YearMonth;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.function.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +73,25 @@ public class ChatService {
      */
     public ChatReply chat(String clientId, String message) {
         return genAiClient.chat(buildContext(clientId), message);
+    }
+
+    /**
+     * Stream a client's chat reply chunk-by-chunk (FR-03, DESIGN §9 time-to-first-token &lt; 1.0&nbsp;s).
+     * When the configured provider can stream ({@link StreamingGenAiClient} — the remote adapter), deltas are
+     * forwarded as they arrive; otherwise (the mock) the buffered {@link GenAiClient#chat} reply is emitted as
+     * a single chunk, so the streaming endpoint works under every provider.
+     *
+     * @param clientId canonical client UUID (as a string; unknown/malformed → shared 404 envelope)
+     * @param message  the user's message
+     * @param onChunk  invoked once per delta, in order
+     */
+    public void streamChat(String clientId, String message, Consumer<String> onChunk) {
+        ChatContext context = buildContext(clientId);
+        if (genAiClient instanceof StreamingGenAiClient streaming) {
+            streaming.streamChat(context, message, onChunk);
+        } else {
+            onChunk.accept(genAiClient.chat(context, message).reply());
+        }
     }
 
     /**

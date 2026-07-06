@@ -7,6 +7,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 /**
  * Conversational-AI endpoints (FR-03, DESIGN.md §6). Thin: validates input and delegates to
@@ -26,6 +30,16 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/v1/clients")
 public class ChatController {
 
+    /** Timeout for a streamed chat before the SSE connection is closed. */
+    private static final long STREAM_TIMEOUT_MS = 60_000L;
+
+    /** Daemon pool that pumps SSE streams off the request thread (Step 7.2 streaming). */
+    private static final ExecutorService STREAM_EXECUTOR = Executors.newCachedThreadPool(runnable -> {
+        Thread thread = new Thread(runnable, "genai-chat-stream");
+        thread.setDaemon(true);
+        return thread;
+    });
+
     private final ChatService chatService;
 
     public ChatController(ChatService chatService) {
@@ -36,6 +50,33 @@ public class ChatController {
     @PostMapping("/{id}/chat")
     public ApiResponse<ChatReply> chat(@PathVariable String id, @Valid @RequestBody ChatRequest request) {
         return ApiResponse.ok(chatService.chat(id, request.message()));
+    }
+
+    /**
+     * {@code POST /api/v1/clients/{id}/chat/stream} — body {@code {message}} → a Server-Sent Event stream of
+     * reply chunks (DESIGN §9 time-to-first-token &lt; 1.0&nbsp;s). Each {@code data:} event carries one text
+     * delta; the stream closes when the reply completes. This surfaces the remote adapter's token stream to
+     * the Flutter client while the buffered {@link #chat} endpoint keeps working for callers that don't
+     * consume a stream (the mock provider emits its whole reply as a single event here).
+     */
+    @PostMapping(value = "/{id}/chat/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter chatStream(@PathVariable String id, @Valid @RequestBody ChatRequest request) {
+        SseEmitter emitter = new SseEmitter(STREAM_TIMEOUT_MS);
+        STREAM_EXECUTOR.execute(() -> {
+            try {
+                chatService.streamChat(id, request.message(), chunk -> {
+                    try {
+                        emitter.send(SseEmitter.event().data(chunk));
+                    } catch (IOException ex) {
+                        throw new UncheckedIOException(ex);
+                    }
+                });
+                emitter.complete();
+            } catch (Exception ex) {
+                emitter.completeWithError(ex);
+            }
+        });
+        return emitter;
     }
 
     /**

@@ -28,6 +28,14 @@ baseerah:
     # GenAiClient provider (DESIGN §2): mock (default, deterministic, needs no API key) | remote (Phase 7).
     # Overridable via the GENAI_PROVIDER env var; falls back to mock so the demo runs offline.
     provider: ${GENAI_PROVIDER:mock}
+    # RemoteGenAi settings (Step 7.2). Only consulted when provider=remote AND api-key is non-blank;
+    # otherwise the app cleanly falls back to the mock. No secret is hardcoded — all env-driven.
+    remote:
+      model: ${GENAI_MODEL:claude-opus-4-8}
+      base-url: ${GENAI_BASE_URL:https://api.anthropic.com}
+      api-key: ${GENAI_API_KEY:}
+      max-tokens: ${GENAI_MAX_TOKENS:1024}
+      version: ${GENAI_VERSION:2023-06-01}
 
 management:
   endpoints:

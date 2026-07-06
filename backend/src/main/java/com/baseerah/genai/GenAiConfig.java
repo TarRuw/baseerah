@@ -1,61 +1,48 @@
 package com.baseerah.genai;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Selects the active {@link GenAiClient} bean from configuration (DESIGN.md §2). The provider is chosen by
- * {@code baseerah.genai.provider}, which defaults to the {@code GENAI_PROVIDER} environment variable and
- * falls back to {@code mock} (see {@code application.yml}):
- * <ul>
- *   <li>{@code mock} (default) → {@link MockGenAi}: deterministic, telemetry-grounded, <strong>needs no API
- *       key</strong> (DESIGN §9 reliability).</li>
- *   <li>{@code remote} → the reserved Phase-7 adapter (Step 7.2). The switch is wired now, but the remote
- *       call is not implemented here — the bean resolves to {@link RemoteGenAiPlaceholder}, which fails fast
- *       if invoked before Phase 7.</li>
- * </ul>
+ * Selects the single active {@link GenAiClient} bean from configuration (DESIGN.md §2), once at wiring time —
+ * never in a controller. Exactly one bean is created, so callers inject one {@link GenAiClient} and never see
+ * a concrete type (Global Rule).
  *
- * <p>Exactly one bean is created, so callers inject a single {@link GenAiClient} and never see a concrete
- * type (Global Rule). {@code mock} is also the {@code matchIfMissing} default, so the mock resolves even if
- * the property is absent entirely.
+ * <ul>
+ *   <li>{@code baseerah.genai.provider=remote} <strong>with an API key present</strong> → {@link RemoteGenAi}
+ *       (streams; DESIGN §9 time-to-first-token &lt; 1.0&nbsp;s).</li>
+ *   <li>{@code provider=remote} but the key is missing/blank → logs a clear warning and <strong>falls back to
+ *       {@link MockGenAi}</strong>, so the demo still runs offline / without keys (DESIGN §9 reliability)
+ *       rather than failing startup or requests.</li>
+ *   <li>anything else (including unset) → {@link MockGenAi}, the deterministic, key-free default.</li>
+ * </ul>
  */
 @Configuration
+@EnableConfigurationProperties(GenAiProperties.class)
 public class GenAiConfig {
 
-    /** Default, key-free provider. Active when {@code baseerah.genai.provider} is {@code mock} or unset. */
+    private static final Logger log = LoggerFactory.getLogger(GenAiConfig.class);
+
     @Bean
-    @ConditionalOnProperty(name = "baseerah.genai.provider", havingValue = "mock", matchIfMissing = true)
-    public GenAiClient mockGenAiClient() {
+    public GenAiClient genAiClient(GenAiProperties properties) {
+        if ("remote".equalsIgnoreCase(properties.getProvider())) {
+            GenAiProperties.Remote remote = properties.getRemote();
+            if (hasText(remote.getApiKey())) {
+                log.info("GenAI provider=remote — using RemoteGenAi (model={}, baseUrl={}).",
+                        remote.getModel(), remote.getBaseUrl());
+                return new RemoteGenAi(remote.getBaseUrl(), remote.getModel(), remote.getApiKey(),
+                        remote.getMaxTokens(), remote.getVersion());
+            }
+            log.warn("GENAI_PROVIDER=remote but no API key is set (GENAI_API_KEY blank/absent) — "
+                    + "falling back to MockGenAi so the demo runs offline (DESIGN §9).");
+        }
         return new MockGenAi();
     }
 
-    /** Reserved remote provider. Active when {@code baseerah.genai.provider=remote}; implemented in Phase 7. */
-    @Bean
-    @ConditionalOnProperty(name = "baseerah.genai.provider", havingValue = "remote")
-    public GenAiClient remoteGenAiClient() {
-        return new RemoteGenAiPlaceholder();
-    }
-
-    /**
-     * Placeholder for the not-yet-built {@code RemoteGenAi} adapter (Step 7.2). It satisfies the
-     * {@code remote} switch so the wiring is complete and testable today, but fails fast if actually called —
-     * the real streaming remote call is out of scope for this step (DESIGN §2, §9).
-     */
-    static final class RemoteGenAiPlaceholder implements GenAiClient {
-
-        private static final String NOT_IMPLEMENTED =
-                "RemoteGenAi is reserved for Phase 7 (Step 7.2). Set GENAI_PROVIDER=mock to use the "
-                        + "deterministic mock provider.";
-
-        @Override
-        public ChatReply chat(ChatContext context, String message) {
-            throw new UnsupportedOperationException(NOT_IMPLEMENTED);
-        }
-
-        @Override
-        public InvoiceParseResult parseInvoice(byte[] image) {
-            throw new UnsupportedOperationException(NOT_IMPLEMENTED);
-        }
+    private static boolean hasText(String value) {
+        return value != null && !value.isBlank();
     }
 }
