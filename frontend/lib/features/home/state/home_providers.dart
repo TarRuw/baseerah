@@ -31,16 +31,34 @@ final _forecastRepositoryProvider = Provider<ForecastRepository>(
 
 // ── Screen state ──────────────────────────────────────────────────────────────
 
-/// The persona the consumer app currently represents. Until a persona picker
-/// exists, this resolves the first seeded client (`GET /api/v1/clients`). The
-/// score/accounts providers depend on it, so everything Home shows is scoped to
-/// one client fetched from the API — no hardcoded ids.
+/// The persona (account) the consumer app runs as. The demo model is one
+/// account per persona rather than an in-app switcher (see `docs/DEMO.md`): pick
+/// which seeded client the app represents at launch with
+/// `--dart-define=BASEERAH_CLIENT=<externalId>` (e.g. `client_003_freelancer`).
+/// Unset → the first seeded client, so a plain `flutter run` still works.
+///
+/// Matching is by the human-readable `externalId` from `GET /api/v1/clients`
+/// (no hardcoded UUIDs). An unknown id fails loud — better a clear error naming
+/// the valid ids than silently demoing the wrong persona in front of an audience.
+const _selectedClientExternalId =
+    String.fromEnvironment('BASEERAH_CLIENT', defaultValue: '');
+
 final currentClientProvider = FutureProvider<Client>((ref) async {
   final clients = await ref.watch(_clientRepositoryProvider).fetchAll();
   if (clients.isEmpty) {
     throw StateError('No seeded clients returned by /clients');
   }
-  return clients.first;
+  final wanted = _selectedClientExternalId.trim();
+  if (wanted.isEmpty) {
+    return clients.first;
+  }
+  return clients.firstWhere(
+    (c) => c.externalId.toLowerCase() == wanted.toLowerCase(),
+    orElse: () => throw StateError(
+      'BASEERAH_CLIENT="$wanted" is not a seeded persona. '
+      'Valid ids: ${clients.map((c) => c.externalId).join(', ')}',
+    ),
+  );
 });
 
 /// Live Financial Stress Score for the current client (loading/error surfaced by

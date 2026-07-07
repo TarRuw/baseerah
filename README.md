@@ -53,6 +53,10 @@ docker compose up -d          # start PostgreSQL 16 for local dev
 
 Verify it's up: `curl http://localhost:8080/actuator/health` → `{"status":"UP"}`.
 
+On first boot the backend runs Liquibase migrations and **seeds the 5 mock personas** from
+`data-mocks/*.json` into Postgres (idempotent — re-running `bootRun` is a cheap no-op).
+Confirm with `curl http://localhost:8080/api/v1/clients` → 5 clients.
+
 ## Running the app
 
 Requires the Flutter 3.x / Dart 3 SDK (see Prerequisites). With the backend running:
@@ -69,3 +73,48 @@ It talks to the backend at `http://localhost:8080/api/v1`. On an Android emulato
 ```bash
 flutter run --dart-define=BASEERAH_API_BASE_URL=http://10.0.2.2:8080/api/v1
 ```
+
+### Choosing which persona (account) the consumer app runs as
+
+The consumer app represents **one seeded account** (there is no in-app persona switcher — the demo
+model is one account per persona). A plain `flutter run` runs as the first seeded client
+(`client_001_family`). To run as a different persona, pass its `externalId` at launch:
+
+```bash
+flutter run --dart-define=BASEERAH_CLIENT=client_003_freelancer
+```
+
+Valid ids come from `GET /api/v1/clients`: `client_001_family`, `client_002_tech_bro`,
+`client_003_freelancer`, `client_004_student`, `client_005_vip`. An unknown id fails loud with the
+list of valid ids. The **bank portal** (reached via the Consumer/Bank toolbar toggle) has its own
+in-screen applicant list, so it needs no flag. See [`docs/DEMO.md`](docs/DEMO.md) for the full
+persona → feature walkthrough.
+
+## Configuration (environment variables)
+
+Everything runs with sensible localhost defaults — **no env vars are required** for the standard
+offline demo. Override as needed:
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `GENAI_PROVIDER` | `mock` | `mock` = deterministic, **offline, no key** (default). `remote` = real streamed AI replies (needs a key; falls back to mock if the key is blank). |
+| `GENAI_API_KEY` | *(blank)* | Provider API key. Only consulted when `GENAI_PROVIDER=remote`. Blank ⇒ keyless fallback to mock, so the demo always runs offline. |
+| `GENAI_MODEL` | `claude-opus-4-8` | Model id used by the remote provider. |
+| `GENAI_BASE_URL` | `https://api.anthropic.com` | Remote provider base URL. |
+| `GENAI_MAX_TOKENS` / `GENAI_VERSION` | `1024` / `2023-06-01` | Remote request tuning. |
+| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5432/baseerah` | DB connection (matches `backend/docker-compose.yml`). |
+| `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD` | `baseerah` / `baseerah` | DB credentials. |
+
+Example — enable a real streamed AI reply:
+
+```bash
+GENAI_PROVIDER=remote GENAI_API_KEY=sk-... ./gradlew bootRun
+```
+
+Leave `GENAI_PROVIDER` unset (or `mock`) for the standard offline demo.
+
+## Demo
+
+For a presenter-ready, persona-by-persona walkthrough of both shells (consumer app + bank portal),
+including the language/RTL toggle and the compliance Settings screen, see
+**[`docs/DEMO.md`](docs/DEMO.md)**. The authoritative design spec is [`docs/DESIGN.md`](docs/DESIGN.md).

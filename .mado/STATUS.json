@@ -8,7 +8,7 @@
     "phase": 7,
     "step": 4,
     "file": ".mado/steps/step-07-04.md",
-    "status": "pending"
+    "status": "completed"
   },
   "phases": [
     {
@@ -89,18 +89,18 @@
     {
       "number": 7,
       "name": "Compliance, GenAI & Polish",
-      "status": "in_progress",
+      "status": "completed",
       "steps": [
         { "number": 1, "name": "SAMA tokenization + NDMO flags + risk-policy persistence", "file": ".mado/steps/step-07-01.md", "status": "completed" },
         { "number": 2, "name": "RemoteGenAi adapter behind GENAI_PROVIDER + streaming TTFT", "file": ".mado/steps/step-07-02.md", "status": "completed" },
         { "number": 3, "name": "Performance hardening (<2.5s) + integration tests (5 personas)", "file": ".mado/steps/step-07-03.md", "status": "completed" },
-        { "number": 4, "name": "Demo script, persona walkthrough & run instructions", "file": ".mado/steps/step-07-04.md", "status": "pending" }
+        { "number": 4, "name": "Demo script, persona walkthrough & run instructions", "file": ".mado/steps/step-07-04.md", "status": "completed" }
       ]
     }
   ],
   "stats": {
     "total_steps": 30,
-    "completed_steps": 28,
-    "completion_percentage": 93.3
+    "completed_steps": 30,
+    "completion_percentage": 100.0
   }
 }
