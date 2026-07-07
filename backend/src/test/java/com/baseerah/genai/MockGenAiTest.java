@@ -2,12 +2,16 @@ package com.baseerah.genai;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.baseerah.common.Messages;
 import com.baseerah.genai.GenAiClient.ChatContext;
 import com.baseerah.genai.GenAiClient.ChatReply;
 import com.baseerah.genai.GenAiClient.InvoiceParseResult;
 import com.baseerah.stress.Zone;
 import java.math.BigDecimal;
+import java.util.Locale;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
  * Unit tests for {@link MockGenAi} (DESIGN §9) — no Spring, no database. Verifies keyword routing (car /
@@ -17,7 +21,15 @@ import org.junit.jupiter.api.Test;
  */
 class MockGenAiTest {
 
-    private final MockGenAi mock = new MockGenAi();
+    // Backed by the real messages*.properties bundles so the English assertions below pin the actual copy and
+    // the Arabic test exercises the ar bundle (Step 8.1). The request locale drives resolution via
+    // LocaleContextHolder — the default is English, so the existing assertions are unaffected.
+    private final MockGenAi mock = new MockGenAi(Messages.forTests());
+
+    @AfterEach
+    void resetLocale() {
+        LocaleContextHolder.resetLocaleContext();
+    }
 
     // Family-persona figures used purely as a known ChatContext to pin the grounding math:
     // income 18,500 − outflow 14,200 = surplus 4,300; 2,100 / 4,300 ≈ 49%; comfortable = 0.5 × 4,300 = 2,150.
@@ -70,6 +82,27 @@ class MockGenAiTest {
                 .isEqualTo(mock.chat(FAMILY, "car lease?").reply());
         assertThat(mock.chat(FAMILY, "how are my finances?").reply())
                 .isEqualTo(mock.chat(FAMILY, "how are my finances?").reply());
+    }
+
+    @Test
+    void replyFollowsRequestLocaleWithIdenticalFigures() {
+        // English baseline for the scenario reply.
+        LocaleContextHolder.setLocale(Locale.ENGLISH);
+        String en = mock.chat(FAMILY, "car lease?").reply();
+
+        // Arabic (Accept-Language: ar) — the copy must be Arabic, yet the grounding figures are identical
+        // (Western digits): same 49% of a 4,300 surplus, same score 62 (I18N-01).
+        LocaleContextHolder.setLocale(Locale.forLanguageTag("ar"));
+        String ar = mock.chat(FAMILY, "car lease?").reply();
+
+        assertThat(ar)
+                .isNotEqualTo(en)
+                .contains("2,100")   // the lease figure, Western digits
+                .contains("49")      // same % of surplus
+                .contains("4,300")   // same surplus
+                .contains("62")      // same current score
+                .containsPattern("[\\u0600-\\u06FF]"); // contains Arabic script
+        assertThat(en).doesNotContainPattern("[\\u0600-\\u06FF]"); // English stays Latin
     }
 
     @Test

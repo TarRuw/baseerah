@@ -2,6 +2,7 @@ package com.baseerah.rescue;
 
 import com.baseerah.client.Client;
 import com.baseerah.client.ClientService;
+import com.baseerah.common.Messages;
 import com.baseerah.forecast.ForecastEngine;
 import com.baseerah.forecast.ForecastEngine.ForecastPoint;
 import com.baseerah.forecast.ForecastEngine.ForecastResult;
@@ -98,15 +99,17 @@ public class RescueService {
     private final TransactionRepository transactionRepository;
     private final ClientService clientService;
     private final RescueEventRepository rescueEventRepository;
+    private final Messages messages;
 
     public RescueService(ForecastEngine forecastEngine, StressScoreCalculator stressScoreCalculator,
             TransactionRepository transactionRepository, ClientService clientService,
-            RescueEventRepository rescueEventRepository) {
+            RescueEventRepository rescueEventRepository, Messages messages) {
         this.forecastEngine = forecastEngine;
         this.stressScoreCalculator = stressScoreCalculator;
         this.transactionRepository = transactionRepository;
         this.clientService = clientService;
         this.rescueEventRepository = rescueEventRepository;
+        this.messages = messages;
     }
 
     /**
@@ -165,9 +168,8 @@ public class RescueService {
         rescueEventRepository.save(new RescueEvent(client, assessment.predictedShortfall(),
                 assessment.deficitInDays(), option.type(), scoreBefore, scoreAfter));
 
-        String message = String.format(
-                "Confirmed %s bridge of SAR %s — projected stress score recovers %d → %d.",
-                option.type(), option.amount().toPlainString(), scoreBefore, scoreAfter);
+        String message = messages.get("rescue.confirm", option.type().name(),
+                option.amount().toPlainString(), Integer.toString(scoreBefore), Integer.toString(scoreAfter));
         return new RescueOutcome(scoreBefore, scoreAfter, message);
     }
 
@@ -199,14 +201,16 @@ public class RescueService {
         BigDecimal amount = roundUpToUnit(shortfall);
         int term = deriveTerm(amount, window);
 
-        RescueOption murabaha = new RescueOption(RescueOptionType.MURABAHA, "Murabaha micro-finance",
+        // Labels/details are resolved for the request locale (Step 8.1, I18N-01); the enum type, amount and
+        // term are unchanged — only the human-facing copy is localised.
+        RescueOption murabaha = new RescueOption(RescueOptionType.MURABAHA,
+                messages.get("rescue.option.murabaha.label"),
                 amount, term,
-                "Pre-approved Sharia-compliant financing of SAR " + amount.toPlainString()
-                        + " repaid over " + term + " months.");
-        RescueOption liquidate = new RescueOption(RescueOptionType.LIQUIDATE, "Liquidate fund assets",
+                messages.get("rescue.option.murabaha.detail", amount.toPlainString(), Integer.toString(term)));
+        RescueOption liquidate = new RescueOption(RescueOptionType.LIQUIDATE,
+                messages.get("rescue.option.liquidate.label"),
                 amount, null,
-                "Liquidate SAR " + amount.toPlainString()
-                        + " of safe investment-fund assets to cover the shortfall — no financing cost.");
+                messages.get("rescue.option.liquidate.detail", amount.toPlainString()));
         return List.of(murabaha, liquidate);
     }
 

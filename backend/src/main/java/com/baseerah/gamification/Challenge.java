@@ -57,12 +57,21 @@ public class Challenge {
     @Column(name = "category_trigger")
     private String categoryTrigger;
 
+    /**
+     * Pipe-delimited, pre-formatted numeric arguments the {@code title}/{@code subtitle} message templates
+     * interpolate (Step 8.1, I18N-01). Stored locale-neutral (Western digits) and resolved with the request
+     * locale + the category label in {@code ChallengeService.toDto}. May be {@code null} when a template
+     * takes no numeric argument.
+     */
+    @Column(name = "text_args")
+    private String textArgs;
+
     protected Challenge() {
         // JPA
     }
 
     public Challenge(Client client, String code, String title, String subtitle, String icon,
-            BigDecimal targetValue, int rewardPoints, String categoryTrigger) {
+            BigDecimal targetValue, int rewardPoints, String categoryTrigger, String textArgs) {
         this.client = client;
         this.code = code;
         this.title = title;
@@ -71,6 +80,7 @@ public class Challenge {
         this.targetValue = targetValue;
         this.rewardPoints = rewardPoints;
         this.categoryTrigger = categoryTrigger;
+        this.textArgs = textArgs;
     }
 
     /**
@@ -79,13 +89,14 @@ public class Challenge {
      * by idempotent re-generation on boot.
      */
     public void refresh(String title, String subtitle, String icon, BigDecimal targetValue,
-            int rewardPoints, String categoryTrigger) {
+            int rewardPoints, String categoryTrigger, String textArgs) {
         this.title = title;
         this.subtitle = subtitle;
         this.icon = icon;
         this.targetValue = targetValue;
         this.rewardPoints = rewardPoints;
         this.categoryTrigger = categoryTrigger;
+        this.textArgs = textArgs;
     }
 
     public UUID getId() {
@@ -122,5 +133,9 @@ public class Challenge {
 
     public String getCategoryTrigger() {
         return categoryTrigger;
+    }
+
+    public String getTextArgs() {
+        return textArgs;
     }
 }

@@ -1,6 +1,13 @@
 spring:
   profiles:
     active: dev
+  messages:
+    # Server-provided content strings (Step 8.1). Resolved per request from Accept-Language; UTF-8 so the
+    # Arabic bundle reads correctly, and no system-locale fallback so a non-ar locale lands on the English
+    # default bundle (messages.properties) rather than the JVM's locale.
+    basename: messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
   datasource:
     url: jdbc:postgresql://localhost:5432/baseerah
     username: baseerah

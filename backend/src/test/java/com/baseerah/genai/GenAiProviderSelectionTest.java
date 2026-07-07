@@ -2,6 +2,7 @@ package com.baseerah.genai;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.baseerah.common.Messages;
 import com.baseerah.genai.GenAiClient.ChatContext;
 import com.baseerah.genai.GenAiClient.ChatReply;
 import com.baseerah.stress.Zone;
@@ -29,11 +30,13 @@ class GenAiProviderSelectionTest {
             "Family / dual income", 62, Zone.WARNING,
             new BigDecimal("18500"), new BigDecimal("14200"));
 
+    private static final Messages MESSAGES = Messages.forTests();
+
     // --- selection + keyless fallback -------------------------------------------------------------------
 
     @Test
     void remoteWithoutKeyFallsBackToMockAndChatStillWorks() {
-        GenAiClient client = new GenAiConfig().genAiClient(props("remote", null));
+        GenAiClient client = new GenAiConfig().genAiClient(props("remote", null), MESSAGES);
 
         assertThat(client).isInstanceOf(MockGenAi.class);
         assertThat(client.chat(FAMILY, "How am I doing?").reply()).isNotBlank(); // no exception, valid reply
@@ -41,22 +44,22 @@ class GenAiProviderSelectionTest {
 
     @Test
     void remoteWithBlankKeyAlsoFallsBackToMock() {
-        assertThat(new GenAiConfig().genAiClient(props("remote", "   "))).isInstanceOf(MockGenAi.class);
+        assertThat(new GenAiConfig().genAiClient(props("remote", "   "), MESSAGES)).isInstanceOf(MockGenAi.class);
     }
 
     @Test
     void unsetProviderUsesMock() {
-        assertThat(new GenAiConfig().genAiClient(new GenAiProperties())).isInstanceOf(MockGenAi.class);
+        assertThat(new GenAiConfig().genAiClient(new GenAiProperties(), MESSAGES)).isInstanceOf(MockGenAi.class);
     }
 
     @Test
     void explicitMockUsesMock() {
-        assertThat(new GenAiConfig().genAiClient(props("mock", null))).isInstanceOf(MockGenAi.class);
+        assertThat(new GenAiConfig().genAiClient(props("mock", null), MESSAGES)).isInstanceOf(MockGenAi.class);
     }
 
     @Test
     void remoteWithKeyUsesRemoteGenAi() {
-        assertThat(new GenAiConfig().genAiClient(props("remote", "sk-test-key")))
+        assertThat(new GenAiConfig().genAiClient(props("remote", "sk-test-key"), MESSAGES))
                 .isInstanceOf(RemoteGenAi.class);
     }
 

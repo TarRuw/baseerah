@@ -58,6 +58,12 @@ screen. **Steps:** 5 — see `steps/step-03-*.md`
 **Purpose:** SAMA tokenization + NDMO flags, RemoteGenAi adapter, performance hardening + integration
 tests, demo script. **Steps:** 4 — see `steps/step-07-*.md`
 
+### Phase 8: QA Remediation
+**Purpose:** Fix the issues found in the live end-to-end review (see `docs/QA_E2E_FINDINGS.md`): localize
+server-provided content strings by `Accept-Language`, add a responsive max-width/phone-frame for wide web,
+polish the consumer shell and bank portal, and correct/verify docs on a release build. **Steps:** 5 — see
+`steps/step-08-*.md`
+
 ## Global Rules
 
 - **All schema changes go through Liquibase.** No `ddl-auto` in prod profiles (`validate` only).
@@ -87,6 +93,8 @@ tests, demo script. **Steps:** 4 — see `steps/step-07-*.md`
   independent of each other and may be executed in any order.
 - Phase 6 requires Phase 1 (telemetry) and reuses Phase 3's `ForecastEngine`.
 - Phase 7 requires Phases 2–6 (hardens and polishes existing features).
+- Phase 8 requires Phases 2–7 (remediates issues in already-built features); source of truth for its scope is
+  `docs/QA_E2E_FINDINGS.md`. Within Phase 8, step 8.5 (verify/close-out) requires steps 8.1–8.4.
 - Every UI step requires its phase's backend endpoint step to be complete first.
 
 ## Additional Context

@@ -5,10 +5,10 @@
     "last_updated": "2026-07-07 00:00:00"
   },
   "current_step": {
-    "phase": 7,
-    "step": 4,
-    "file": ".mado/steps/step-07-04.md",
-    "status": "completed"
+    "phase": 8,
+    "step": 2,
+    "file": ".mado/steps/step-08-02.md",
+    "status": "pending"
   },
   "phases": [
     {
@@ -96,11 +96,23 @@
         { "number": 3, "name": "Performance hardening (<2.5s) + integration tests (5 personas)", "file": ".mado/steps/step-07-03.md", "status": "completed" },
         { "number": 4, "name": "Demo script, persona walkthrough & run instructions", "file": ".mado/steps/step-07-04.md", "status": "completed" }
       ]
+    },
+    {
+      "number": 8,
+      "name": "QA Remediation",
+      "status": "pending",
+      "steps": [
+        { "number": 1, "name": "Localize server-provided content strings (Accept-Language) + challenge copy", "file": ".mado/steps/step-08-01.md", "status": "completed" },
+        { "number": 2, "name": "Responsive max-width / phone-frame layout for web & desktop", "file": ".mado/steps/step-08-02.md", "status": "pending" },
+        { "number": 3, "name": "Consumer UI polish (pluralization, recovery gauge, stat colour, locale persistence)", "file": ".mado/steps/step-08-03.md", "status": "pending" },
+        { "number": 4, "name": "Bank portal polish (decision reflected in queue, portfolio status thresholds)", "file": ".mado/steps/step-08-04.md", "status": "pending" },
+        { "number": 5, "name": "Docs correction + release-build perf & mobile verification", "file": ".mado/steps/step-08-05.md", "status": "pending" }
+      ]
     }
   ],
   "stats": {
-    "total_steps": 30,
-    "completed_steps": 30,
-    "completion_percentage": 100.0
+    "total_steps": 35,
+    "completed_steps": 31,
+    "completion_percentage": 88.6
   }
 }

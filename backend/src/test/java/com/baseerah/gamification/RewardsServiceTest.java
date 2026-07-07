@@ -65,7 +65,8 @@ class RewardsServiceTest {
                 .getId();
         // Fixed-clock instance → deterministic detection window; joins the test's transaction.
         ChallengeService fixedClockService = new ChallengeService(transactionRepository, clientService,
-                challengeRepository, challengeProgressRepository, FIXED_CLOCK);
+                challengeRepository, challengeProgressRepository, com.baseerah.common.Messages.forTests(),
+                FIXED_CLOCK);
         fixedClockService.generateForClient(studentId);
     }
 

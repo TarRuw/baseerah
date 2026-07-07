@@ -73,7 +73,8 @@ class GamificationControllerTest {
                 .getId();
         // Fixed-clock instance → deterministic detection window; joins (and rolls back with) the test tx.
         new ChallengeService(transactionRepository, clientService, challengeRepository,
-                challengeProgressRepository, FIXED_CLOCK).generateForClient(studentId);
+                challengeProgressRepository, com.baseerah.common.Messages.forTests(), FIXED_CLOCK)
+                .generateForClient(studentId);
     }
 
     private Challenge challengeMatching(Predicate<ChallengeProgress> progressTest) {

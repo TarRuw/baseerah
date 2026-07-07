@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
  */
 class LoanCalculatorTest {
 
-    private final LoanCalculator calculator = new LoanCalculator(null, null, null, null);
+    // compute() is a pure function of its inputs and emits the verdict message *key*, so no Messages/clock
+    // are needed here (the shell resolves the key to locale text; see LoanControllerTest for that path).
+    private final LoanCalculator calculator = new LoanCalculator(null, null, null, null, null);
 
     private static final BigDecimal INCOME = new BigDecimal("18500");
     private static final BigDecimal ESSENTIALS = new BigDecimal("14200"); // surplus = 4,300

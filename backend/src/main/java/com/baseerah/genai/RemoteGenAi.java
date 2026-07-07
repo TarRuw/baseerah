@@ -21,6 +21,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
  * Real {@link GenAiClient} that calls the provider's Messages API (DESIGN.md §2, §5, §9), selected by
@@ -173,8 +174,12 @@ public class RemoteGenAi implements GenAiClient, StreamingGenAiClient {
     }
 
     private static String systemPrompt(ChatContext ctx) {
-        return "You are Baseerah, a Saudi personal-finance assistant. Reply in the user's language "
-                + "(Arabic or English), concisely, grounded ONLY in the telemetry below. Never invent "
+        // Pin the reply language to the request locale (Accept-Language), so a real reply follows the same
+        // locale the mock and every other content string does (Step 8.1, I18N-01).
+        boolean arabic = "ar".equalsIgnoreCase(LocaleContextHolder.getLocale().getLanguage());
+        String language = arabic ? "Arabic" : "English";
+        return "You are Baseerah, a Saudi personal-finance assistant. Reply strictly in " + language
+                + ", concisely, grounded ONLY in the telemetry below. Never invent "
                 + "account numbers, transactions, or figures beyond these.\n"
                 + "Client profile: " + ctx.profileLabel() + "\n"
                 + "Financial health score: " + ctx.currentScore() + "/100 (" + zoneLabel(ctx.zone()) + ")\n"

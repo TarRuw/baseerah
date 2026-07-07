@@ -1,5 +1,6 @@
 package com.baseerah.genai;
 
+import com.baseerah.common.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -27,7 +28,7 @@ public class GenAiConfig {
     private static final Logger log = LoggerFactory.getLogger(GenAiConfig.class);
 
     @Bean
-    public GenAiClient genAiClient(GenAiProperties properties) {
+    public GenAiClient genAiClient(GenAiProperties properties, Messages messages) {
         if ("remote".equalsIgnoreCase(properties.getProvider())) {
             GenAiProperties.Remote remote = properties.getRemote();
             if (hasText(remote.getApiKey())) {
@@ -39,7 +40,7 @@ public class GenAiConfig {
             log.warn("GENAI_PROVIDER=remote but no API key is set (GENAI_API_KEY blank/absent) — "
                     + "falling back to MockGenAi so the demo runs offline (DESIGN §9).");
         }
-        return new MockGenAi();
+        return new MockGenAi(messages);
     }
 
     private static boolean hasText(String value) {

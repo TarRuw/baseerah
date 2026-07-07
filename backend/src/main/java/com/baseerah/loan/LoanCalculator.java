@@ -2,6 +2,7 @@ package com.baseerah.loan;
 
 import com.baseerah.client.Client;
 import com.baseerah.client.ClientService;
+import com.baseerah.common.Messages;
 import com.baseerah.stress.StressScoreService;
 import com.baseerah.transaction.Direction;
 import com.baseerah.transaction.Transaction;
@@ -51,10 +52,11 @@ public class LoanCalculator {
     static final String ORANGE = "#E5A63A";
     static final String RED = "#E0574F";
 
-    // Verdict text (DESIGN §5.3).
-    static final String VERDICT_COMFORTABLE = "Comfortably affordable";
-    static final String VERDICT_STRAINS = "Strains liquidity";
-    static final String VERDICT_NOT_AFFORDABLE = "Not affordable";
+    // Verdict message keys (DESIGN §5.3). The pure core emits the key; the shell (simulate) resolves it to the
+    // request locale via Messages (Step 8.1, I18N-01), so English/Arabic text never leaks into the pure math.
+    static final String VERDICT_COMFORTABLE = "loan.verdict.comfortable";
+    static final String VERDICT_STRAINS = "loan.verdict.strains";
+    static final String VERDICT_NOT_AFFORDABLE = "loan.verdict.notAffordable";
 
     // Score-impact curve (DESIGN §5.3): proj = score - max(0, (strain - 0.35)) * 90, clamped to [9, 84].
     private static final double STRAIN_FREE_THRESHOLD = 0.35;
@@ -76,19 +78,21 @@ public class LoanCalculator {
     private final ClientService clientService;
     private final TransactionRepository transactionRepository;
     private final StressScoreService stressScoreService;
+    private final Messages messages;
     private final Clock clock;
 
     @Autowired
     public LoanCalculator(ClientService clientService, TransactionRepository transactionRepository,
-            StressScoreService stressScoreService) {
-        this(clientService, transactionRepository, stressScoreService, Clock.systemUTC());
+            StressScoreService stressScoreService, Messages messages) {
+        this(clientService, transactionRepository, stressScoreService, messages, Clock.systemUTC());
     }
 
     LoanCalculator(ClientService clientService, TransactionRepository transactionRepository,
-            StressScoreService stressScoreService, Clock clock) {
+            StressScoreService stressScoreService, Messages messages, Clock clock) {
         this.clientService = clientService;
         this.transactionRepository = transactionRepository;
         this.stressScoreService = stressScoreService;
+        this.messages = messages;
         this.clock = clock;
     }
 
@@ -113,8 +117,19 @@ public class LoanCalculator {
                 .findByAccount_Client_IdAndBookingDateBetween(client.getId(), from, to);
 
         Telemetry telemetry = deriveTelemetry(window);
-        return compute(request.principal(), request.rate(), request.term(),
+        LoanSimulateResponse quote = compute(request.principal(), request.rate(), request.term(),
                 telemetry.income(), telemetry.essentials(), currentScore);
+        return localizeVerdict(quote);
+    }
+
+    /**
+     * Resolve the pure core's verdict message key (e.g. {@code loan.verdict.comfortable}) to the request
+     * locale (Step 8.1, I18N-01), leaving every figure and colour untouched. Kept in the shell so
+     * {@link #compute} stays a pure, locale-free function of its inputs.
+     */
+    private LoanSimulateResponse localizeVerdict(LoanSimulateResponse quote) {
+        return new LoanSimulateResponse(quote.installment(), quote.total(), quote.dti(), quote.dtiColor(),
+                messages.get(quote.verdict()), quote.verdictColor(), quote.projectedScore());
     }
 
     /**

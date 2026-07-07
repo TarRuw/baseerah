@@ -2,6 +2,7 @@ package com.baseerah.gamification;
 
 import com.baseerah.client.Client;
 import com.baseerah.client.ClientService;
+import com.baseerah.common.Messages;
 import com.baseerah.common.NotFoundException;
 import com.baseerah.gamification.dto.ChallengeDto;
 import com.baseerah.transaction.Category;
@@ -89,10 +90,6 @@ public class ChallengeService {
 
     private static final ZoneOffset UTC = ZoneOffset.UTC;
 
-    /** Currency label for progress text — English default and Arabic ({@code Accept-Language: ar}). */
-    private static final String SAR_LABEL_EN = "SAR";
-    private static final String SAR_LABEL_AR = "ريال";
-
     /**
      * Discretionary categories eligible for a spending cap (DESIGN §4.1 modelled set). Essentials
      * (groceries, telecom, utilities, healthcare, transportation, education, business) and income are
@@ -114,23 +111,25 @@ public class ChallengeService {
     private final ClientService clientService;
     private final ChallengeRepository challengeRepository;
     private final ChallengeProgressRepository challengeProgressRepository;
+    private final Messages messages;
     private final Clock clock;
 
     @Autowired
     public ChallengeService(TransactionRepository transactionRepository, ClientService clientService,
             ChallengeRepository challengeRepository,
-            ChallengeProgressRepository challengeProgressRepository) {
-        this(transactionRepository, clientService, challengeRepository, challengeProgressRepository,
+            ChallengeProgressRepository challengeProgressRepository, Messages messages) {
+        this(transactionRepository, clientService, challengeRepository, challengeProgressRepository, messages,
                 Clock.systemUTC());
     }
 
     ChallengeService(TransactionRepository transactionRepository, ClientService clientService,
             ChallengeRepository challengeRepository,
-            ChallengeProgressRepository challengeProgressRepository, Clock clock) {
+            ChallengeProgressRepository challengeProgressRepository, Messages messages, Clock clock) {
         this.transactionRepository = transactionRepository;
         this.clientService = clientService;
         this.challengeRepository = challengeRepository;
         this.challengeProgressRepository = challengeProgressRepository;
+        this.messages = messages;
         this.clock = clock;
     }
 
@@ -154,12 +153,13 @@ public class ChallengeService {
         for (ChallengeSpec spec : detect(window)) {
             Challenge challenge = challengeRepository.findByClient_IdAndCode(clientId, spec.code())
                     .map(existing -> {
-                        existing.refresh(spec.title(), spec.subtitle(), spec.icon(), spec.targetValue(),
-                                spec.rewardPoints(), spec.categoryTrigger());
+                        existing.refresh(spec.titleKey(), spec.subtitleKey(), spec.icon(), spec.targetValue(),
+                                spec.rewardPoints(), spec.categoryTrigger(), spec.textArgs());
                         return existing;
                     })
-                    .orElseGet(() -> new Challenge(client, spec.code(), spec.title(), spec.subtitle(),
-                            spec.icon(), spec.targetValue(), spec.rewardPoints(), spec.categoryTrigger()));
+                    .orElseGet(() -> new Challenge(client, spec.code(), spec.titleKey(), spec.subtitleKey(),
+                            spec.icon(), spec.targetValue(), spec.rewardPoints(), spec.categoryTrigger(),
+                            spec.textArgs()));
             challenge = challengeRepository.save(challenge);
 
             Challenge saved = challenge;
@@ -237,9 +237,32 @@ public class ChallengeService {
         int pct = progress == null ? 0 : progress.getPct();
         boolean claimed = progress != null && progress.isClaimed();
         boolean claimable = progress != null && progress.isClaimable();
-        return new ChallengeDto(challenge.getId(), challenge.getIcon(), challenge.getTitle(),
-                challenge.getSubtitle(), challenge.getRewardPoints(), pct,
+        // title/subtitle columns hold message keys (Step 8.1); resolve them for the request locale with the
+        // per-locale category label (arg 0) followed by the stored numeric args (args 1..).
+        Object[] args = titleArgs(challenge, locale);
+        String title = messages.get(locale, challenge.getTitle(), args);
+        String subtitle = challenge.getSubtitle() == null ? null
+                : messages.get(locale, challenge.getSubtitle(), args);
+        return new ChallengeDto(challenge.getId(), challenge.getIcon(), title, subtitle,
+                challenge.getRewardPoints(), pct,
                 progressText(current, challenge.getTargetValue(), locale), claimable, claimed);
+    }
+
+    /**
+     * Assemble the message arguments for a challenge's title/subtitle: {@code arg[0]} is the category label
+     * resolved for {@code locale} (COPY-01 grammar fix — e.g. "restaurant dining" / "المطاعم"), and
+     * {@code arg[1..]} are the challenge's pre-formatted numeric arguments (Western digits, so figures are
+     * identical across locales). Templates reference only the positions they need.
+     */
+    private Object[] titleArgs(Challenge challenge, Locale locale) {
+        String label = challenge.getCategoryTrigger() == null ? ""
+                : messages.get(locale, "category." + challenge.getCategoryTrigger());
+        String raw = challenge.getTextArgs();
+        String[] nums = (raw == null || raw.isEmpty()) ? new String[0] : raw.split("\\|", -1);
+        Object[] args = new Object[nums.length + 1];
+        args[0] = label;
+        System.arraycopy(nums, 0, args, 1, nums.length);
+        return args;
     }
 
     /**
@@ -248,13 +271,8 @@ public class ChallengeService {
      * {@code "SAR"} by default and {@code "ريال"} when the {@code Accept-Language} header is Arabic. Digits
      * stay Western (the Goals screen re-formats for full RTL display in Step 5.3).
      */
-    static String progressText(BigDecimal current, BigDecimal target, Locale locale) {
-        String label = isArabic(locale) ? SAR_LABEL_AR : SAR_LABEL_EN;
-        return grouped(current) + " / " + grouped(target) + " " + label;
-    }
-
-    private static boolean isArabic(Locale locale) {
-        return locale != null && "ar".equalsIgnoreCase(locale.getLanguage());
+    String progressText(BigDecimal current, BigDecimal target, Locale locale) {
+        return grouped(current) + " / " + grouped(target) + " " + messages.get(locale, "currency.sar");
     }
 
     private static String grouped(BigDecimal value) {
@@ -311,9 +329,11 @@ public class ChallengeService {
 
         List<ChallengeSpec> specs = new ArrayList<>();
         String trigger = dominant.name();
-        String label = prettify(dominant);
         String icon = iconFor(dominant);
 
+        // Title/subtitle are emitted as message *keys* + pre-formatted numeric args (Step 8.1); the category
+        // label and copy are resolved for the reader's locale at read time in toDto (COPY-01 grammar fix), so
+        // nothing English is baked into the persisted goal.
         BigDecimal dominantTotal = totals.getOrDefault(dominant, BigDecimal.ZERO);
         BigDecimal dominantMonthlyAvg = money(dominantTotal.divide(BigDecimal.valueOf(monthCount), 2,
                 RoundingMode.HALF_UP));
@@ -322,18 +342,16 @@ public class ChallengeService {
         // 1) WELCOME_MINDFUL — retrospective starter reward, complete on generation (demoable claim).
         BigDecimal welcomeTarget = roundUnit(dominantTotal.multiply(
                 BigDecimal.valueOf(WELCOME_ACHIEVED_FRACTION)));
-        specs.add(new ChallengeSpec("WELCOME_MINDFUL", "Mindful spender",
-                "You've already tracked SAR " + plain(dominantTotal) + " of " + label
-                        + " spending — here's your starter reward.",
+        specs.add(new ChallengeSpec("WELCOME_MINDFUL", "challenge.welcome.title", "challenge.welcome.subtitle",
+                plain(dominantTotal),
                 "star", welcomeTarget, points(welcomeTarget), trigger,
                 money(dominantTotal), pct(dominantTotal, welcomeTarget)));
 
         // 2) CAP_<category> — forward monthly cap below the client's own average.
         BigDecimal capTarget = roundUnit(dominantMonthlyAvg.multiply(
                 BigDecimal.valueOf(1.0 - CAP_REDUCTION)));
-        specs.add(new ChallengeSpec("CAP_" + trigger, "Cap your " + label + " spend",
-                "Keep " + label + " under SAR " + plain(capTarget) + " this month (you average SAR "
-                        + plain(dominantMonthlyAvg) + ").",
+        specs.add(new ChallengeSpec("CAP_" + trigger, "challenge.cap.title", "challenge.cap.subtitle",
+                plain(capTarget) + "|" + plain(dominantMonthlyAvg),
                 icon, capTarget, points(capTarget), trigger,
                 money(dominantRecent), capPct(dominantRecent, capTarget)));
 
@@ -342,8 +360,8 @@ public class ChallengeService {
         BigDecimal discretionaryRecent = discretionaryMonthSpend(monthly, recentMonth);
         BigDecimal saveTarget = roundUnit(discretionaryMonthly.multiply(BigDecimal.valueOf(SAVE_FRACTION)));
         BigDecimal saved = money(discretionaryMonthly.subtract(discretionaryRecent).max(BigDecimal.ZERO));
-        specs.add(new ChallengeSpec("SAVE_MICRO", "Micro-saving sprint",
-                "Set aside SAR " + plain(saveTarget) + " by trimming your discretionary spending.",
+        specs.add(new ChallengeSpec("SAVE_MICRO", "challenge.save.title", "challenge.save.subtitle",
+                plain(saveTarget),
                 "savings", saveTarget, points(saveTarget), trigger,
                 saved, pct(saved, saveTarget)));
 
@@ -426,11 +444,6 @@ public class ChallengeService {
         return value.setScale(0, RoundingMode.HALF_UP).toPlainString();
     }
 
-    /** Human-readable category label, e.g. {@code RESTAURANTS_DINING → "restaurants dining"}. */
-    private static String prettify(Category category) {
-        return category.name().toLowerCase().replace('_', ' ');
-    }
-
     /** A semantic icon token for the Goals screen (Step 5.3 maps it to a glyph). */
     private static String iconFor(Category category) {
         return switch (category) {
@@ -445,10 +458,12 @@ public class ChallengeService {
     }
 
     /**
-     * A generated challenge and its computed progress, before persistence. {@code targetValue} and
+     * A generated challenge and its computed progress, before persistence. {@code titleKey}/{@code subtitleKey}
+     * are message-bundle keys (resolved for the reader's locale at read time) and {@code textArgs} is their
+     * pipe-delimited, pre-formatted numeric arguments (Step 8.1, I18N-01). {@code targetValue} and
      * {@code currentValue} are SAR; {@code pct} is the completion percentage in {@code [0,100]}.
      */
-    public record ChallengeSpec(String code, String title, String subtitle, String icon,
+    public record ChallengeSpec(String code, String titleKey, String subtitleKey, String textArgs, String icon,
             BigDecimal targetValue, int rewardPoints, String categoryTrigger,
             BigDecimal currentValue, int pct) {
     }
