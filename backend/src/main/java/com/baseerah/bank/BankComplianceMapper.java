@@ -2,8 +2,11 @@ package com.baseerah.bank;
 
 import com.baseerah.account.Account;
 import com.baseerah.account.AccountRepository;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 /**
@@ -71,6 +74,33 @@ public class BankComplianceMapper {
         return accountRepository.findByClientId(clientRef).stream()
                 .map(Account::getTokenizedAccountId)
                 .toList();
+    }
+
+    /**
+     * The batch form of {@link #accountTokensFor(UUID, RiskPolicy)}: the tokenized references for a whole set
+     * of linked consumers, resolved in a <strong>single</strong> {@code findByClientIdIn} query (Step 7.3 —
+     * eliminates the portfolio's per-applicant N+1). Preserves every guarantee of the single-client form —
+     * this stays the one and only place an {@link Account} maps to a bank field, reads exclusively
+     * {@link Account#getTokenizedAccountId()}, and honours the {@code tokenization} toggle by returning an
+     * empty map (no token surface at all) when it is off. A client with no accounts is simply absent from the
+     * map; callers treat a missing key as an empty token list.
+     *
+     * @param clientRefs the linked consumers to resolve (nulls are ignored)
+     * @param policy     the live risk policy supplying the tokenization toggle
+     * @return client id → its tokenized account references; empty when tokenization is off
+     */
+    public Map<UUID, List<String>> accountTokensFor(Collection<UUID> clientRefs, RiskPolicy policy) {
+        if (clientRefs.isEmpty() || !policy.isTokenization()) {
+            return Map.of();
+        }
+        List<UUID> ids = clientRefs.stream().filter(java.util.Objects::nonNull).distinct().toList();
+        if (ids.isEmpty()) {
+            return Map.of();
+        }
+        // account.getClient().getId() reads the id straight off the lazy proxy — no per-account query.
+        return accountRepository.findByClientIdIn(ids).stream()
+                .collect(Collectors.groupingBy(account -> account.getClient().getId(),
+                        Collectors.mapping(Account::getTokenizedAccountId, Collectors.toList())));
     }
 
     /** The NDMO residency marker for the current policy (local vs unrestricted). */

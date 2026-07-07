@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -188,8 +189,16 @@ public class ChallengeService {
     @Transactional(readOnly = true)
     public List<ChallengeDto> listForClient(UUID clientId, Locale locale) {
         clientService.requireClient(clientId.toString());
-        return challengeRepository.findByClient_Id(clientId).stream()
-                .map(challenge -> toDto(challenge, locale))
+        List<Challenge> challenges = challengeRepository.findByClient_Id(clientId);
+        // Batch-load every challenge's (0..1) progress in one query, then map in-memory — was an N+1
+        // (one progress lookup per challenge) before Step 7.3. There is exactly one progress row per
+        // challenge (DB-enforced), so keys never collide. getChallenge().getId() reads the id off the lazy
+        // proxy without a per-row query.
+        Map<UUID, ChallengeProgress> progressByChallenge = challengeProgressRepository
+                .findByChallenge_IdIn(challenges.stream().map(Challenge::getId).toList()).stream()
+                .collect(Collectors.toMap(p -> p.getChallenge().getId(), p -> p));
+        return challenges.stream()
+                .map(challenge -> toDto(challenge, progressByChallenge.get(challenge.getId()), locale))
                 .toList();
     }
 
@@ -213,10 +222,17 @@ public class ChallengeService {
         return toDto(challenge, locale);
     }
 
-    /** Project a challenge + its (0..1) progress row into the client-facing DTO. */
+    /** Project a challenge into the DTO, looking up its (0..1) progress row (single-challenge path). */
     private ChallengeDto toDto(Challenge challenge, Locale locale) {
-        ChallengeProgress progress = challengeProgressRepository.findByChallenge_Id(challenge.getId())
-                .orElse(null);
+        return toDto(challenge, challengeProgressRepository.findByChallenge_Id(challenge.getId()).orElse(null),
+                locale);
+    }
+
+    /**
+     * Project a challenge + an already-resolved progress row ({@code null} when none) into the client-facing
+     * DTO. The batch list path pre-fetches all progress rows and calls this, avoiding a per-challenge query.
+     */
+    private ChallengeDto toDto(Challenge challenge, ChallengeProgress progress, Locale locale) {
         BigDecimal current = progress == null ? BigDecimal.ZERO : progress.getCurrentValue();
         int pct = progress == null ? 0 : progress.getPct();
         boolean claimed = progress != null && progress.isClaimed();

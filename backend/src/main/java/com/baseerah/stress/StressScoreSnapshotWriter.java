@@ -40,7 +40,9 @@ public class StressScoreSnapshotWriter {
         this(calculator, stressScoreRepository, transactionRepository, clientService, Clock.systemUTC());
     }
 
-    StressScoreSnapshotWriter(StressScoreCalculator calculator,
+    // Public so integration tests in other packages can pin "today" to the frozen mock-data window and get
+    // deterministic, machine-date-independent zones (the same fixed-clock technique the gamification tests use).
+    public StressScoreSnapshotWriter(StressScoreCalculator calculator,
             StressScoreRepository stressScoreRepository, TransactionRepository transactionRepository,
             ClientService clientService, Clock clock) {
         this.calculator = calculator;

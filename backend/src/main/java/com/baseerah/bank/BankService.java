@@ -179,8 +179,12 @@ public class BankService {
         BigDecimal nplRate = meanDefaultProb(screened);
         BigDecimal nplBaselineDelta = nplRate.subtract(baselineNpl);
 
+        // Resolve every facility's compliance tokens in one query (Step 7.3 — was an N+1: one account lookup
+        // per monitoring row). The mapper stays the sole account→token choke-point.
+        Map<UUID, List<String>> tokensByClient = complianceMapper.accountTokensFor(
+                activeBook.stream().map(LoanApplication::getClientRef).toList(), policy);
         List<MonitoringRow> monitoring = activeBook.stream()
-                .map(app -> monitoringRow(app, avgStamina, policy))
+                .map(app -> monitoringRow(app, avgStamina, tokensByClient))
                 .toList();
         int atRiskAccounts = (int) monitoring.stream()
                 .filter(row -> row.status() == Status.AT_RISK)
@@ -200,7 +204,8 @@ public class BankService {
      * One monitoring row for a facility, with its trend taken relative to the portfolio's mean stamina and the
      * borrower's accounts carried as tokenized references only (via {@link BankComplianceMapper}).
      */
-    private MonitoringRow monitoringRow(LoanApplication app, int portfolioMeanStamina, RiskPolicy policy) {
+    private MonitoringRow monitoringRow(LoanApplication app, int portfolioMeanStamina,
+            Map<UUID, List<String>> tokensByClient) {
         int health = app.getStaminaScore();
         Trend trend;
         if (health > portfolioMeanStamina + TREND_DEADBAND) {
@@ -210,8 +215,10 @@ public class BankService {
         } else {
             trend = Trend.FLAT;
         }
+        // Pre-resolved tokens from the batch load; a facility with no linked accounts maps to an empty list.
+        List<String> tokens = tokensByClient.getOrDefault(app.getClientRef(), List.of());
         return new MonitoringRow(app.getApplicantName(), app.getPurpose(), health, trend,
-                statusFor(app.getVerdict()), complianceMapper.accountTokensFor(app.getClientRef(), policy));
+                statusFor(app.getVerdict()), tokens);
     }
 
     /** Monitoring status aligned to the §5.5 verdict: OK→Healthy, WARN→Watch, BAD→At-risk. */
