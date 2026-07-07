@@ -79,56 +79,70 @@ class _StressGaugeState extends State<StressGauge>
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return AspectRatio(
-      aspectRatio: 1,
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, _) {
-          final displayed = _from + (widget.score - _from) * _animation.value;
-          return CustomPaint(
-            painter: _GaugePainter(fraction: (displayed / 100).clamp(0.0, 1.0)),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    displayed.round().toString(),
-                    style: textTheme.displaySmall?.copyWith(
-                      color: widget.color,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    widget.caption,
-                    style: textTheme.bodySmall?.copyWith(
-                      color: BaseerahTokens.muted,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: widget.color.withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(
-                        BaseerahTokens.radiusControl,
+    // Cap the diameter so the 1:1 gauge can never dominate the screen, even in a
+    // container wider than a phone (QA UI-01, defense in depth). No-op at phone
+    // width, where the available width is already below the cap.
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: BaseerahTokens.gaugeMaxDiameter,
+          maxHeight: BaseerahTokens.gaugeMaxDiameter,
+        ),
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: AnimatedBuilder(
+            animation: _animation,
+            builder: (context, _) {
+              final displayed =
+                  _from + (widget.score - _from) * _animation.value;
+              return CustomPaint(
+                painter: _GaugePainter(
+                  fraction: (displayed / 100).clamp(0.0, 1.0),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        displayed.round().toString(),
+                        style: textTheme.displaySmall?.copyWith(
+                          color: widget.color,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      widget.zoneLabel,
-                      style: textTheme.labelLarge?.copyWith(
-                        color: widget.color,
-                        fontWeight: FontWeight.w600,
+                      Text(
+                        widget.caption,
+                        style: textTheme.bodySmall?.copyWith(
+                          color: BaseerahTokens.muted,
+                        ),
                       ),
-                    ),
+                      const SizedBox(height: 4),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: widget.color.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(
+                            BaseerahTokens.radiusControl,
+                          ),
+                        ),
+                        child: Text(
+                          widget.zoneLabel,
+                          style: textTheme.labelLarge?.copyWith(
+                            color: widget.color,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          );
-        },
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

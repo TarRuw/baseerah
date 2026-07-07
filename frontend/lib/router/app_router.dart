@@ -12,6 +12,7 @@ import '../features/simulate/simulate_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/locale_provider.dart';
 import '../shell/bottom_nav.dart';
+import '../shell/responsive_frame.dart';
 import '../theme/baseerah_theme.dart';
 
 /// Consumer shell routes (bottom nav order: Home · Simulate · Rescue · Goals).
@@ -175,12 +176,16 @@ class _ConsumerShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const _ShellToolbar(isBank: false),
-      body: navigationShell,
-      bottomNavigationBar: ConsumerBottomNav(
-        selectedIndex: navigationShell.currentIndex,
-        onDestinationSelected: navigationShell.goBranch,
+    // Cap to a phone frame on wide web/desktop (QA UI-01); a no-op on real phones.
+    return ResponsiveFrame(
+      maxWidth: BaseerahTokens.phoneFrameMaxWidth,
+      child: Scaffold(
+        appBar: const _ShellToolbar(isBank: false),
+        body: navigationShell,
+        bottomNavigationBar: ConsumerBottomNav(
+          selectedIndex: navigationShell.currentIndex,
+          onDestinationSelected: navigationShell.goBranch,
+        ),
       ),
     );
   }
@@ -195,32 +200,38 @@ class _BankShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
-    return Scaffold(
-      appBar: const _ShellToolbar(isBank: true),
-      body: Row(
-        children: [
-          NavigationRail(
-            selectedIndex: navigationShell.currentIndex,
-            onDestinationSelected: navigationShell.goBranch,
-            labelType: NavigationRailLabelType.all,
-            destinations: [
-              NavigationRailDestination(
-                icon: const Icon(Icons.assignment_outlined),
-                label: Text(l.navBankApplications),
-              ),
-              NavigationRailDestination(
-                icon: const Icon(Icons.pie_chart_outline),
-                label: Text(l.navBankPortfolio),
-              ),
-              NavigationRailDestination(
-                icon: const Icon(Icons.settings_outlined),
-                label: Text(l.navBankSettings),
-              ),
-            ],
-          ),
-          const VerticalDivider(width: 1),
-          Expanded(child: navigationShell),
-        ],
+    // A desktop layout by design — only rein in ultra-wide monitors, no phone
+    // frame (framed: false).
+    return ResponsiveFrame(
+      maxWidth: BaseerahTokens.bankFrameMaxWidth,
+      framed: false,
+      child: Scaffold(
+        appBar: const _ShellToolbar(isBank: true),
+        body: Row(
+          children: [
+            NavigationRail(
+              selectedIndex: navigationShell.currentIndex,
+              onDestinationSelected: navigationShell.goBranch,
+              labelType: NavigationRailLabelType.all,
+              destinations: [
+                NavigationRailDestination(
+                  icon: const Icon(Icons.assignment_outlined),
+                  label: Text(l.navBankApplications),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.pie_chart_outline),
+                  label: Text(l.navBankPortfolio),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.settings_outlined),
+                  label: Text(l.navBankSettings),
+                ),
+              ],
+            ),
+            const VerticalDivider(width: 1),
+            Expanded(child: navigationShell),
+          ],
+        ),
       ),
     );
   }

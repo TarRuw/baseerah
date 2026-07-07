@@ -93,6 +93,24 @@ class BaseerahTokens {
   static const double gap = 16;
   static const double screenPadding = 20;
 
+  // ── Layout / responsive (QA UI-01) ──────────────────────────────────────────
+  /// The consumer shell is mobile-first: on a wide (web/desktop) viewport it is
+  /// capped to this phone width and centered in a device frame. This is also the
+  /// breakpoint — at or below it (real phones) the frame is inert and the shell
+  /// renders full-bleed, so the mobile layout is untouched.
+  static const double phoneFrameMaxWidth = 460;
+
+  /// The bank portal is a desktop layout by design (sidebar + wide content), so
+  /// it gets a much larger cap that only reins in ultra-wide monitors.
+  static const double bankFrameMaxWidth = 1400;
+
+  /// Hard ceiling on the stress-score gauge diameter. The gauge is a 1:1
+  /// [AspectRatio], so an unconstrained width makes it equally tall and it can
+  /// bury the rest of Home; this caps it independently of the shell frame
+  /// (defense in depth for UI-01). Above the phone-content width, so it is a
+  /// no-op at phone size.
+  static const double gaugeMaxDiameter = 340;
+
   /// Parse a `#RRGGBB` hex (as served by the stress-score API `color` field) to a
   /// [Color]. Falls back to [muted] for anything malformed so the UI never throws
   /// on an unexpected payload.
@@ -125,16 +143,17 @@ class BaseerahTheme {
 
   /// Light theme (the app's primary appearance). [locale] selects the font.
   static ThemeData light(Locale locale) {
-    final colorScheme = ColorScheme.fromSeed(
-      seedColor: BaseerahTokens.teal,
-      brightness: Brightness.light,
-    ).copyWith(
-      primary: BaseerahTokens.teal,
-      secondary: BaseerahTokens.gold,
-      error: BaseerahTokens.alertRed,
-      surface: Colors.white,
-      onSurface: BaseerahTokens.darkText,
-    );
+    final colorScheme =
+        ColorScheme.fromSeed(
+          seedColor: BaseerahTokens.teal,
+          brightness: Brightness.light,
+        ).copyWith(
+          primary: BaseerahTokens.teal,
+          secondary: BaseerahTokens.gold,
+          error: BaseerahTokens.alertRed,
+          surface: Colors.white,
+          onSurface: BaseerahTokens.darkText,
+        );
 
     return ThemeData(
       useMaterial3: true,
