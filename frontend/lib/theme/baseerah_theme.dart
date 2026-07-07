@@ -30,6 +30,18 @@ class BaseerahTokens {
   static const Color desktopBackdropInner = Color(0xFF243530);
   static const Color desktopBackdropOuter = Color(0xFF161E1A);
 
+  /// Health-band colour for a 0–100 sub-score where **higher = healthier**
+  /// (both Home stat sub-scores are normalised this way by the backend
+  /// `StressScoreCalculator` — burn-rate is inverted into a healthiness score).
+  /// Uses the same §5.1 zone cutoffs as the stress gauge — `<40` critical (red),
+  /// `40–70` warning (orange), `≥70` optimal (green) — so a stat bar speaks the
+  /// same visual language as the gauge and a top value never reads as caution.
+  static Color subScoreColor(double value) {
+    if (value < 40) return alertRed;
+    if (value < 70) return warningOrange;
+    return successGreen;
+  }
+
   // ── Radii ─────────────────────────────────────────────────────────────────
   static const double radiusPhoneFrame = 52;
   static const double radiusPhoneScreen = 40;

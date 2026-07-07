@@ -31,6 +31,9 @@ dependencies:
   # federated plugins cover mobile, web and desktop, so the local demo runs
   # everywhere `flutter run` targets.
   image_picker: ^1.1.2
+  # Persists the chosen locale across a full reload/restart (QA UI-07). Federated
+  # plugin backs web (localStorage), mobile and desktop.
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:

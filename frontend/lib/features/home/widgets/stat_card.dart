@@ -25,6 +25,10 @@ class StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final clamped = (value / 100).clamp(0.0, 1.0);
+    // The bar encodes health (higher = healthier for both sub-scores), so its
+    // colour follows the value's zone — a top value reads green, not caution
+    // (QA UI-04). The icon keeps its per-metric brand [accent] for identity.
+    final barColor = BaseerahTokens.subScoreColor(value);
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -66,8 +70,8 @@ class StatCard extends StatelessWidget {
             child: LinearProgressIndicator(
               value: clamped,
               minHeight: 6,
-              backgroundColor: accent.withValues(alpha: 0.12),
-              valueColor: AlwaysStoppedAnimation<Color>(accent),
+              backgroundColor: barColor.withValues(alpha: 0.12),
+              valueColor: AlwaysStoppedAnimation<Color>(barColor),
             ),
           ),
         ],

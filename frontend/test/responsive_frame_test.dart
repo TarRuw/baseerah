@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'support/test_prefs.dart';
+
 void main() {
   // The consumer bottom nav spans the full width of the shell frame, so its
   // rendered width is a clean proxy for the frame's width.
@@ -14,7 +16,12 @@ void main() {
     await tester.binding.setSurfaceSize(surface);
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    await tester.pumpWidget(const ProviderScope(child: BaseerahApp()));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [await prefsOverride()],
+        child: const BaseerahApp(),
+      ),
+    );
     await tester.pumpAndSettle();
 
     return tester.getSize(find.byType(ConsumerBottomNav)).width;

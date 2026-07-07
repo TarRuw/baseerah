@@ -6,11 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'support/test_prefs.dart';
+
 void main() {
   testWidgets('boots in Arabic (RTL) and toggles to English (LTR)', (
     tester,
   ) async {
-    await tester.pumpWidget(const ProviderScope(child: BaseerahApp()));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [await prefsOverride()],
+        child: const BaseerahApp(),
+      ),
+    );
     await tester.pumpAndSettle();
 
     // Default locale is Arabic → the brand name renders in Arabic (it appears

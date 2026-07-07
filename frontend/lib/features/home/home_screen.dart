@@ -203,7 +203,7 @@ class _Header extends StatelessWidget {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  '${l.liveLabel} · $bankCount ${l.banksUnit}',
+                  l.liveBanks(bankCount),
                   style: textTheme.labelMedium?.copyWith(
                     color: BaseerahTokens.successGreen,
                     fontWeight: FontWeight.w600,

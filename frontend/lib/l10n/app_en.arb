@@ -39,13 +39,12 @@
   "@outOf100": {
     "description": "Suffix clarifying the 0-100 stress-score scale."
   },
-  "liveLabel": "Live",
-  "@liveLabel": {
-    "description": "Prefix of the live-multibank badge (e.g. 'Live · 3 banks')."
-  },
-  "banksUnit": "banks",
-  "@banksUnit": {
-    "description": "Unit word for the linked-bank count in the multibank badge."
+  "liveBanks": "Live · {count, plural, one{1 bank} other{{count} banks}}",
+  "@liveBanks": {
+    "description": "Live-multibank badge with ICU-pluralized bank count (e.g. 'Live · 1 bank' / 'Live · 3 banks').",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
   },
   "deficitTitle": "Liquidity deficit predicted",
   "@deficitTitle": {
