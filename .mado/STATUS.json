@@ -8,7 +8,7 @@
     "phase": 8,
     "step": 5,
     "file": ".mado/steps/step-08-05.md",
-    "status": "pending"
+    "status": "completed"
   },
   "phases": [
     {
@@ -100,19 +100,19 @@
     {
       "number": 8,
       "name": "QA Remediation",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         { "number": 1, "name": "Localize server-provided content strings (Accept-Language) + challenge copy", "file": ".mado/steps/step-08-01.md", "status": "completed" },
         { "number": 2, "name": "Responsive max-width / phone-frame layout for web & desktop", "file": ".mado/steps/step-08-02.md", "status": "completed" },
         { "number": 3, "name": "Consumer UI polish (pluralization, recovery gauge, stat colour, locale persistence)", "file": ".mado/steps/step-08-03.md", "status": "completed" },
         { "number": 4, "name": "Bank portal polish (decision reflected in queue, portfolio status thresholds)", "file": ".mado/steps/step-08-04.md", "status": "completed" },
-        { "number": 5, "name": "Docs correction + release-build perf & mobile verification", "file": ".mado/steps/step-08-05.md", "status": "pending" }
+        { "number": 5, "name": "Docs correction + release-build perf & mobile verification", "file": ".mado/steps/step-08-05.md", "status": "completed" }
       ]
     }
   ],
   "stats": {
     "total_steps": 35,
-    "completed_steps": 34,
-    "completion_percentage": 97.1
+    "completed_steps": 35,
+    "completion_percentage": 100.0
   }
 }

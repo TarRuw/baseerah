@@ -32,7 +32,7 @@ local backend. Follow it verbatim against a fresh checkout after completing
 | Persona (`externalId`) | Launch as | Screen | The "wow" moment |
 |---|---|---|---|
 | `client_001_family` — الموظف المستقر (أبو عائلة) | `--dart-define=BASEERAH_CLIENT=client_001_family` (or default) | **Home / Radar** + **Simulate** | Healthy **OPTIMAL** gauge (score ~95) and a "Comfortably affordable" loan baseline. |
-| `client_003_freelancer` — رائد الأعمال المستقل | `--dart-define=BASEERAH_CLIENT=client_003_freelancer` | **Rescue** | **Smart Rescue** headline: a projected shortfall (~SAR 2,779) with two Sharia-compliant bridge options → confirm → **before→after score recovery** (e.g. 83 → 91). |
+| `client_003_freelancer` — رائد الأعمال المستقل | `--dart-define=BASEERAH_CLIENT=client_003_freelancer` | **Rescue** | **Smart Rescue** headline: a projected shortfall (~SAR 2,943) with two Sharia-compliant bridge options → confirm → **before→after score recovery** (e.g. 83 → 91). |
 | `client_004_student` — الطالب الجامعي | `--dart-define=BASEERAH_CLIENT=client_004_student` | **Goals** | Gamified micro-saving: challenge cards with progress, **Claim** flow, Akhtar-points card + risk tier. |
 | `client_002_tech_bro` — الشاب العازب (عاشق القهوة) | `--dart-define=BASEERAH_CLIENT=client_002_tech_bro` | **Home / Radar** | **Performance** showcase: the highest-transaction-volume persona; analytics still return in **well under 2.5 s** (measured single-digit ms). |
 | `client_005_vip` — العميل عالي الملاءة المالية | Bank shell (segmented control) → pick in Applications list | **Bank portal** | Predictive underwriting report + portfolio cross-sell view. |
@@ -71,8 +71,8 @@ persona-specific moments (5, 6) call out which account to launch as.
    invoice-upload affordance.
 5. **Rescue — the Smart Rescue headline.** *Relaunch as
    `--dart-define=BASEERAH_CLIENT=client_003_freelancer`* and tap **Rescue**. The screen is in its
-   **open** state: a **shortfall banner** (~SAR 2,779), two selectable **bridge cards** —
-   **Murabaha micro-finance** (Sharia-compliant, ~SAR 2,800 over 3 months) and **Liquidate fund
+   **open** state: a **shortfall banner** (~SAR 2,943), two selectable **bridge cards** —
+   **Murabaha micro-finance** (Sharia-compliant, ~SAR 3,000 over 3 months) and **Liquidate fund
    assets** (no financing cost). Select one, tap **Confirm**, and the screen flips to the **complete**
    state: a success card with the **before→after score recovery** (e.g. **83 → 91**) and a run-again
    action.
@@ -81,8 +81,11 @@ persona-specific moments (5, 6) call out which account to launch as.
    card** + risk tier (starts at 0 points / BRONZE), then the challenge cards with progress bars. Tap
    **Claim** on a completed challenge to run the claim flow (Claim → Claimed).
 7. **Language / RTL toggle.** Tap **EN / ع** in the toolbar. The whole app flips between Arabic (RTL)
-   and English (LTR) — layout mirrors, numerals and currency reformat, and (because requests carry
-   `Accept-Language`) the API copy follows.
+   and English (LTR) — layout mirrors, numerals and currency reformat, and — because every request
+   carries `Accept-Language` — the **server-provided content** follows too: loan **verdicts**, **Rescue**
+   option labels/details and the confirmation line, challenge copy, and the **Ask-Baseerah** reply all
+   switch language (localized server-side in step 8.1; verified live). Only proper-noun seed data such as
+   persona display names stays fixed. The chosen language now also survives a full page reload (step 8.3).
 
 ---
 
@@ -92,9 +95,11 @@ persona-specific moments (5, 6) call out which account to launch as.
    layout becomes a desktop frame with the left sidebar (Applications · Portfolio · Settings).
 9. **Applications — generate a predictive report.** On **Applications**, the left pane lists the
    underwriting queue (with risk badges). Click an applicant (this is the real in-screen picker — use
-   it to feature `client_005_vip`). The right pane shows the empty→**generating** spinner
-   ("Analyzing 24-month telemetry…"), then the **report**: a **verdict panel**, a **financial-stamina**
-   box, three **KPI** boxes, and a **12-month cash-flow chart**. (Report generation returns in ~10 ms.)
+   it to feature `client_005_vip`). The right pane shows the applicant header with a **"Generate
+   predictive report"** button — selecting an applicant does *not* auto-generate. Click that button; the
+   pane switches to the **generating** spinner ("Analyzing 24-month telemetry…"), then the **report**: a
+   **verdict panel**, a **financial-stamina** box, three **KPI** boxes, and a **12-month cash-flow
+   chart**. (Report generation returns in ~10 ms.)
 10. **Decision.** Click **Approve** (or **Decline**) — the decision is recorded and reflected in the
     applicant's status.
 11. **Portfolio — monitoring.** Open **Portfolio**. Show the four **KPI cards** (active facilities,
