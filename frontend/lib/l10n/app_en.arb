@@ -410,6 +410,14 @@
   "@bankDeclinedMsg": {
     "description": "Decision confirmation — declined."
   },
+  "bankDecisionApproved": "Approved",
+  "@bankDecisionApproved": {
+    "description": "Compact status chip on a queue row whose loan was approved."
+  },
+  "bankDecisionDeclined": "Declined",
+  "@bankDecisionDeclined": {
+    "description": "Compact status chip on a queue row whose loan was declined."
+  },
   "bankDecisionError": "Couldn't record the decision. Please try again.",
   "@bankDecisionError": {
     "description": "Snackbar when the decision call fails."

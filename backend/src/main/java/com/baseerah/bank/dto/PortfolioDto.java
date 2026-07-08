@@ -63,13 +63,16 @@ public record PortfolioDto(
         DOWN
     }
 
-    /** Monitoring status badge (DESIGN §7.6): Healthy · Watch · At-risk, aligned to the §5.5 verdict. */
+    /**
+     * Monitoring status badge: Healthy · Watch · At-risk, banded off the facility's health (stamina) score so
+     * it always agrees with the shown figure. §5.5-aligned cutoffs — see {@code BankService.statusFor(int)}.
+     */
     public enum Status {
-        /** Verdict OK — comfortably within policy. */
+        /** Health ≥ 70 (the §5.5 OK stamina floor) — comfortably within policy. */
         HEALTHY,
-        /** Verdict WARN — mixed signals, keep watching. */
+        /** Health 49–69 — mixed signals, keep watching. */
         WATCH,
-        /** Verdict BAD — fragile, flagged for action. */
+        /** Health ≤ 48 (the §5.5 BAD stamina ceiling) — fragile, flagged for action. */
         AT_RISK
     }
 }

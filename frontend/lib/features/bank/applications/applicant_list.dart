@@ -90,7 +90,13 @@ class _ApplicantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
-    final badge = RiskBadge.of(applicant.verdict, l);
+    // Once a banker has acted, the row leads with the decided status (Approved /
+    // Declined) instead of the model's risk badge: the human outcome is now the
+    // salient fact and the queue stays in sync with the decision without a
+    // reload (UI-05). Until then it shows the §5.5 risk badge.
+    final Widget trailing = applicant.decision == null
+        ? RiskBadge.of(applicant.verdict, l).build(context)
+        : _DecisionChip.of(applicant.decision!, l).build(context);
 
     return Material(
       color: Colors.white,
@@ -139,7 +145,7 @@ class _ApplicantCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              badge.build(context),
+              trailing,
             ],
           ),
         ),
@@ -220,6 +226,39 @@ class RiskBadge {
     };
   }
 
+  Widget build(BuildContext context) => _StatusPill(color: color, label: label);
+}
+
+/// Decided-status chip shown on a queue row once a banker has acted (UI-05):
+/// Approve → green, Decline → red. Reuses the shared [_StatusPill] so it sits
+/// exactly where the risk badge it replaces did. Labels are localised.
+class _DecisionChip {
+  const _DecisionChip._(this.color, this.label);
+
+  final Color color;
+  final String label;
+
+  factory _DecisionChip.of(Decision decision, AppLocalizations l) {
+    return switch (decision) {
+      Decision.approve =>
+        _DecisionChip._(BaseerahTokens.successGreen, l.bankDecisionApproved),
+      Decision.decline =>
+        _DecisionChip._(BaseerahTokens.alertRed, l.bankDecisionDeclined),
+    };
+  }
+
+  Widget build(BuildContext context) => _StatusPill(color: color, label: label);
+}
+
+/// The compact colour-coded pill shared by the risk badge and the decision chip:
+/// a tinted rounded rect with a bold coloured label (DESIGN §7.5).
+class _StatusPill extends StatelessWidget {
+  const _StatusPill({required this.color, required this.label});
+
+  final Color color;
+  final String label;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),

@@ -24,9 +24,10 @@ enum Trend {
   };
 }
 
-/// Monitoring status badge (DESIGN §7.6): Healthy · Watch · At-risk, aligned to
-/// the §5.5 verdict. Mirrors the backend `Status` enum and reuses the shared
-/// zone palette when rendered (green / orange / red).
+/// Monitoring status badge: Healthy · Watch · At-risk, banded off the facility's
+/// health score server-side (§5.5-aligned cutoffs) so it agrees with the shown
+/// figure. Mirrors the backend `Status` enum and reuses the shared zone palette
+/// when rendered (green / orange / red).
 enum Status {
   healthy,
   watch,

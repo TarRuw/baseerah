@@ -48,7 +48,9 @@ import org.springframework.transaction.annotation.Transactional;
  *       delta.</li>
  *   <li><b>At-risk accounts</b> = active-book facilities whose status is {@link Status#AT_RISK}.</li>
  *   <li><b>Monitoring rows</b> — one per active-book facility: {@code health} is its stamina; {@code status}
- *       is aligned to the §5.5 verdict (OK→Healthy, WARN→Watch, BAD→At-risk); {@code trend} compares the
+ *       is banded off that same {@code health} score (§5.5-aligned: Healthy ≥ {@value #HEALTHY_FLOOR},
+ *       At-risk ≤ {@value #AT_RISK_CEILING}, Watch between) so the badge and the shown figure never
+ *       disagree (see {@link #statusFor(int)}); {@code trend} compares the
  *       facility's health to the portfolio mean with a {@value #TREND_DEADBAND} point deadband (above →
  *       UP, below → DOWN, within → FLAT). The deadband width is the one free presentation parameter here.</li>
  * </ul>
@@ -64,6 +66,12 @@ public class BankService {
 
     /** A monitoring facility's health must differ from the portfolio mean by more than this to trend UP/DOWN. */
     private static final int TREND_DEADBAND = 5;
+
+    /** Health at/above this maps to {@link Status#HEALTHY} — the §5.5 OK stamina floor. */
+    private static final int HEALTHY_FLOOR = 70;
+
+    /** Health at/below this maps to {@link Status#AT_RISK} — the §5.5 BAD stamina ceiling. */
+    private static final int AT_RISK_CEILING = 48;
 
     private final UnderwritingService underwritingService;
     private final ForecastEngine forecastEngine;
@@ -218,16 +226,24 @@ public class BankService {
         // Pre-resolved tokens from the batch load; a facility with no linked accounts maps to an empty list.
         List<String> tokens = tokensByClient.getOrDefault(app.getClientRef(), List.of());
         return new MonitoringRow(app.getApplicantName(), app.getPurpose(), health, trend,
-                statusFor(app.getVerdict()), tokens);
+                statusFor(health), tokens);
     }
 
-    /** Monitoring status aligned to the §5.5 verdict: OK→Healthy, WARN→Watch, BAD→At-risk. */
-    private static Status statusFor(Verdict verdict) {
-        return switch (verdict) {
-            case OK -> Status.HEALTHY;
-            case WARN -> Status.WATCH;
-            case BAD -> Status.AT_RISK;
-        };
+    /**
+     * Monitoring status banded off the facility's {@code health} (stamina) score, so the badge always agrees
+     * with the number shown beside it (UI-06). Cutoffs are §5.5-aligned: {@link Status#HEALTHY} at/above the
+     * OK stamina floor ({@value #HEALTHY_FLOOR}), {@link Status#AT_RISK} at/below the BAD stamina ceiling
+     * ({@value #AT_RISK_CEILING}), {@link Status#WATCH} in the mixed band between. Package-private so the
+     * boundary mapping is unit-testable without a Spring/Postgres context.
+     */
+    static Status statusFor(int health) {
+        if (health >= HEALTHY_FLOOR) {
+            return Status.HEALTHY;
+        } else if (health <= AT_RISK_CEILING) {
+            return Status.AT_RISK;
+        } else {
+            return Status.WATCH;
+        }
     }
 
     /** Mean stamina across the book, rounded to a whole score; {@code 0} for an empty book. */

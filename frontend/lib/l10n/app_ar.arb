@@ -104,6 +104,8 @@
   "bankVerdictBadSub": "التدفق لا يكفي لخدمة الدين",
   "bankApprovedMsg": "تمت الموافقة على التمويل وأُرسل للعميل ✓",
   "bankDeclinedMsg": "تم رفض الطلب وإخطار العميل",
+  "bankDecisionApproved": "موافَق عليه",
+  "bankDecisionDeclined": "مرفوض",
   "bankDecisionError": "تعذّر تسجيل القرار. حاول مرة أخرى.",
   "bankPortfolioTitle": "محفظة القروض",
   "bankPortfolioSub": "مراقبة المؤشرات بعد الصرف",

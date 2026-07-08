@@ -64,12 +64,30 @@ UnderwritingReport _report(String id, Verdict verdict, int stamina) =>
 
 /// Stub backend: only the public surface (the private dio field isn't part of
 /// the cross-library interface, so it isn't required).
+Applicant _withDecision(Applicant base, Decision? decision) => Applicant(
+  id: base.id,
+  applicantName: base.applicantName,
+  initials: base.initials,
+  purpose: base.purpose,
+  amount: base.amount,
+  verdict: base.verdict,
+  riskTier: base.riskTier,
+  decision: decision,
+);
+
 class _FakeRepo implements BankRepository {
   int reportCalls = 0;
   int decideCalls = 0;
 
+  /// Decisions the banker has recorded this session — mirrors the backend
+  /// persisting a decision, so a re-fetched queue echoes it (like the live API).
+  final Map<String, Decision> decisions = {};
+
   @override
-  Future<List<Applicant>> applicants() async => [_okApplicant, _badApplicant];
+  Future<List<Applicant>> applicants() async => [
+    _withDecision(_okApplicant, decisions[_okId]),
+    _withDecision(_badApplicant, decisions[_badId]),
+  ];
 
   @override
   Future<UnderwritingReport> report(String applicationId) async {
@@ -108,17 +126,9 @@ class _FakeRepo implements BankRepository {
   @override
   Future<Applicant> decide(String applicationId, Decision decision) async {
     decideCalls++;
+    decisions[applicationId] = decision;
     final base = applicationId == _badId ? _badApplicant : _okApplicant;
-    return Applicant(
-      id: base.id,
-      applicantName: base.applicantName,
-      initials: base.initials,
-      purpose: base.purpose,
-      amount: base.amount,
-      verdict: base.verdict,
-      riskTier: base.riskTier,
-      decision: decision,
-    );
+    return _withDecision(base, decision);
   }
 }
 
@@ -224,6 +234,32 @@ void main() {
       find.text('Loan approved and dispatched to applicant ✓'),
       findsOneWidget,
     );
+  });
+
+  testWidgets(
+      'a recorded decision is reflected in the queue row without a reload (UI-05)',
+      (tester) async {
+    useDesktopSurface(tester);
+    await tester.pumpWidget(_app(const Locale('en'), overrides: overrides()));
+    await settleLoad(tester);
+
+    // Before any decision the queue row shows only its risk badge, not a
+    // decided-status chip.
+    expect(find.text('Approved'), findsNothing);
+
+    await tester.tap(find.text('Noura Al-Qahtani'));
+    await tester.pump();
+    await tester.tap(find.text('Generate predictive report'));
+    await tester.pump(); // → generating
+    await tester.pump(const Duration(milliseconds: 100)); // resolve report()
+
+    await tester.tap(find.text('Approve loan'));
+    await tester.pump(); // register → deciding
+    await tester.pump(); // resolve decide() → decided + queue invalidated
+    await tester.pump(); // re-fetch applicants() → data state
+
+    // The queue row now carries an "Approved" status chip — no manual reload.
+    expect(find.text('Approved'), findsOneWidget);
   });
 
   testWidgets('Approve is disabled for a BAD verdict', (tester) async {
