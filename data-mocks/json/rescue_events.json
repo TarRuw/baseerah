@@ -1,0 +1,72 @@
+[
+  {
+    "id": "6470af43-cc72-4b0c-961d-3eb888b864a6",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "predicted_shortfall": 6828.84,
+    "deficit_in_days": 26,
+    "option_chosen": "LIQUIDATE",
+    "score_before": 31,
+    "score_after": 66,
+    "created_at": "2026-07-17T06:54:03.056779+00:00"
+  },
+  {
+    "id": "94d33c6f-8358-4a2a-93f0-c69dca4635e1",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "predicted_shortfall": 6828.84,
+    "deficit_in_days": 26,
+    "option_chosen": "LIQUIDATE",
+    "score_before": 31,
+    "score_after": 66,
+    "created_at": "2026-07-17T07:17:04.692465+00:00"
+  },
+  {
+    "id": "b8c773d3-0c8d-452f-a715-215299412828",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "predicted_shortfall": 6828.84,
+    "deficit_in_days": 26,
+    "option_chosen": "LIQUIDATE",
+    "score_before": 31,
+    "score_after": 66,
+    "created_at": "2026-07-17T07:17:52.361567+00:00"
+  },
+  {
+    "id": "7d12b531-6f09-49ac-a796-b283611a1d7d",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "predicted_shortfall": 6828.84,
+    "deficit_in_days": 26,
+    "option_chosen": "MURABAHA",
+    "score_before": 31,
+    "score_after": 31,
+    "created_at": "2026-07-17T10:33:35.686063+00:00"
+  },
+  {
+    "id": "356fed2b-5923-46b1-960b-5a6188d26044",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "predicted_shortfall": 7712.12,
+    "deficit_in_days": 20,
+    "option_chosen": "MURABAHA",
+    "score_before": 31,
+    "score_after": 31,
+    "created_at": "2026-07-17T14:17:24.188216+00:00"
+  },
+  {
+    "id": "c714a59e-b22d-4191-a909-0c4f9a656d58",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "predicted_shortfall": 7712.12,
+    "deficit_in_days": 20,
+    "option_chosen": "MURABAHA",
+    "score_before": 31,
+    "score_after": 31,
+    "created_at": "2026-07-17T16:39:30.294998+00:00"
+  },
+  {
+    "id": "2ce4b77f-43f4-40c6-a5c0-5e67415f7870",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "predicted_shortfall": 7712.12,
+    "deficit_in_days": 20,
+    "option_chosen": "MURABAHA",
+    "score_before": 31,
+    "score_after": 31,
+    "created_at": "2026-07-17T17:22:44.032503+00:00"
+  }
+]

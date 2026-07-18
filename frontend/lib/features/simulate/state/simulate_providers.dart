@@ -24,8 +24,10 @@ final currentClientIdProvider = Provider<String?>(
 
 // ── Loan Affordability tab ──────────────────────────────────────────────────
 
-/// The three slider inputs. Ranges/steps mirror the prototype (DESIGN §7.2):
-/// principal 5k–150k step 1k · rate 2–14% step 0.25 · term 6–60 mo step 6.
+/// The three loan inputs, now free numeric fields rather than capped sliders so
+/// the simulation can model real-world facilities. Bounds are guardrails the
+/// input fields clamp to, not prototype slider ticks: principal 1k–10M SAR ·
+/// rate 0–100% · term 1–600 months (up to 50 years).
 class LoanInputs {
   const LoanInputs({
     required this.principal,
@@ -37,15 +39,12 @@ class LoanInputs {
   final double rate;
   final int term;
 
-  static const double principalMin = 5000;
-  static const double principalMax = 150000;
-  static const double principalStep = 1000;
-  static const double rateMin = 2;
-  static const double rateMax = 14;
-  static const double rateStep = 0.25;
-  static const int termMin = 6;
-  static const int termMax = 60;
-  static const int termStep = 6;
+  static const double principalMin = 1000;
+  static const double principalMax = 10000000;
+  static const double rateMin = 0;
+  static const double rateMax = 100;
+  static const int termMin = 1;
+  static const int termMax = 600;
 
   /// Prototype defaults so the result card is meaningful the moment the tab opens.
   static const LoanInputs defaults = LoanInputs(
@@ -101,9 +100,16 @@ class LoanController extends StateNotifier<LoanState> {
   final Duration debounceDelay;
   Timer? _debounce;
 
-  void setPrincipal(double value) => _update(state.inputs.copyWith(principal: value));
-  void setRate(double value) => _update(state.inputs.copyWith(rate: value));
-  void setTerm(int value) => _update(state.inputs.copyWith(term: value));
+  void setPrincipal(double value) => _update(state.inputs.copyWith(
+        principal:
+            value.clamp(LoanInputs.principalMin, LoanInputs.principalMax),
+      ));
+  void setRate(double value) => _update(state.inputs.copyWith(
+        rate: value.clamp(LoanInputs.rateMin, LoanInputs.rateMax),
+      ));
+  void setTerm(int value) => _update(state.inputs.copyWith(
+        term: value.clamp(LoanInputs.termMin, LoanInputs.termMax),
+      ));
 
   /// Apply new inputs at once (label tracks the thumb) and (re)arm the debounce.
   void _update(LoanInputs inputs) {

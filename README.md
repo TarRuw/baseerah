@@ -1,120 +1,96 @@
-# Baseerah (بصيرة) — Early Warning Financial Radar
+# Baseerah — بصيرة
 
-Baseerah is a proactive, AI-driven FinTech platform for the Saudi market. Unlike reactive apps that
-merely record past spending, Baseerah predicts liquidity gaps, cash-flow deficits, and potential
-defaults **12–15 days before they happen** and offers concrete rescue actions. It presents two faces
-over a single backend: a **consumer app** (Financial Stress Score, AI scenario/loan simulation, Smart
-Rescue Mode, gamified saving) and a **bank portal** (B2B credit-verification pipeline, portfolio
-monitoring, risk-policy settings). Strategic anchors align with Vision 2030 — lifting household saving,
-cutting bank NPLs through pre-emptive affordability checks, and maximising SAMA Open Banking utilisation.
+### The Early-Warning Financial Radar
 
-> **Design source of truth:** [`docs/DESIGN.md`](docs/DESIGN.md). Read it before working on any step.
+**Baseerah sees the cash-flow crunch coming — 12 to 15 days before it hits — and tells you what to do about it.**
 
-## Repository structure
+A proactive, AI-driven FinTech platform for the Saudi market. Where ordinary money apps look
+*backward* and report what you already spent, Baseerah looks *forward*: it predicts liquidity gaps,
+cash-flow deficits, and potential defaults before they happen, then hands the user a concrete plan to
+avoid them.
+
+---
+
+## The problem
+
+Most personal-finance and banking tools are rear-view mirrors. They categorize last month's spending
+and draw a nice chart — but by the time a shortfall shows up in the statement, the damage is done: a
+missed obligation, an overdraft, a late loan payment, a hit to creditworthiness.
+
+- **Consumers** find out they're in trouble *after* it happens, with no time to react.
+- **Banks** approve financing on backward-looking snapshots and absorb the cost when borrowers quietly
+  drift toward default — driving up non-performing loans (NPLs).
+- **Rich Open-Banking data exists**, but it's used to *describe* the past, not to *warn* about the future.
+
+## The solution
+
+Baseerah turns SAMA Open-Banking transaction data into a **forward-looking early-warning system**. One
+backend powers two experiences:
+
+### 📱 For consumers — see trouble before it arrives
+- **Financial Stress Score** — a single, explainable health gauge computed from real cash-flow signals
+  (income consistency, spending health, obligation load, liquidity buffer).
+- **Deficit forecasting** — projects the balance forward and flags a shortfall **12–15 days out**, while
+  there's still time to act.
+- **Smart Rescue Mode** — when a gap is coming, Baseerah proposes concrete bridge actions instead of just
+  raising an alarm.
+- **AI scenarios & loan simulation** — "What if I take this loan / this expense?" answered against the
+  user's actual finances.
+- **Gamified saving** — challenges and rewards that turn small, consistent habits into measurable gains.
+
+### 🏦 For banks — lend on where the borrower is heading, not where they've been
+- **Predictive credit verification** — an underwriting pipeline that scores affordability from forward-
+  looking cash-flow health, not just a static snapshot.
+- **Portfolio monitoring** — track the health of disbursed facilities and surface risk early.
+- **Configurable risk policy** — bank-wide thresholds and controls that drive automated screening.
+
+---
+
+## Why it matters — aligned with Vision 2030
+
+- **Lift household saving** from ~6% toward 10% by making financial foresight effortless.
+- **Cut bank NPLs** through pre-emptive, affordability-first lending decisions.
+- **Maximize SAMA Open Banking utilization** — putting the data to work as prevention, not just reporting.
+
+---
+
+## Built for production
+
+A modern, cleanly-layered stack designed to scale and to stay honest about the future:
+
+| Layer | Technology |
+|---|---|
+| **Backend** | Spring Boot 3 · Java 21 · layered REST API, stateless |
+| **Data** | PostgreSQL 16 · Spring Data JPA · Liquibase migrations |
+| **Frontend** | Flutter 3 · Dart 3 · one codebase, two shells · **Arabic-first, RTL** |
+| **Forecasting** | Deterministic Java engine behind a swappable interface (ML sidecar-ready) |
+| **GenAI** | Pluggable provider — offline deterministic mock by default, real model opt-in |
+| **Delivery** | Docker images · Kubernetes manifests · GitOps (GitLab CI + ArgoCD) |
+
+**Security & operability:** phone + OTP authentication with JWT sessions, role-based access (consumer vs.
+bank), all secrets injected from the environment, and a container image that carries no seeded personal
+data.
+
+---
+
+## Repository layout
 
 ```
-baseerah/
-├── backend/        Spring Boot 3 API (Java 21, Gradle Kotlin DSL) — package root com.baseerah
-├── frontend/       Flutter 3 app (Dart 3) — consumer + bank shells, RTL/Arabic-first
-├── docs/           DESIGN.md, the authoritative design specification
-├── data-mocks/     SAMA Open-Banking mock datasets (5 personas) — read-only input
-├── design/         Imported prototype (Baseerah.dc.html) — read-only input
-└── .mado/          MADO orchestration: phases, per-step files, and STATUS.json
+production/
+├── backend/       Spring Boot 3 API — production configuration, secrets externalized
+├── frontend/      Flutter 3 app — consumer + bank shells, build-time API URL
+├── data-mocks/    Persona test/demo dataset (for staging/QA — never production)
+├── PRODUCTION.md  Deployment guide: required env vars, secrets, and what was hardened
+└── README.md      You are here
 ```
 
-## Tech stack
+## Get started
 
-Spring Boot 3 / Java 21 / Gradle (Kotlin DSL) · PostgreSQL 16 + Spring Data JPA + Liquibase ·
-Flutter 3 / Dart 3 with **Riverpod** state management + **dio** HTTP client · pure-Java heuristic
-forecasting (Python sidecar swappable later behind the same interface) · pluggable GenAI
-(`MockGenAi` default, `RemoteGenAi` optional). See [`docs/DESIGN.md`](docs/DESIGN.md) §2 for the full
-table and the decision record.
+- **Deploy it:** see **[`PRODUCTION.md`](PRODUCTION.md)** for the required environment variables,
+  Kubernetes secret wiring, and the frontend build inputs.
+- **Populate a test environment:** see **[`data-mocks/README.md`](data-mocks/README.md)** for the demo
+  personas and how to load them.
 
-### State-management decision
+---
 
-**Riverpod is the chosen Flutter state-management approach** and is locked for the whole project.
-Bloc was the considered alternative; per DESIGN.md §2 the team picked one in Phase 0 and keeps it.
-
-## Prerequisites
-
-- **JDK 21**
-- **Docker** + **docker-compose**
-- **Flutter 3.x SDK** (includes **Dart 3**)
-
-## Running the backend
-
-Both commands run from `backend/` (that's where `docker-compose.yml` and the Gradle wrapper live):
-
-```bash
-cd backend
-docker compose up -d          # start PostgreSQL 16 for local dev
-./gradlew bootRun             # start the API on http://localhost:8080
-```
-
-Verify it's up: `curl http://localhost:8080/actuator/health` → `{"status":"UP"}`.
-
-On first boot the backend runs Liquibase migrations and **seeds the 5 mock personas** from
-`data-mocks/*.json` into Postgres (idempotent — re-running `bootRun` is a cheap no-op).
-Confirm with `curl http://localhost:8080/api/v1/clients` → 5 clients.
-
-## Running the app
-
-Requires the Flutter 3.x / Dart 3 SDK (see Prerequisites). With the backend running:
-
-```bash
-cd frontend
-flutter pub get   # also generates localizations (l10n)
-flutter run       # pick a device: chrome (web), an emulator, or desktop
-```
-
-The app is **Arabic-first (RTL)** by default; the toolbar language toggle flips to English (LTR).
-It talks to the backend at `http://localhost:8080/api/v1`. On an Android emulator, override the host:
-
-```bash
-flutter run --dart-define=BASEERAH_API_BASE_URL=http://10.0.2.2:8080/api/v1
-```
-
-### Choosing which persona (account) the consumer app runs as
-
-The consumer app represents **one seeded account** (there is no in-app persona switcher — the demo
-model is one account per persona). A plain `flutter run` runs as the first seeded client
-(`client_001_family`). To run as a different persona, pass its `externalId` at launch:
-
-```bash
-flutter run --dart-define=BASEERAH_CLIENT=client_003_freelancer
-```
-
-Valid ids come from `GET /api/v1/clients`: `client_001_family`, `client_002_tech_bro`,
-`client_003_freelancer`, `client_004_student`, `client_005_vip`. An unknown id fails loud with the
-list of valid ids. The **bank portal** (reached via the Consumer/Bank toolbar toggle) has its own
-in-screen applicant list, so it needs no flag. See [`docs/DEMO.md`](docs/DEMO.md) for the full
-persona → feature walkthrough.
-
-## Configuration (environment variables)
-
-Everything runs with sensible localhost defaults — **no env vars are required** for the standard
-offline demo. Override as needed:
-
-| Variable | Default | Purpose |
-|---|---|---|
-| `GENAI_PROVIDER` | `mock` | `mock` = deterministic, **offline, no key** (default). `remote` = real streamed AI replies (needs a key; falls back to mock if the key is blank). |
-| `GENAI_API_KEY` | *(blank)* | Provider API key. Only consulted when `GENAI_PROVIDER=remote`. Blank ⇒ keyless fallback to mock, so the demo always runs offline. |
-| `GENAI_MODEL` | `claude-opus-4-8` | Model id used by the remote provider. |
-| `GENAI_BASE_URL` | `https://api.anthropic.com` | Remote provider base URL. |
-| `GENAI_MAX_TOKENS` / `GENAI_VERSION` | `1024` / `2023-06-01` | Remote request tuning. |
-| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5432/baseerah` | DB connection (matches `backend/docker-compose.yml`). |
-| `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD` | `baseerah` / `baseerah` | DB credentials. |
-
-Example — enable a real streamed AI reply:
-
-```bash
-GENAI_PROVIDER=remote GENAI_API_KEY=sk-... ./gradlew bootRun
-```
-
-Leave `GENAI_PROVIDER` unset (or `mock`) for the standard offline demo.
-
-## Demo
-
-For a presenter-ready, persona-by-persona walkthrough of both shells (consumer app + bank portal),
-including the language/RTL toggle and the compliance Settings screen, see
-**[`docs/DEMO.md`](docs/DEMO.md)**. The authoritative design spec is [`docs/DESIGN.md`](docs/DESIGN.md).
+<p align="center"><em>Baseerah — don't just track your money. See where it's going.</em></p>

@@ -25,18 +25,18 @@ class StressScore {
     required this.score,
     required this.zone,
     required this.color,
-    required this.spendingVelocity,
+    required this.spendingHealth,
     required this.incomeConsistency,
-    required this.liabilityRatio,
+    required this.obligationHealth,
     required this.asOfDate,
   });
 
   final int score;
   final StressZone zone;
   final Color color;
-  final double spendingVelocity;
+  final double spendingHealth;
   final double incomeConsistency;
-  final double liabilityRatio;
+  final double obligationHealth;
   final DateTime asOfDate;
 
   factory StressScore.fromJson(Map<String, dynamic> json) {
@@ -44,9 +44,9 @@ class StressScore {
       score: (json['score'] as num).toInt(),
       zone: StressZone.fromApi(json['zone'] as String),
       color: BaseerahTokens.hex(json['color'] as String),
-      spendingVelocity: (json['spendingVelocity'] as num).toDouble(),
+      spendingHealth: (json['spendingHealth'] as num).toDouble(),
       incomeConsistency: (json['incomeConsistency'] as num).toDouble(),
-      liabilityRatio: (json['liabilityRatio'] as num).toDouble(),
+      obligationHealth: (json['obligationHealth'] as num).toDouble(),
       asOfDate: DateTime.parse(json['asOfDate'] as String),
     );
   }

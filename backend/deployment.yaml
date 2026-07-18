@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baseerah-backend
+  labels:
+    app: baseerah-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: baseerah-backend
+  template:
+    metadata:
+      labels:
+        app: baseerah-backend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-backend-secret
+      containers:
+      - name: backend
+        # Image tag is rewritten to the built commit SHA by CI.
+        image: registry.gitlab.com/baseerah/backend/baseerah-backend:REPLACE_WITH_IMAGE_TAG
+        env:
+        # Non-secret connection settings can stay inline (or move to a ConfigMap).
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://baseerah-postgres-service:5432/baseerah_db
+        # Secrets are pulled from the `baseerah-backend-secrets` Secret — never inline.
+        # Create it out-of-band, e.g.:
+        #   kubectl create secret generic baseerah-backend-secrets \
+        #     --from-literal=datasource-username=... \
+        #     --from-literal=datasource-password=... \
+        #     --from-literal=jwt-secret=... \
+        #     --from-literal=auth-mock-otp=...
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: baseerah-backend-secrets
+              key: datasource-username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: baseerah-backend-secrets
+              key: datasource-password
+        # HS256 JWT signing key (≥32 bytes).
+        - name: BASEERAH_AUTH_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: baseerah-backend-secrets
+              key: jwt-secret
+        # Mock OTP code accepted by the (still-mock) OtpService. Replace the provider
+        # with a real SMS/OTP gateway before production use; until then this is a shared secret.
+        - name: BASEERAH_AUTH_MOCK_OTP
+          valueFrom:
+            secretKeyRef:
+              name: baseerah-backend-secrets
+              key: auth-mock-otp
+        # CORS allow-list for the browser frontend origin(s). The app's WebCorsConfig binds
+        # baseerah.cors.allowed-origin-patterns from this env var (relaxed binding).
+        - name: BASEERAH_CORS_ALLOWED_ORIGIN_PATTERNS
+          value: "https://REPLACE_WITH_FRONTEND_ORIGIN"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: baseerah-backend-service
+spec:
+  selector:
+    app: baseerah-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 32001
+  type: NodePort

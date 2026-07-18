@@ -12,6 +12,8 @@ class Account {
   const Account({
     required this.id,
     required this.bankName,
+    required this.bankCode,
+    required this.logoSlug,
     required this.displayColor,
     required this.currency,
     required this.latestBalance,
@@ -20,6 +22,16 @@ class Account {
 
   final String id;
   final String bankName;
+
+  /// The bank's stable code from the server's directory (e.g. `RAJHI`), or `null`
+  /// when its name matched no directory row.
+  final String? bankCode;
+
+  /// Key for the bank's bundled mark — `assets/banks/<logoSlug>.png`. `null` when
+  /// the bank is not in the directory; `BankLogo` then draws a monogram, so an
+  /// unlisted bank costs a logo rather than the accounts list.
+  final String? logoSlug;
+
   final Color displayColor;
   final String currency;
   final double latestBalance;
@@ -29,6 +41,8 @@ class Account {
     return Account(
       id: json['id'] as String,
       bankName: json['bankName'] as String,
+      bankCode: json['bankCode'] as String?,
+      logoSlug: json['logoSlug'] as String?,
       displayColor: BaseerahTokens.hex(json['displayColor'] as String),
       currency: json['currency'] as String,
       latestBalance: (json['latestBalance'] as num).toDouble(),

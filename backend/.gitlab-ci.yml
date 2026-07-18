@@ -1,0 +1,78 @@
+# Identical in the frontend and backend repos: parameterized by $CI_PROJECT_NAME
+# (= "frontend" / "backend"), so the image is $CI_REGISTRY_IMAGE/baseerah-$CI_PROJECT_NAME.
+#
+# Flow: push to main -> build & push an image tagged with the commit SHA -> bump the
+# image tag in deployment.yaml on main (the branch ArgoCD watches, its Application
+# targetRevision) -> ArgoCD auto-syncs and rolls out the new image. main is the single
+# source of truth; there is no separate deploy branch.
+# We deliberately do NOT `kubectl apply`: ArgoCD auto-sync + self-heal would revert
+# any out-of-band change, and a mutable :latest tag never triggers a rollout. Pinning
+# the immutable SHA in git is what ArgoCD detects.
+
+image: docker:24.0.5
+
+services:
+  - docker:24.0.5-dind
+
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  # The branch ArgoCD watches (its Application targetRevision) — the deploy job
+  # commits the image-tag bump here. Kept as main: single-branch GitOps.
+  DEPLOY_BRANCH: main
+  # Baked into the frontend web bundle at build time; the backend Dockerfile declares
+  # no such ARG and simply ignores it (unused build-args are a warning, not an error).
+  # Set this as a project CI/CD variable (Settings > CI/CD > Variables) rather than
+  # hardcoding an environment endpoint here.
+  BASEERAH_API_BASE_URL: "${BASEERAH_API_BASE_URL}"
+
+stages:
+  - build
+  - deploy
+
+build-job:
+  stage: build
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+  script:
+    - docker buildx create --use --driver docker-container
+    - docker buildx build --push --no-cache
+      --build-arg BASEERAH_API_BASE_URL="$BASEERAH_API_BASE_URL"
+      --file ./Dockerfile
+      -t "$CI_REGISTRY_IMAGE/baseerah-$CI_PROJECT_NAME:$CI_COMMIT_SHA"
+      -t "$CI_REGISTRY_IMAGE/baseerah-$CI_PROJECT_NAME:latest" .
+
+# Prerequisites (one-time, per project):
+#   • CI/CD variable GITOPS_TOKEN — a token (service-account PAT) with write_repository
+#     scope whose account can push to DEPLOY_BRANCH. Since main is a protected branch
+#     (Maintainers), the service account is a Maintainer on this project.
+#   • ArgoCD Application: Sync Policy → Automated (auto-sync) so the pushed tag rolls out.
+deploy-job:
+  stage: deploy
+  image:
+    name: alpine/git:latest
+    entrypoint: [""]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  variables:
+    # We clone the deploy branch ourselves; don't let GitLab check out the source ref.
+    GIT_STRATEGY: none
+  script:
+    - git config --global user.email "ci-bot@baseerah.local"
+    - git config --global user.name "GitLab CI"
+    - REPO_URL="https://oauth2:${GITOPS_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+    - git clone --depth 1 --branch "$DEPLOY_BRANCH" "$REPO_URL" gitops && cd gitops
+    # Anchored to the image: line (so the app's name labels are never touched) and
+    # tag-agnostic (adds or replaces the tag), so it works whether the manifest pins
+    # :latest, a prior SHA, or no tag at all.
+    - sed -i -E "/^[[:space:]]*image:/ s#(baseerah-${CI_PROJECT_NAME})(:[A-Za-z0-9._-]+)?#\1:${CI_COMMIT_SHA}#" deployment.yaml
+    - |
+      if git diff --quiet -- deployment.yaml; then
+        echo "deployment.yaml on ${DEPLOY_BRANCH} already at ${CI_COMMIT_SHA}; nothing to bump."
+      else
+        git add deployment.yaml
+        # [skip ci] stops this manifest-only commit from re-triggering the pipeline.
+        git commit -m "ci: deploy ${CI_PROJECT_NAME} ${CI_COMMIT_SHA} [skip ci]"
+        git push "$REPO_URL" "HEAD:${DEPLOY_BRANCH}"
+      fi

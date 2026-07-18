@@ -105,6 +105,13 @@ class RescueController extends StateNotifier<RescueScreenState> {
     try {
       final assessment = await _ref.read(rescueRepositoryProvider).fetch(id);
       if (!mounted) return;
+      // Open the rescue flow whenever the backend predicts a deficit (`hasDeficit`) — the same signal
+      // Home gates its liquidity-deficit card on, so the two screens never contradict each other. The
+      // FR-06 15-day lead flag (`alertRaised`) is *not* a visibility gate: it only escalates urgency
+      // (the shortfall banner pulses when it's true), so a real but not-yet-imminent deficit — e.g.
+      // client_003's 26-day-out shortfall, the Smart Rescue headline demo — still surfaces its bridge
+      // options instead of the calm "you're fine" view. Healthy savers never cross zero within the
+      // assessment horizon, so they return `hasDeficit:false` and correctly stay in the no-deficit state.
       state = assessment.hasDeficit
           ? RescueScreenState.open(assessment)
           : RescueScreenState.noDeficit(assessment);

@@ -10,9 +10,12 @@ import 'data/stress_score.dart';
 import 'state/home_providers.dart';
 import 'widgets/deficit_warning_card.dart';
 import 'widgets/forecast_chart.dart';
+import 'widgets/info_hint.dart';
 import 'widgets/linked_accounts_list.dart';
+import 'widgets/money_stat_card.dart';
 import 'widgets/stat_card.dart';
 import 'widgets/stress_gauge.dart';
+import 'widgets/total_balance_card.dart';
 
 /// Consumer Home / Radar screen (DESIGN §7.1): greeting + avatar, live-multibank
 /// badge, animated Stress Score gauge, (conditional) pulsing deficit warning,
@@ -32,6 +35,7 @@ class HomeScreen extends ConsumerWidget {
     final client = ref.watch(currentClientProvider);
     final score = ref.watch(stressScoreProvider);
     final accounts = ref.watch(accountsProvider);
+    final cashflow = ref.watch(cashflowSummaryProvider);
     final deficit = ref.watch(deficitSignalProvider);
 
     return SafeArea(
@@ -44,6 +48,24 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: BaseerahTokens.gap),
 
             // ── Gauge ──────────────────────────────────────────────────────
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Text(
+                    l.healthScore,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: BaseerahTokens.darkText,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6),
+                InfoHint(message: l.healthScoreHint),
+              ],
+            ),
+            const SizedBox(height: 8),
             score.when(
               data: (s) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -68,6 +90,37 @@ class HomeScreen extends ConsumerWidget {
               const SizedBox(height: BaseerahTokens.gap),
             ],
 
+            // ── Average income / spending money cards ──────────────────────
+            cashflow.maybeWhen(
+              data: (c) => Padding(
+                padding: const EdgeInsets.only(bottom: BaseerahTokens.gap),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: MoneyStatCard(
+                        label: l.avgMonthlyIncome,
+                        value: fmt.money(c.avgMonthlyIncome),
+                        icon: Icons.south_west,
+                        accent: BaseerahTokens.successGreen,
+                        hint: l.avgMonthlyIncomeHint,
+                      ),
+                    ),
+                    const SizedBox(width: BaseerahTokens.gap),
+                    Expanded(
+                      child: MoneyStatCard(
+                        label: l.avgMonthlyExpense,
+                        value: fmt.money(c.avgMonthlyExpense),
+                        icon: Icons.north_east,
+                        accent: BaseerahTokens.gold,
+                        hint: l.avgMonthlyExpenseHint,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              orElse: () => const SizedBox.shrink(),
+            ),
+
             // ── Sub-score stat cards ───────────────────────────────────────
             score.maybeWhen(
               data: (s) => Row(
@@ -78,15 +131,17 @@ class HomeScreen extends ConsumerWidget {
                       value: s.incomeConsistency,
                       icon: Icons.trending_up,
                       accent: BaseerahTokens.teal,
+                      hint: l.incomeConsistencyHint,
                     ),
                   ),
                   const SizedBox(width: BaseerahTokens.gap),
                   Expanded(
                     child: StatCard(
-                      label: l.spendingVelocity,
-                      value: s.spendingVelocity,
+                      label: l.spendingHealth,
+                      value: s.spendingHealth,
                       icon: Icons.speed,
                       accent: BaseerahTokens.gold,
+                      hint: l.spendingHealthHint,
                     ),
                   ),
                 ],
@@ -97,6 +152,17 @@ class HomeScreen extends ConsumerWidget {
 
             // ── Forecast chart (Phase 3 Step 3.2) ──────────────────────────
             const ForecastChart(),
+            const SizedBox(height: BaseerahTokens.gap),
+
+            // ── Total balance across every linked account ──────────────────
+            // Summarises the list below it rather than heading the screen: the
+            // gauge and the deficit warning stay the first things read.
+            accounts.maybeWhen(
+              data: (list) => list.isEmpty
+                  ? const SizedBox.shrink()
+                  : TotalBalanceCard(accounts: list, fmt: fmt),
+              orElse: () => const SizedBox.shrink(),
+            ),
             const SizedBox(height: BaseerahTokens.gap),
 
             // ── Linked accounts ────────────────────────────────────────────
@@ -184,7 +250,22 @@ class _Header extends StatelessWidget {
           ),
         ),
         if (bankCount > 0)
-          Container(
+          Tooltip(
+            message: l.liveBanksHint,
+            triggerMode: TooltipTriggerMode.tap,
+            showDuration: const Duration(seconds: 6),
+            preferBelow: true,
+            margin: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: BaseerahTokens.darkText,
+              borderRadius: BorderRadius.circular(BaseerahTokens.radiusControl),
+            ),
+            textStyle: textTheme.bodySmall?.copyWith(
+              color: Colors.white,
+              height: 1.4,
+            ),
+            child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
               color: BaseerahTokens.successGreen.withValues(alpha: 0.12),
@@ -210,6 +291,7 @@ class _Header extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
             ),
           ),
       ],
@@ -258,9 +340,9 @@ class _SectionError extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             l.loadError,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: BaseerahTokens.muted,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: BaseerahTokens.muted),
           ),
           const SizedBox(height: 8),
           OutlinedButton(onPressed: onRetry, child: Text(l.retry)),

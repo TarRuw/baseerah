@@ -1,8 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../api/api_client.dart';
+import '../../auth/state/auth_providers.dart';
 import '../data/account.dart';
 import '../data/accounts_repository.dart';
+import '../data/cashflow_repository.dart';
+import '../data/cashflow_summary.dart';
 import '../data/client.dart';
 import '../data/client_repository.dart';
 import '../data/forecast.dart';
@@ -29,34 +32,34 @@ final _forecastRepositoryProvider = Provider<ForecastRepository>(
   (ref) => ForecastRepository(ref.watch(apiClientProvider)),
 );
 
+final _cashflowRepositoryProvider = Provider<CashflowRepository>(
+  (ref) => CashflowRepository(ref.watch(apiClientProvider)),
+);
+
 // ── Screen state ──────────────────────────────────────────────────────────────
 
-/// The persona (account) the consumer app runs as. The demo model is one
-/// account per persona rather than an in-app switcher (see `docs/DEMO.md`): pick
-/// which seeded client the app represents at launch with
-/// `--dart-define=BASEERAH_CLIENT=<externalId>` (e.g. `client_003_freelancer`).
-/// Unset → the first seeded client, so a plain `flutter run` still works.
+/// The persona (client) the consumer app runs as — now resolved from the
+/// **authenticated user** (Step 9.4), not a build-time selector. Login (Step 9.5)
+/// replaces the retired `BASEERAH_CLIENT` dart-define: the signed-in
+/// `AuthUser.clientId` / `clientExternalId` (from `/auth/me`) identifies the
+/// persona, and the app never shows a client the user isn't logged in as.
 ///
-/// Matching is by the human-readable `externalId` from `GET /api/v1/clients`
-/// (no hardcoded UUIDs). An unknown id fails loud — better a clear error naming
-/// the valid ids than silently demoing the wrong persona in front of an audience.
-const _selectedClientExternalId =
-    String.fromEnvironment('BASEERAH_CLIENT', defaultValue: '');
-
+/// The `/clients` row is still fetched to hydrate the human-readable
+/// `profileLabel` / `persona` the Home UI shows; it is matched to the session by
+/// id (no hardcoded UUIDs). Depends on [authControllerProvider], so it refetches
+/// on login/logout. Throws when there is no authenticated consumer, so consumer
+/// screens degrade to an error state rather than leaking another persona.
 final currentClientProvider = FutureProvider<Client>((ref) async {
+  final user = ref.watch(currentUserProvider);
+  if (user == null || !user.isConsumer) {
+    throw StateError('No authenticated consumer; cannot resolve current client.');
+  }
   final clients = await ref.watch(_clientRepositoryProvider).fetchAll();
-  if (clients.isEmpty) {
-    throw StateError('No seeded clients returned by /clients');
-  }
-  final wanted = _selectedClientExternalId.trim();
-  if (wanted.isEmpty) {
-    return clients.first;
-  }
   return clients.firstWhere(
-    (c) => c.externalId.toLowerCase() == wanted.toLowerCase(),
+    (c) => c.id == user.clientId || c.externalId == user.clientExternalId,
     orElse: () => throw StateError(
-      'BASEERAH_CLIENT="$wanted" is not a seeded persona. '
-      'Valid ids: ${clients.map((c) => c.externalId).join(', ')}',
+      'Authenticated client "${user.clientExternalId ?? user.clientId}" '
+      'is not among the seeded personas returned by /clients.',
     ),
   );
 });
@@ -73,6 +76,14 @@ final stressScoreProvider = FutureProvider<StressScore>((ref) async {
 final accountsProvider = FutureProvider<List<Account>>((ref) async {
   final client = await ref.watch(currentClientProvider.future);
   return ref.watch(_accountsRepositoryProvider).fetch(client.id);
+});
+
+/// Average monthly income and spending for the current client (loading/error
+/// surfaced by the `AsyncValue`). Backs the two Home cash-flow cards; depends on
+/// [currentClientProvider], so it refetches if the client changes.
+final cashflowSummaryProvider = FutureProvider<CashflowSummary>((ref) async {
+  final client = await ref.watch(currentClientProvider.future);
+  return ref.watch(_cashflowRepositoryProvider).fetch(client.id);
 });
 
 /// Live 30-day cash-flow forecast for the current client (loading/error surfaced

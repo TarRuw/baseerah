@@ -7,12 +7,14 @@ import '../../../theme/baseerah_theme.dart';
 import '../data/applicant_models.dart';
 import '../state/bank_providers.dart';
 
-/// Left pane of the Applications split view (DESIGN §7.5): the underwriting queue
-/// from `GET /bank/applicants`, each row a selectable card with avatar (initials),
-/// name, `purpose · amount`, and a colour-coded risk badge (the verdict). The
-/// selected row is highlighted with a teal border. Loads/degrades on its own —
-/// a spinner while fetching, an inline retry on failure — so a dropped queue
-/// call never takes down the whole screen.
+/// Left pane of the Underwrite split view (DESIGN §7.5): the underwrite-stage
+/// queue from `GET /bank/loan-requests?stage=underwrite`, each row a selectable
+/// card with avatar (initials), name and `purpose · amount`. The queue lists
+/// un-underwritten requests, so a row carries no verdict badge — the verdict is
+/// produced by the report the detail pane generates. The selected row is
+/// highlighted with a teal border. Loads/degrades on its own — a spinner while
+/// fetching, an inline retry on failure — so a dropped queue call never takes
+/// down the whole screen.
 class ApplicantList extends ConsumerWidget {
   const ApplicantList({super.key});
 
@@ -20,9 +22,9 @@ class ApplicantList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
     final fmt = Fmt(Localizations.localeOf(context), l);
-    final applicants = ref.watch(bankApplicantsProvider);
+    final requests = ref.watch(bankLoanRequestsProvider);
     final selectedId = ref.watch(
-      bankDetailProvider.select((s) => s.selected?.id),
+      bankDetailProvider.select((s) => s.selected?.requestId),
     );
 
     return Column(
@@ -39,9 +41,9 @@ class ApplicantList extends ConsumerWidget {
           ),
         ),
         Expanded(
-          child: applicants.when(
-            // A decision invalidates this provider to reflect the persisted
-            // outcome; keep the list on screen during that reload rather than
+          child: requests.when(
+            // A decline invalidates this provider to drop the request from the
+            // queue; keep the list on screen during that reload rather than
             // flashing a spinner.
             skipLoadingOnReload: true,
             data: (rows) => rows.isEmpty
@@ -50,20 +52,20 @@ class ApplicantList extends ConsumerWidget {
                     itemCount: rows.length,
                     separatorBuilder: (_, __) => const SizedBox(height: 11),
                     itemBuilder: (context, i) {
-                      final a = rows[i];
-                      return _ApplicantCard(
-                        applicant: a,
-                        selected: a.id == selectedId,
-                        amountLabel: fmt.money(a.amount),
+                      final r = rows[i];
+                      return _RequestCard(
+                        request: r,
+                        selected: r.requestId == selectedId,
+                        amountLabel: fmt.money(r.amount),
                         onTap: () =>
-                            ref.read(bankDetailProvider.notifier).select(a),
+                            ref.read(bankDetailProvider.notifier).select(r),
                       );
                     },
                   ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (_, __) => _QueueError(
               l: l,
-              onRetry: () => ref.invalidate(bankApplicantsProvider),
+              onRetry: () => ref.invalidate(bankLoanRequestsProvider),
             ),
           ),
         ),
@@ -72,31 +74,26 @@ class ApplicantList extends ConsumerWidget {
   }
 }
 
-/// A single selectable applicant card. Border turns teal when [selected].
-class _ApplicantCard extends StatelessWidget {
-  const _ApplicantCard({
-    required this.applicant,
+/// A single selectable loan-request card. Border turns teal when [selected].
+class _RequestCard extends StatelessWidget {
+  const _RequestCard({
+    required this.request,
     required this.selected,
     required this.amountLabel,
     required this.onTap,
   });
 
-  final Applicant applicant;
+  final LoanRequestRow request;
   final bool selected;
   final String amountLabel;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
-    // Once a banker has acted, the row leads with the decided status (Approved /
-    // Declined) instead of the model's risk badge: the human outcome is now the
-    // salient fact and the queue stays in sync with the decision without a
-    // reload (UI-05). Until then it shows the §5.5 risk badge.
-    final Widget trailing = applicant.decision == null
-        ? RiskBadge.of(applicant.verdict, l).build(context)
-        : _DecisionChip.of(applicant.decision!, l).build(context);
+    final purpose = request.purpose;
+    final subtitle =
+        purpose == null ? amountLabel : '$purpose · $amountLabel';
 
     return Material(
       color: Colors.white,
@@ -117,14 +114,14 @@ class _ApplicantCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              _Avatar(initials: applicant.initials, size: 40, fontSize: 14),
+              _Avatar(initials: request.initials, size: 40, fontSize: 14),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      applicant.applicantName,
+                      request.applicantLabel,
                       style: textTheme.titleSmall?.copyWith(
                         color: BaseerahTokens.darkText,
                         fontWeight: FontWeight.w600,
@@ -134,7 +131,7 @@ class _ApplicantCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 1),
                     Text(
-                      '${applicant.purpose} · $amountLabel',
+                      subtitle,
                       style: textTheme.bodySmall?.copyWith(
                         color: BaseerahTokens.muted,
                       ),
@@ -144,8 +141,6 @@ class _ApplicantCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
-              trailing,
             ],
           ),
         ),
@@ -208,9 +203,10 @@ class BankAvatar extends StatelessWidget {
 }
 
 /// Colour-coded risk badge derived from the [Verdict] (DESIGN §7.5). OK→low
-/// (green), WARN→medium (orange), BAD→high (red), and an un-underwritten
-/// applicant (null verdict) → a neutral "unscored" chip. All colours from the
-/// single theme token file; labels localised.
+/// (green), WARN→medium (orange), BAD→high (red), and an un-underwritten request
+/// (null verdict) → a neutral "unscored" chip. Used by the Price tab's detail as
+/// a pricing risk hint (the underwrite queue itself is un-underwritten, so it
+/// shows no badge). All colours from the single theme token file; labels localised.
 class RiskBadge {
   const RiskBadge._(this.color, this.label);
 
@@ -229,29 +225,8 @@ class RiskBadge {
   Widget build(BuildContext context) => _StatusPill(color: color, label: label);
 }
 
-/// Decided-status chip shown on a queue row once a banker has acted (UI-05):
-/// Approve → green, Decline → red. Reuses the shared [_StatusPill] so it sits
-/// exactly where the risk badge it replaces did. Labels are localised.
-class _DecisionChip {
-  const _DecisionChip._(this.color, this.label);
-
-  final Color color;
-  final String label;
-
-  factory _DecisionChip.of(Decision decision, AppLocalizations l) {
-    return switch (decision) {
-      Decision.approve =>
-        _DecisionChip._(BaseerahTokens.successGreen, l.bankDecisionApproved),
-      Decision.decline =>
-        _DecisionChip._(BaseerahTokens.alertRed, l.bankDecisionDeclined),
-    };
-  }
-
-  Widget build(BuildContext context) => _StatusPill(color: color, label: label);
-}
-
-/// The compact colour-coded pill shared by the risk badge and the decision chip:
-/// a tinted rounded rect with a bold coloured label (DESIGN §7.5).
+/// The compact colour-coded pill used by the risk badge: a tinted rounded rect
+/// with a bold coloured label (DESIGN §7.5).
 class _StatusPill extends StatelessWidget {
   const _StatusPill({required this.color, required this.label});
 
@@ -278,7 +253,7 @@ class _StatusPill extends StatelessWidget {
   }
 }
 
-/// Neutral empty state when the queue comes back with no applicants.
+/// Neutral empty state when the queue comes back with no requests to underwrite.
 class _EmptyQueue extends StatelessWidget {
   const _EmptyQueue({required this.l});
 

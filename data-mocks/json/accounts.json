@@ -1,0 +1,82 @@
+[
+  {
+    "id": "2f199c16-23b2-5762-825d-dea99e974f4a",
+    "client_id": "9500d3f9-ff1d-541b-969a-5725b51af601",
+    "external_id": "acc-client_001_family",
+    "bank_name": "Riyad Bank",
+    "display_color": "#E0574F",
+    "currency": "SAR",
+    "latest_balance": 78000.0,
+    "tokenized_account_id": "TKN-ED766471392F0A0D1E343756"
+  },
+  {
+    "id": "80b254ac-60a5-5456-a570-fb40ad4ca37b",
+    "client_id": "28ea2245-77f9-569c-b100-b23af5006d4c",
+    "external_id": "acc-client_002_tech_bro",
+    "bank_name": "Banque Saudi Fransi",
+    "display_color": "#C4A24C",
+    "currency": "SAR",
+    "latest_balance": 34000.0,
+    "tokenized_account_id": "TKN-8947788306BA30DA6390209C"
+  },
+  {
+    "id": "92ca4d61-8e21-59bf-9867-246f51a55d27",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "external_id": "acc-client_003_freelancer",
+    "bank_name": "The Saudi Investment Bank",
+    "display_color": "#0a3d33",
+    "currency": "SAR",
+    "latest_balance": 5800.0,
+    "tokenized_account_id": "TKN-BC649B781A728FE068990EE2"
+  },
+  {
+    "id": "f508c399-5755-55f7-aeeb-264cde70af6c",
+    "client_id": "c30745ec-4a2a-53ed-b7a9-783d813cb38d",
+    "external_id": "acc-client_004_student",
+    "bank_name": "Al Rajhi Bank",
+    "display_color": "#0e6b54",
+    "currency": "SAR",
+    "latest_balance": 6600.0,
+    "tokenized_account_id": "TKN-6F90E6BF4BEF729791E4B8AE"
+  },
+  {
+    "id": "849ea5dc-4d36-5fce-9070-c2c81c37fa01",
+    "client_id": "f12b64f2-4785-541c-8c2b-62d831181d5b",
+    "external_id": "acc-client_005_vip",
+    "bank_name": "Banque Saudi Fransi",
+    "display_color": "#C4A24C",
+    "currency": "SAR",
+    "latest_balance": 1650000.0,
+    "tokenized_account_id": "TKN-2656963D9F1CC0FDB324C5C3"
+  },
+  {
+    "id": "08f491f0-2418-4cf8-9ce8-42b7bdbbcd87",
+    "client_id": "f9990ef3-424c-47c4-9e03-310fbe5c75a8",
+    "external_id": "acc-006-gig",
+    "bank_name": "Bank Albilad",
+    "display_color": "#E0574F",
+    "currency": "SAR",
+    "latest_balance": 480.0,
+    "tokenized_account_id": "TKN-006GIGDISTRESSDEMO0001"
+  },
+  {
+    "id": "2cf0b653-1e38-5fda-9741-5c054a2c844d",
+    "client_id": "c30745ec-4a2a-53ed-b7a9-783d813cb38d",
+    "external_id": "acc-client_004_student_savings",
+    "bank_name": "Riyad Bank",
+    "display_color": "#1D9E63",
+    "currency": "SAR",
+    "latest_balance": 1550.16,
+    "tokenized_account_id": "TKN-129B5D94E03735CAC1DD4C10"
+  },
+  {
+    "id": "3416ecea-05e1-517b-8d20-1250697e8086",
+    "client_id": "f12b64f2-4785-541c-8c2b-62d831181d5b",
+    "external_id": "acc-client_005_vip_savings",
+    "bank_name": "Alinma Bank",
+    "display_color": "#E5A63A",
+    "currency": "SAR",
+    "latest_balance": 517919.95,
+    "tokenized_account_id": "TKN-A1D4E24E15BFEC35E8D83318"
+  }
+]

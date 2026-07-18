@@ -1,0 +1,57 @@
+[
+  {
+    "id": "ffa68ee2-83aa-4064-ab93-9929d4798800",
+    "client_id": "28ea2245-77f9-569c-b100-b23af5006d4c",
+    "as_of_date": "2026-07-16",
+    "score": 46,
+    "zone": "WARNING",
+    "spending_velocity": 33.83,
+    "income_consistency": 75.0,
+    "liability_ratio": 31.82,
+    "created_at": "2026-07-16T11:05:32.824558+00:00"
+  },
+  {
+    "id": "74c0ccc7-c223-47f2-99bb-5e7cf15b34ef",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "as_of_date": "2026-07-16",
+    "score": 31,
+    "zone": "CRITICAL",
+    "spending_velocity": 0.0,
+    "income_consistency": 54.6,
+    "liability_ratio": 47.51,
+    "created_at": "2026-07-16T11:05:39.875049+00:00"
+  },
+  {
+    "id": "4ea628bf-e8fd-4f2a-9f53-3ed691a2a745",
+    "client_id": "c30745ec-4a2a-53ed-b7a9-783d813cb38d",
+    "as_of_date": "2026-07-16",
+    "score": 72,
+    "zone": "OPTIMAL",
+    "spending_velocity": 64.52,
+    "income_consistency": 66.57,
+    "liability_ratio": 88.84,
+    "created_at": "2026-07-16T11:05:45.771554+00:00"
+  },
+  {
+    "id": "0ac244de-4cf1-4547-8694-59e842028da8",
+    "client_id": "f12b64f2-4785-541c-8c2b-62d831181d5b",
+    "as_of_date": "2026-07-16",
+    "score": 82,
+    "zone": "OPTIMAL",
+    "spending_velocity": 100.0,
+    "income_consistency": 56.62,
+    "liability_ratio": 83.49,
+    "created_at": "2026-07-16T11:05:53.566512+00:00"
+  },
+  {
+    "id": "25449b56-9f90-4fa0-9d11-38d78083f24c",
+    "client_id": "9500d3f9-ff1d-541b-969a-5725b51af601",
+    "as_of_date": "2026-07-16",
+    "score": 75,
+    "zone": "OPTIMAL",
+    "spending_velocity": 83.74,
+    "income_consistency": 75.0,
+    "liability_ratio": 63.96,
+    "created_at": "2026-07-16T11:07:18.858313+00:00"
+  }
+]

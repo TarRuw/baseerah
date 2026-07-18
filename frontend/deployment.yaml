@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baseerah-frontend
+  labels:
+    app: baseerah-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: baseerah-frontend
+  template:
+    metadata:
+      labels:
+        app: baseerah-frontend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-frontend-secret
+      containers:
+      - name: frontend
+        # Immutable, per-commit tag. CI rewrites this to the built commit SHA and
+        # commits it back, so ArgoCD sees a changed image and rolls out automatically.
+        # (A mutable :latest never changes the manifest, so ArgoCD stays "Synced" and
+        # never recreates pods — that was the "pods are hours old" bug.)
+        # Image tag is rewritten to the built commit SHA by CI.
+        image: registry.gitlab.com/baseerah/frontend/baseerah-frontend:REPLACE_WITH_IMAGE_TAG
+        imagePullPolicy: Always
+        # NOTE: the API base URL is compiled into the web bundle at `flutter build web`
+        # time via the Dockerfile's BASEERAH_API_BASE_URL build-arg — a runtime env on
+        # this nginx container has no effect. Set it in CI:
+        #   docker build --build-arg BASEERAH_API_BASE_URL=https://api.example.com/api/v1 .
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: baseerah-frontend-service
+spec:
+  selector:
+    app: baseerah-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 32000
+  type: NodePort

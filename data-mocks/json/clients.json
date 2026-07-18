@@ -1,0 +1,44 @@
+[
+  {
+    "id": "9500d3f9-ff1d-541b-969a-5725b51af601",
+    "external_id": "client_001_family",
+    "profile_label": "الموظف المستقر (أبو عائلة)",
+    "persona": "الموظف المستقر (أبو عائلة)",
+    "created_at": "2026-07-16T11:02:44.054776+00:00"
+  },
+  {
+    "id": "28ea2245-77f9-569c-b100-b23af5006d4c",
+    "external_id": "client_002_tech_bro",
+    "profile_label": "الشاب العازب (عاشق القهوة)",
+    "persona": "الشاب العازب (عاشق القهوة)",
+    "created_at": "2026-07-16T11:02:44.054776+00:00"
+  },
+  {
+    "id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "external_id": "client_003_freelancer",
+    "profile_label": "رائد الأعمال المستقل",
+    "persona": "رائد الأعمال المستقل",
+    "created_at": "2026-07-16T11:02:44.054776+00:00"
+  },
+  {
+    "id": "c30745ec-4a2a-53ed-b7a9-783d813cb38d",
+    "external_id": "client_004_student",
+    "profile_label": "الطالب الجامعي",
+    "persona": "الطالب الجامعي",
+    "created_at": "2026-07-16T11:02:44.054776+00:00"
+  },
+  {
+    "id": "f12b64f2-4785-541c-8c2b-62d831181d5b",
+    "external_id": "client_005_vip",
+    "profile_label": "العميل عالي الملاءة المالية",
+    "persona": "العميل عالي الملاءة المالية",
+    "created_at": "2026-07-16T11:02:44.054776+00:00"
+  },
+  {
+    "id": "f9990ef3-424c-47c4-9e03-310fbe5c75a8",
+    "external_id": "client_006_gig",
+    "profile_label": "Gig worker · cash-flow distress",
+    "persona": "gig_worker_distress",
+    "created_at": "2026-07-16T11:02:47.18296+00:00"
+  }
+]

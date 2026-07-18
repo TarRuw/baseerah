@@ -1,0 +1,56 @@
+[
+  {
+    "id": "197c57db-34d8-4c8b-ba3c-d6a6495e65e6",
+    "mobile": "+966501000001",
+    "display_name": "Abdullah Al-Qahtani",
+    "display_name_ar": "عبدالله القحطاني",
+    "role": "CONSUMER",
+    "client_id": "9500d3f9-ff1d-541b-969a-5725b51af601",
+    "created_at": "2026-07-16T11:02:47.411997+00:00"
+  },
+  {
+    "id": "f92bd1b0-13f5-4faf-ac1e-43a6aa5012f4",
+    "mobile": "+966501000002",
+    "display_name": "Faisal Al-Otaibi",
+    "display_name_ar": "فيصل العتيبي",
+    "role": "CONSUMER",
+    "client_id": "28ea2245-77f9-569c-b100-b23af5006d4c",
+    "created_at": "2026-07-16T11:02:47.417244+00:00"
+  },
+  {
+    "id": "6ad5e6ee-1c2e-4df9-af7e-34fc478be916",
+    "mobile": "+966501000003",
+    "display_name": "Noura Al-Harbi",
+    "display_name_ar": "نورة الحربي",
+    "role": "CONSUMER",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "created_at": "2026-07-16T11:02:47.421632+00:00"
+  },
+  {
+    "id": "af8192b8-e1fb-4d44-be21-d2e6f81095cc",
+    "mobile": "+966501000004",
+    "display_name": "Sara Al-Dosari",
+    "display_name_ar": "سارة الدوسري",
+    "role": "CONSUMER",
+    "client_id": "c30745ec-4a2a-53ed-b7a9-783d813cb38d",
+    "created_at": "2026-07-16T11:02:47.425769+00:00"
+  },
+  {
+    "id": "26689e16-d6ca-4f33-b7e0-2270975442b2",
+    "mobile": "+966501000005",
+    "display_name": "Khalid Al-Rashid",
+    "display_name_ar": "خالد الراشد",
+    "role": "CONSUMER",
+    "client_id": "f12b64f2-4785-541c-8c2b-62d831181d5b",
+    "created_at": "2026-07-16T11:02:47.429769+00:00"
+  },
+  {
+    "id": "b0b881f3-1643-4627-9299-655a2db77f6f",
+    "mobile": "+966509000001",
+    "display_name": "Mona Al-Zahrani",
+    "display_name_ar": "منى الزهراني",
+    "role": "BANK",
+    "client_id": null,
+    "created_at": "2026-07-16T11:02:47.432655+00:00"
+  }
+]

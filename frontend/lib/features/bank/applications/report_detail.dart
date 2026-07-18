@@ -8,15 +8,16 @@ import '../data/applicant_models.dart';
 import '../state/bank_providers.dart';
 import 'applicant_list.dart';
 
-/// Right pane of the Applications split view (DESIGN §7.5): the applicant detail,
+/// Right pane of the Underwrite split view (DESIGN §7.5): the request detail,
 /// driven by [bankDetailProvider]. Three states —
 ///   • **empty**: nothing selected → a neutral placeholder;
 ///   • **generating**: the `bsr-spin` (0.8 s) loader + "Analyzing 24-month
-///     telemetry…" while the report POST is in flight;
+///     telemetry…" while the underwrite POST is in flight;
 ///   • **report**: the verdict panel, band-coloured stamina box, three KPI boxes,
-///     the 12-month cash-flow chart, and Approve / Decline actions.
-/// A failed report shows an inline retry; a decision shows a confirmation and
-/// disables the actions.
+///     the 12-month cash-flow chart, and a Decline action (approval is pricing,
+///     in the next tab).
+/// A failed report shows an inline retry; a decline shows a confirmation and
+/// disables the action.
 class ReportDetail extends ConsumerWidget {
   const ReportDetail({super.key});
 
@@ -38,7 +39,7 @@ class ReportDetail extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _DetailHeader(applicant: selected, state: state),
+          _DetailHeader(request: selected, state: state),
           Flexible(child: _DetailBody(state: state)),
         ],
       ),
@@ -104,9 +105,9 @@ class DottedPlaceholder extends StatelessWidget {
 /// Report header: avatar + name + request line, plus the "generate report"
 /// action while no report has been generated yet.
 class _DetailHeader extends ConsumerWidget {
-  const _DetailHeader({required this.applicant, required this.state});
+  const _DetailHeader({required this.request, required this.state});
 
-  final Applicant applicant;
+  final LoanRequestRow request;
   final BankDetailState state;
 
   @override
@@ -115,6 +116,10 @@ class _DetailHeader extends ConsumerWidget {
     final fmt = Fmt(Localizations.localeOf(context), l);
     final textTheme = Theme.of(context).textTheme;
     final canGenerate = state.phase == BankDetailPhase.empty;
+    final purpose = request.purpose;
+    final subtitle = purpose == null
+        ? fmt.money(request.amount)
+        : '$purpose · ${fmt.money(request.amount)}';
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
@@ -127,14 +132,14 @@ class _DetailHeader extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          BankAvatar(initials: applicant.initials),
+          BankAvatar(initials: request.initials),
           const SizedBox(width: 13),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  applicant.applicantName,
+                  request.applicantLabel,
                   style: textTheme.titleMedium?.copyWith(
                     color: BaseerahTokens.darkText,
                     fontWeight: FontWeight.w600,
@@ -142,7 +147,7 @@ class _DetailHeader extends ConsumerWidget {
                 ),
                 const SizedBox(height: 1),
                 Text(
-                  '${applicant.purpose} · ${fmt.money(applicant.amount)}',
+                  subtitle,
                   style: textTheme.bodySmall?.copyWith(
                     color: BaseerahTokens.muted,
                   ),
@@ -324,11 +329,11 @@ class _ReportBody extends ConsumerWidget {
             l: l,
           ),
           const SizedBox(height: 20),
-          // ── Approve / Decline ───────────────────────────────────────────────
-          _DecisionActions(state: state),
-          if (state.decision != null) ...[
+          // ── Decline (approval is pricing, in the next tab) ──────────────────
+          _DeclineAction(state: state),
+          if (state.declined) ...[
             const SizedBox(height: 14),
-            _DecisionConfirmation(decision: state.decision!, l: l),
+            _DeclineConfirmation(l: l),
           ],
         ],
       ),
@@ -469,22 +474,22 @@ class _KpiBox extends StatelessWidget {
   }
 }
 
-/// The Approve / Decline action row. Approve is disabled for a BAD verdict and
-/// while a decision is in flight; the pressed button shows progress.
-class _DecisionActions extends ConsumerWidget {
-  const _DecisionActions({required this.state});
+/// The Decline action row for the Underwrite stage. Approval is no longer an
+/// underwrite action — pricing (the next tab) is the approve path — so the only
+/// action here is Decline. Disabled once declined or while the decline POST is
+/// in flight; the pressed button shows progress.
+class _DeclineAction extends ConsumerWidget {
+  const _DeclineAction({required this.state});
 
   final BankDetailState state;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
-    final decided = state.decision != null;
-    final approveEnabled = !decided && !state.deciding && !state.approveDisabled;
-    final declineEnabled = !decided && !state.deciding;
+    final enabled = !state.declined && !state.deciding;
 
-    Future<void> decide(Decision d) async {
-      final ok = await ref.read(bankDetailProvider.notifier).decide(d);
+    Future<void> decline() async {
+      final ok = await ref.read(bankDetailProvider.notifier).declineRequest();
       if (!ok && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l.bankDecisionError)),
@@ -492,73 +497,47 @@ class _DecisionActions extends ConsumerWidget {
       }
     }
 
-    final deciding = state.deciding;
-    return Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: approveEnabled ? () => decide(Decision.approve) : null,
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 13),
-            ),
-            child: deciding && state.decision == null
-                ? const _BtnSpinner(color: Colors.white)
-                : Text(l.bankApprove),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: OutlinedButton(
-            onPressed: declineEnabled ? () => decide(Decision.decline) : null,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: BaseerahTokens.alertRed,
-              padding: const EdgeInsets.symmetric(vertical: 13),
-              side: BorderSide(
-                color: BaseerahTokens.alertRed.withValues(alpha: 0.4),
-                width: 1.5,
-              ),
-            ),
-            child: Text(l.bankDecline),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Small in-button progress spinner.
-class _BtnSpinner extends StatelessWidget {
-  const _BtnSpinner({required this.color});
-
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
     return SizedBox(
-      width: 18,
-      height: 18,
-      child: CircularProgressIndicator(strokeWidth: 2, color: color),
+      width: double.infinity,
+      child: OutlinedButton(
+        onPressed: enabled ? decline : null,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: BaseerahTokens.alertRed,
+          padding: const EdgeInsets.symmetric(vertical: 13),
+          side: BorderSide(
+            color: BaseerahTokens.alertRed.withValues(alpha: 0.4),
+            width: 1.5,
+          ),
+        ),
+        child: state.deciding
+            ? const SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: BaseerahTokens.alertRed,
+                ),
+              )
+            : Text(l.bankDecline),
+      ),
     );
   }
 }
 
-/// The persisted-decision confirmation line (green for approved, red-ish for
-/// declined), shown once a decision is recorded.
-class _DecisionConfirmation extends StatelessWidget {
-  const _DecisionConfirmation({required this.decision, required this.l});
+/// The decline confirmation line, shown once the request has been declined.
+class _DeclineConfirmation extends StatelessWidget {
+  const _DeclineConfirmation({required this.l});
 
-  final Decision decision;
   final AppLocalizations l;
 
   @override
   Widget build(BuildContext context) {
-    final approved = decision == Decision.approve;
     return Center(
       child: Text(
-        approved ? l.bankApprovedMsg : l.bankDeclinedMsg,
+        l.bankDeclinedMsg,
         textAlign: TextAlign.center,
-        style: TextStyle(
-          color: approved ? BaseerahTokens.successGreen : BaseerahTokens.alertRed,
+        style: const TextStyle(
+          color: BaseerahTokens.alertRed,
           fontSize: 13,
           fontWeight: FontWeight.w600,
         ),
@@ -673,14 +652,24 @@ class _CashFlowPainter extends CustomPainter {
     final plotW = (plotRight - plotLeft) <= 0 ? 1.0 : plotRight - plotLeft;
     final plotH = (plotBottom - plotTop) <= 0 ? 1.0 : plotBottom - plotTop;
 
-    var lo = 0.0;
-    var hi = 0.0;
+    var lo = balances.first;
+    var hi = balances.first;
     for (final b in balances) {
       if (b < lo) lo = b;
       if (b > hi) hi = b;
     }
-    if (hi == lo) hi = lo + 1;
-    hi += (hi - lo) * 0.08;
+    // Frame the actual value range (not a zero baseline) with padding, so each applicant's
+    // trend and intra-month rhythm fills the plot and reads distinctly. A zero-anchored axis
+    // collapsed every high-balance series to the same near-flat line hugging the top.
+    if (hi == lo) {
+      final pad = hi.abs() < 1 ? 1.0 : hi.abs() * 0.08;
+      lo -= pad;
+      hi += pad;
+    } else {
+      final pad = (hi - lo) * 0.15;
+      lo -= pad;
+      hi += pad;
+    }
 
     double xFor(int i) {
       final frac = n == 1 ? 0.0 : i / (n - 1);

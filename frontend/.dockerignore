@@ -1,0 +1,36 @@
+# The image compiles the app from source, so the Dart/Flutter sources must reach
+# the build context. Only exclude what the build regenerates or never reads.
+
+# Regenerated inside the image
+build/
+.dart_tool/
+.pub-cache/
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+lib/l10n/app_localizations*.dart
+
+# Platform targets the web build never touches
+android/
+ios/
+linux/
+macos/
+windows/
+
+# VCS, tooling, editor state
+.git/
+.gitignore
+.gitlab-ci.yml
+.github/
+.idea/
+.vscode/
+.claude/
+*.iml
+
+# Not read by the build stage
+Dockerfile
+.dockerignore
+docker-compose.yml
+deployment.yaml
+README.md
+test/

@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/auth/data/auth_models.dart';
+import '../features/auth/login_mobile_screen.dart';
+import '../features/auth/state/auth_providers.dart';
 import '../features/bank/applications/applications_screen.dart';
+import '../features/bank/disbursements/disbursements_screen.dart';
+import '../features/bank/financing/financing_requests_screen.dart';
 import '../features/bank/portfolio/portfolio_screen.dart';
 import '../features/bank/settings/settings_screen.dart';
+import '../features/expenses/expenses_screen.dart';
+import '../features/financing/financing_screen.dart';
 import '../features/goals/goals_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/rescue/rescue_screen.dart';
@@ -15,32 +22,83 @@ import '../shell/bottom_nav.dart';
 import '../shell/responsive_frame.dart';
 import '../theme/baseerah_theme.dart';
 
-/// Consumer shell routes (bottom nav order: Home · Simulate · Rescue · Goals).
+/// Login (Step 9.5): the only route reachable while signed out.
+const _login = '/login';
+
+/// Consumer shell routes (bottom nav order: Home · Simulate · Rescue · Goals ·
+/// Expenses).
 const _consumerHome = '/home';
 const _consumerSimulate = '/simulate';
 const _consumerRescue = '/rescue';
 const _consumerGoals = '/goals';
+const _consumerExpenses = '/expenses';
 
-/// Bank portal shell routes (sidebar order: Applications · Portfolio · Settings).
-const _bankApps = '/bank/apps';
+/// Bank portal shell routes — one loan pipeline in stages (sidebar order:
+/// Underwrite · Price · Disburse · Portfolio · Settings). Underwrite is the
+/// request-model successor to the retired FR-08 Applications tab (Step 12.6).
+const _bankUnderwrite = '/bank/underwrite';
+const _bankPrice = '/bank/price';
+const _bankDisburse = '/bank/disburse';
 const _bankPortfolio = '/bank/portfolio';
 const _bankSettings = '/bank/settings';
 
-/// Builds the app's [GoRouter]. Two independent stateful shells — the consumer
-/// mobile app and the bank desktop portal — reachable from each other via the
-/// toolbar's Consumer/Bank switch. Real screens replace the placeholders in
-/// Phases 2–6.
-GoRouter createRouter() {
+/// The app's [GoRouter], built once and rebuilt never (it re-reads auth state on
+/// each redirect via [ref] and re-evaluates redirects through a
+/// [refreshListenable] bound to [authControllerProvider]).
+///
+/// Gating (Step 9.5): signed-out users can only reach `/login`; signed-in users
+/// land on — and are held within — the shell for their role. A consumer can't
+/// reach `/bank/**` and a bank officer can't reach the consumer screens; the
+/// router redirect is the UX half of that, the backend `403`s (Step 9.3) the
+/// enforced half.
+final routerProvider = Provider<GoRouter>((ref) {
+  // A Listenable the router refreshes on: fires whenever auth state changes so a
+  // login/logout re-runs the redirect immediately.
+  final refresh = ValueNotifier<AuthState>(ref.read(authControllerProvider));
+  ref.onDispose(refresh.dispose);
+  ref.listen<AuthState>(
+    authControllerProvider,
+    (_, next) => refresh.value = next,
+  );
+
+  String roleLanding(AuthUser user) =>
+      user.role == AuthRole.bank ? _bankUnderwrite : _consumerHome;
+
+  final initial = ref.read(authControllerProvider);
+  final initialLocation =
+      initial.isAuthenticated ? roleLanding(initial.user!) : _login;
+
   return GoRouter(
-    initialLocation: _consumerHome,
+    initialLocation: initialLocation,
+    refreshListenable: refresh,
+    redirect: (context, state) {
+      final auth = ref.read(authControllerProvider);
+      final atLogin = state.matchedLocation == _login;
+
+      // Signed out (or an OTP verify still in flight): only /login is allowed.
+      if (!auth.isAuthenticated) {
+        return atLogin ? null : _login;
+      }
+
+      // Signed in: keep the user inside their role's shell.
+      final atBankRoute = state.matchedLocation.startsWith('/bank');
+      if (auth.user!.role == AuthRole.bank) {
+        return (atLogin || !atBankRoute) ? _bankUnderwrite : null;
+      }
+      return (atLogin || atBankRoute) ? _consumerHome : null;
+    },
     routes: [
+      // ── Login (outside both shells) ───────────────────────────────────────
+      GoRoute(
+        path: _login,
+        builder: (context, state) => const LoginMobileScreen(),
+      ),
+
       // ── Consumer shell: bottom navigation ─────────────────────────────────
       StatefulShellRoute.indexedStack(
         builder: (context, state, navShell) =>
             _ConsumerShell(navigationShell: navShell),
         branches: [
-          // Home is the first real screen (Step 2.3); the rest stay placeholders
-          // until their phases land.
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -49,7 +107,6 @@ GoRouter createRouter() {
               ),
             ],
           ),
-          // Simulate is a real screen from Step 3.5 (loan sliders + AI chat).
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -58,18 +115,21 @@ GoRouter createRouter() {
               ),
             ],
           ),
-          // Rescue is a real screen from Step 4.3 (shortfall banner, bridge
-          // cards, before→after recovery).
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: _consumerRescue,
                 builder: (context, state) => const RescueScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'financing',
+                    builder: (context, state) =>
+                        FinancingScreen(args: state.extra as FinancingArgs),
+                  ),
+                ],
               ),
             ],
           ),
-          // Goals is a real screen from Step 5.3 (gold points card, challenge
-          // cards, live claim flow).
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -78,25 +138,46 @@ GoRouter createRouter() {
               ),
             ],
           ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _consumerExpenses,
+                builder: (context, state) => const ExpensesScreen(),
+              ),
+            ],
+          ),
         ],
       ),
+
       // ── Bank portal shell: sidebar navigation ─────────────────────────────
       StatefulShellRoute.indexedStack(
         builder: (context, state, navShell) =>
             _BankShell(navigationShell: navShell),
         branches: [
-          // Applications is the first real bank screen (Step 6.3): split-pane
-          // applicant queue ↔ predictive report. Portfolio + Settings become
-          // real screens in Step 6.4.
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: _bankApps,
+                path: _bankUnderwrite,
                 builder: (context, state) => const ApplicationsScreen(),
               ),
             ],
           ),
-          // Portfolio (Step 6.4): 4 live KPI cards + monitoring table.
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _bankPrice,
+                builder: (context, state) => const FinancingRequestsScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _bankDisburse,
+                builder: (context, state) => const DisbursementsScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -105,8 +186,6 @@ GoRouter createRouter() {
               ),
             ],
           ),
-          // Settings (Step 6.4): SAMA status, NDMO/tokenization toggles, risk
-          // thresholds — reads/persists the singleton risk policy.
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -119,14 +198,13 @@ GoRouter createRouter() {
       ),
     ],
   );
-}
+});
 
-/// Shared toolbar: logo, Consumer/Bank switch, language toggle. Present on both
-/// shells so the two are always reachable and the language can flip anywhere.
+/// Shared toolbar: logo/title, the signed-in user's name + logout, and the
+/// language toggle. The role now decides the shell, so the old Consumer/Bank
+/// switch is gone (Step 9.5).
 class _ShellToolbar extends ConsumerWidget implements PreferredSizeWidget {
-  const _ShellToolbar({required this.isBank});
-
-  final bool isBank;
+  const _ShellToolbar();
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -134,29 +212,57 @@ class _ShellToolbar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+    final user = ref.watch(currentUserProvider);
+    final name =
+        user == null ? '' : (isArabic ? user.displayNameAr : user.displayName);
+
     return AppBar(
       title: Text(l.appTitle),
       actions: [
-        SegmentedButton<bool>(
-          style: SegmentedButton.styleFrom(
-            foregroundColor: Colors.white,
-            selectedForegroundColor: BaseerahTokens.teal,
-            selectedBackgroundColor: Colors.white,
-            side: const BorderSide(color: Colors.white54),
+        if (user != null)
+          PopupMenuButton<_AccountAction>(
+            tooltip: name,
+            onSelected: (action) {
+              if (action == _AccountAction.logout) {
+                // Router redirect returns to /login when the state flips.
+                ref.read(authControllerProvider.notifier).logout();
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem<_AccountAction>(
+                value: _AccountAction.logout,
+                child: Row(
+                  children: [
+                    const Icon(Icons.logout, size: 18),
+                    const SizedBox(width: 12),
+                    Text(l.logout),
+                  ],
+                ),
+              ),
+            ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.account_circle_outlined,
+                      color: Colors.white),
+                  const SizedBox(width: 6),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 120),
+                    child: Text(
+                      name,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const Icon(Icons.arrow_drop_down, color: Colors.white),
+                ],
+              ),
+            ),
           ),
-          segments: [
-            ButtonSegment(value: false, label: Text(l.shellConsumer)),
-            ButtonSegment(value: true, label: Text(l.shellBank)),
-          ],
-          selected: {isBank},
-          showSelectedIcon: false,
-          onSelectionChanged: (sel) {
-            final goBank = sel.first;
-            if (goBank == isBank) return;
-            context.go(goBank ? _bankApps : _consumerHome);
-          },
-        ),
-        const SizedBox(width: 8),
         TextButton(
           onPressed: () => ref.read(localeProvider.notifier).toggle(),
           style: TextButton.styleFrom(foregroundColor: Colors.white),
@@ -167,6 +273,9 @@ class _ShellToolbar extends ConsumerWidget implements PreferredSizeWidget {
     );
   }
 }
+
+/// Account-menu actions in the shell toolbar.
+enum _AccountAction { logout }
 
 /// Consumer mobile shell — bottom navigation bar.
 class _ConsumerShell extends StatelessWidget {
@@ -180,7 +289,7 @@ class _ConsumerShell extends StatelessWidget {
     return ResponsiveFrame(
       maxWidth: BaseerahTokens.phoneFrameMaxWidth,
       child: Scaffold(
-        appBar: const _ShellToolbar(isBank: false),
+        appBar: const _ShellToolbar(),
         body: navigationShell,
         bottomNavigationBar: ConsumerBottomNav(
           selectedIndex: navigationShell.currentIndex,
@@ -200,13 +309,13 @@ class _BankShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
-    // A desktop layout by design — only rein in ultra-wide monitors, no phone
+    // A desktop layout by design — fills the full window width (no cap), no phone
     // frame (framed: false).
     return ResponsiveFrame(
-      maxWidth: BaseerahTokens.bankFrameMaxWidth,
+      maxWidth: double.infinity,
       framed: false,
       child: Scaffold(
-        appBar: const _ShellToolbar(isBank: true),
+        appBar: const _ShellToolbar(),
         body: Row(
           children: [
             NavigationRail(
@@ -215,8 +324,16 @@ class _BankShell extends StatelessWidget {
               labelType: NavigationRailLabelType.all,
               destinations: [
                 NavigationRailDestination(
-                  icon: const Icon(Icons.assignment_outlined),
+                  icon: const Icon(Icons.fact_check_outlined),
                   label: Text(l.navBankApplications),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.request_quote_outlined),
+                  label: Text(l.navBankFinancing),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.account_balance_wallet_outlined),
+                  label: Text(l.navBankDisbursements),
                 ),
                 NavigationRailDestination(
                   icon: const Icon(Icons.pie_chart_outline),

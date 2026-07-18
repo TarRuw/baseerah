@@ -1,0 +1,28 @@
+[
+  {
+    "id": "20056c50-2411-440f-95f8-1e13691853e2",
+    "client_id": "a4d77ac0-8baa-5381-8593-17365c4b0dc7",
+    "label": "ايجار",
+    "category": "TRAVEL_HOTELS",
+    "amount": 1000.0,
+    "currency": "SAR",
+    "cadence": "MONTHLY",
+    "day_of_month": 27,
+    "active": true,
+    "created_at": "2026-07-17T10:03:06.306826+00:00",
+    "updated_at": "2026-07-17T10:03:06.306857+00:00"
+  },
+  {
+    "id": "7f3a3283-7e1c-4b77-be37-9af4b45bd30a",
+    "client_id": "f12b64f2-4785-541c-8c2b-62d831181d5b",
+    "label": "ايجار",
+    "category": "TRAVEL_HOTELS",
+    "amount": 10000.0,
+    "currency": "SAR",
+    "cadence": "MONTHLY",
+    "day_of_month": 31,
+    "active": true,
+    "created_at": "2026-07-17T14:16:29.603116+00:00",
+    "updated_at": "2026-07-17T14:16:29.603144+00:00"
+  }
+]

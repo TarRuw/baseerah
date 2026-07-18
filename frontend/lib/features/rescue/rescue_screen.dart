@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/format.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/baseerah_theme.dart';
+import '../financing/financing_screen.dart';
 import 'state/rescue_providers.dart';
 import 'widgets/bridge_card.dart';
 import 'widgets/recovery_gauge.dart';
@@ -203,7 +205,31 @@ class _OpenView extends ConsumerWidget {
               fmt: fmt,
             ),
           ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
+        // Alternative to liquidating assets: raise a financing request-for-proposal
+        // to the client's banks and compare their real offers (Smart Rescue RFP).
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton.icon(
+            onPressed: confirming
+                ? null
+                : () => context.push(
+                      '/rescue/financing',
+                      extra: FinancingArgs(
+                        amount: assessment.shortfall ?? 0,
+                        deficitInDays: assessment.deficitInDays ?? 0,
+                      ),
+                    ),
+            icon: const Icon(Icons.request_quote_outlined),
+            label: Text(l.financingRequestCta),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: BaseerahTokens.teal,
+              side: const BorderSide(color: BaseerahTokens.teal),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(

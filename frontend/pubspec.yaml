@@ -44,3 +44,9 @@ flutter:
   uses-material-design: true
   # Generate the localized AppLocalizations from lib/l10n/*.arb (see l10n.yaml).
   generate: true
+  assets:
+    # Bank marks, one per banks.logo_slug. Bundled rather than fetched: the accounts list must render
+    # offline and on first paint, and the app never calls a third-party host at runtime.
+    # Third-party trademarks — read docs/bank-logos.md before adding or redistributing any. Keep this
+    # directory to image files only: everything in it is published with the web bundle.
+    - assets/banks/

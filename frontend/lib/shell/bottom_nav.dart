@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 
-/// Consumer shell bottom navigation: Home · Simulate · Rescue · Goals
-/// (DESIGN §7). Stateless — the owning [StatefulNavigationShell] holds the
+/// Consumer shell bottom navigation: Home · Simulate · Rescue · Goals ·
+/// Expenses (DESIGN §7). Stateless — the owning [StatefulNavigationShell] holds the
 /// selected index and branch switching; this only renders the bar. Labels are
 /// localized and mirror correctly under RTL because order follows reading order.
 class ConsumerBottomNav extends StatelessWidget {
@@ -42,6 +42,11 @@ class ConsumerBottomNav extends StatelessWidget {
           icon: const Icon(Icons.flag_outlined),
           selectedIcon: const Icon(Icons.flag),
           label: l.navGoals,
+        ),
+        NavigationDestination(
+          icon: const Icon(Icons.receipt_long_outlined),
+          selectedIcon: const Icon(Icons.receipt_long),
+          label: l.navExpenses,
         ),
       ],
     );

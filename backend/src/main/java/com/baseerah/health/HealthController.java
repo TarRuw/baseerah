@@ -1,6 +1,6 @@
 package com.baseerah.health;
 
-import com.baseerah.common.ApiResponse;
+import com.baseerah.shared.ApiResponse;
 import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

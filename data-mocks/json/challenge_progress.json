@@ -1,0 +1,122 @@
+[
+  {
+    "id": "0015d6b4-4cbc-42f9-a3e7-a108a0649a71",
+    "challenge_id": "71660963-0567-443c-9981-fc39d6d3edb5",
+    "current_value": 1885.0,
+    "pct": 100,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "1a14b0f7-ec18-472d-aa47-e1bde3b4fe5d",
+    "challenge_id": "f9c87cc7-6c42-4a9e-8c32-a2b48be3e2b5",
+    "current_value": 443.0,
+    "pct": 90,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "9aa94961-6d36-4b67-8575-3f04b6f8f672",
+    "challenge_id": "e2fdeb2f-6993-4515-be69-208dfb5bd869",
+    "current_value": 595.4,
+    "pct": 100,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "c81f24b4-aec2-47a8-8404-b64b9bd710a6",
+    "challenge_id": "5b811e25-ecbc-4438-b3ad-6a68169b0404",
+    "current_value": 13515.0,
+    "pct": 100,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "8e216e62-7f36-4a67-b2d2-4d0ae9923283",
+    "challenge_id": "d2fa4aca-e2cd-4109-8739-c284a980b6f1",
+    "current_value": 4575.0,
+    "pct": 59,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "6b0d5790-9508-4a89-8ec8-3c6dce1967b7",
+    "challenge_id": "4abb9d32-640d-4656-9803-c3c5f0145193",
+    "current_value": 5625.0,
+    "pct": 100,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "ff675d85-91cf-4e5e-a4b8-babc6304ec3a",
+    "challenge_id": "3e430531-8fd3-4312-892e-c736bcce89e2",
+    "current_value": 1049.85,
+    "pct": 67,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "0088df9b-c818-4703-81f5-ee9dbaff8ffd",
+    "challenge_id": "b6c84a62-7ce6-43a7-a8e4-5a5be60fee15",
+    "current_value": 1722.2,
+    "pct": 100,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "6f304fdb-a48b-477c-a305-2bd1b58c6425",
+    "challenge_id": "b79b689c-e305-468e-9499-27939d361393",
+    "current_value": 596.6,
+    "pct": 50,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "1979c286-e684-4fbe-9094-08f9228b6e75",
+    "challenge_id": "540737f8-1455-42fe-999a-d5b4482969d6",
+    "current_value": 0.0,
+    "pct": 0,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "b1122fa5-2681-4e59-a692-3752bf6fad74",
+    "challenge_id": "c9c4191a-1bc0-4d03-a165-32b5ff870445",
+    "current_value": 4680.0,
+    "pct": 60,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "d08c1729-1df5-48b6-ace8-1574f75fe0db",
+    "challenge_id": "3f876d2a-3bad-40d8-b3b1-a9757b20513e",
+    "current_value": 0.0,
+    "pct": 0,
+    "claimed": false,
+    "claimed_at": null
+  },
+  {
+    "id": "2c064176-52a8-4569-b17f-581194db40bc",
+    "challenge_id": "cab838ab-b8fd-4bb0-996a-cfd893ea703f",
+    "current_value": 14232.0,
+    "pct": 100,
+    "claimed": true,
+    "claimed_at": "2026-07-16T17:51:24.558471+00:00"
+  },
+  {
+    "id": "9d2c62ba-12bf-453f-a45c-134b207632d2",
+    "challenge_id": "66669d7f-6e73-48e5-a5e1-2a513a4ab508",
+    "current_value": 697.85,
+    "pct": 100,
+    "claimed": true,
+    "claimed_at": "2026-07-16T17:54:12.317258+00:00"
+  },
+  {
+    "id": "e5cf6dcd-e8d0-45ed-975e-e2edea778c74",
+    "challenge_id": "f4f7db51-ed54-46cc-b20a-5304a50139e5",
+    "current_value": 3510.0,
+    "pct": 100,
+    "claimed": true,
+    "claimed_at": "2026-07-16T17:54:13.998096+00:00"
+  }
+]

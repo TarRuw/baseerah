@@ -10,7 +10,10 @@ import 'theme/baseerah_theme.dart';
 
 Future<void> main() async {
   // Load persisted preferences before the first frame so the restored locale
-  // (QA UI-07) is present synchronously when the app mounts — no Arabic flash.
+  // (QA UI-07) and the restored auth session (Step 9.4) are present
+  // synchronously when the app mounts — no Arabic flash, no logged-out flash.
+  // `authStoreProvider` / `authControllerProvider` read this same
+  // `SharedPreferences` instance, so the session is resolved before runApp.
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   runApp(
@@ -21,19 +24,16 @@ Future<void> main() async {
   );
 }
 
-class BaseerahApp extends ConsumerStatefulWidget {
+class BaseerahApp extends ConsumerWidget {
   const BaseerahApp({super.key});
 
   @override
-  ConsumerState<BaseerahApp> createState() => _BaseerahAppState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    // The router is a provider (Step 9.5): built once and cached, it re-reads
+    // auth state on each redirect and refreshes on login/logout. `watch` returns
+    // the same instance across rebuilds since the provider never recomputes.
+    final router = ref.watch(routerProvider);
 
-class _BaseerahAppState extends ConsumerState<BaseerahApp> {
-  // The router outlives rebuilds; create it once.
-  final _router = createRouter();
-
-  @override
-  Widget build(BuildContext context) {
     // Active locale drives both the strings and the text direction (RTL for ar):
     // MaterialApp derives Directionality from `locale`, so no manual wrapping.
     final locale = ref.watch(localeProvider);
@@ -50,7 +50,7 @@ class _BaseerahAppState extends ConsumerState<BaseerahApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      routerConfig: _router,
+      routerConfig: router,
     );
   }
 }

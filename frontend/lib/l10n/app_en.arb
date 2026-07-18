@@ -20,7 +20,11 @@
   "navSimulate": "Simulate",
   "navRescue": "Rescue",
   "navGoals": "Goals",
-  "navBankApplications": "Applications",
+  "navExpenses": "Expenses",
+  "@navExpenses": {
+    "description": "Bottom-nav label for the consumer Expenses tab (declared periodic expenses)."
+  },
+  "navBankApplications": "Underwrite",
   "navBankPortfolio": "Portfolio",
   "navBankSettings": "Settings",
   "comingSoon": "Coming soon",
@@ -35,6 +39,10 @@
   "@healthScore": {
     "description": "Label under the stress-score gauge."
   },
+  "healthScoreHint": "Your overall financial health on a 0–100 scale, based on how stable your income is, how healthy your spending is, and your cash buffer. Higher is healthier: green is optimal, orange needs attention, and red is critical.",
+  "@healthScoreHint": {
+    "description": "Tooltip explaining what the Financial Health Score gauge means."
+  },
   "outOf100": "out of 100",
   "@outOf100": {
     "description": "Suffix clarifying the 0-100 stress-score scale."
@@ -46,6 +54,10 @@
       "count": { "type": "int" }
     }
   },
+  "liveBanksHint": "Your accounts are securely linked across this many banks and updated in real time through SAMA Open Banking.",
+  "@liveBanksHint": {
+    "description": "Tooltip explaining the live-multibank badge."
+  },
   "deficitTitle": "Liquidity deficit predicted",
   "@deficitTitle": {
     "description": "Title of the pulsing liquidity-deficit warning card."
@@ -54,13 +66,48 @@
   "@deficitSub": {
     "description": "Body of the liquidity-deficit warning card."
   },
+  "avgMonthlyIncome": "Avg. income / month",
+  "@avgMonthlyIncome": {
+    "description": "Money-card label for the client's average monthly income."
+  },
+  "avgMonthlyIncomeHint": "Your average monthly income — money coming in — over the last few months.",
+  "@avgMonthlyIncomeHint": {
+    "description": "Tooltip explaining the average monthly income card."
+  },
+  "avgMonthlyExpense": "Avg. spending / month",
+  "@avgMonthlyExpense": {
+    "description": "Money-card label for the client's average monthly spending."
+  },
+  "avgMonthlyExpenseHint": "Your average monthly spending — money going out — over the last few months.",
+  "@avgMonthlyExpenseHint": {
+    "description": "Tooltip explaining the average monthly spending card."
+  },
   "incomeConsistency": "Income consistency",
   "@incomeConsistency": {
     "description": "Stat-card label bound to the income-consistency sub-score."
   },
-  "spendingVelocity": "Spending velocity",
-  "@spendingVelocity": {
-    "description": "Stat-card label bound to the spending-velocity sub-score."
+  "incomeConsistencyHint": "How steady and predictable your income is from month to month. A higher score means your earnings arrive regularly and reliably.",
+  "@incomeConsistencyHint": {
+    "description": "Tooltip explaining the income-consistency sub-score."
+  },
+  "spendingHealth": "Spending health",
+  "@spendingHealth": {
+    "description": "Stat-card label bound to the spending-health sub-score (higher = spending well within income)."
+  },
+  "spendingHealthHint": "How well your spending stays within your income. A higher score means you spend at a comfortable, sustainable pace.",
+  "@spendingHealthHint": {
+    "description": "Tooltip explaining the spending-health sub-score."
+  },
+  "totalBalance": "Total balance",
+  "@totalBalance": {
+    "description": "Label of the card summing the latest balance of every linked account."
+  },
+  "acrossAccounts": "across {count, plural, one{1 account} other{{count} accounts}}",
+  "@acrossAccounts": {
+    "description": "Sub-label under the total balance, ICU-pluralized on the number of linked accounts (e.g. 'across 1 account' / 'across 2 accounts').",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
   },
   "linkedAccounts": "Linked accounts",
   "@linkedAccounts": {
@@ -89,6 +136,14 @@
   "currencySar": "SAR",
   "@currencySar": {
     "description": "Currency unit appended by the money() formatter."
+  },
+  "axisUnitThousand": "K",
+  "@axisUnitThousand": {
+    "description": "Chart axis abbreviation for thousands, appended to a scaled tick value (8K). Keep to 1-3 characters: it repeats on every tick inside a narrow gutter. Intentionally invariant — an axis tick is a measurement abbreviation, not prose, so it is not inflected for number."
+  },
+  "axisUnitMillion": "M",
+  "@axisUnitMillion": {
+    "description": "Chart axis abbreviation for millions, appended to a scaled tick value (2.24M). Keep to 1-3 characters: it repeats on every tick inside a narrow gutter. Intentionally invariant — see axisUnitThousand."
   },
   "loadError": "Couldn't load your data",
   "@loadError": {
@@ -133,6 +188,10 @@
       "count": { "type": "int" }
     }
   },
+  "monthsUnit": "months",
+  "@monthsUnit": {
+    "description": "Unit suffix for the repayment-term input field."
+  },
   "monthlyInstallment": "Monthly installment",
   "@monthlyInstallment": {
     "description": "Label above the computed monthly installment."
@@ -148,6 +207,10 @@
   "scoreIfTaken": "Health score if taken",
   "@scoreIfTaken": {
     "description": "Label preceding the projected-vs-current score impact."
+  },
+  "loanRequestFinancing": "Request this financing",
+  "@loanRequestFinancing": {
+    "description": "Button on the loan-affordability tab that raises a real financing request for the entered amount."
   },
   "aiName": "Baseerah AI",
   "@aiName": {
@@ -226,7 +289,7 @@
   "@rescueNoDeficitTitle": {
     "description": "Title of the calm no-deficit (healthy) state."
   },
-  "rescueNoDeficitBody": "No cash-flow deficit is predicted. We'll alert you the moment that changes.",
+  "rescueNoDeficitBody": "No imminent cash-flow deficit is predicted. We'll alert you the moment that changes.",
   "@rescueNoDeficitBody": {
     "description": "Body of the calm no-deficit (healthy) state."
   },
@@ -302,13 +365,13 @@
   "@tierPlatinum": {
     "description": "Reward-tier badge label: PLATINUM."
   },
-  "bankApplicationsTitle": "Applications",
+  "bankApplicationsTitle": "Underwrite",
   "@bankApplicationsTitle": {
-    "description": "Title of the bank Applications screen."
+    "description": "Title of the bank Underwrite (loan-request underwriting) screen."
   },
   "bankPendingReview": "Pending review",
   "@bankPendingReview": {
-    "description": "Header above the applicant queue."
+    "description": "Header above the underwrite queue."
   },
   "bankRiskLow": "Low risk",
   "@bankRiskLow": {
@@ -326,13 +389,13 @@
   "@bankRiskUnscored": {
     "description": "Risk badge for an applicant not yet underwritten."
   },
-  "bankQueueEmpty": "No applicants in the queue.",
+  "bankQueueEmpty": "No requests awaiting underwriting.",
   "@bankQueueEmpty": {
-    "description": "Empty state when the applicant queue is empty."
+    "description": "Empty state when the underwrite queue is empty."
   },
-  "bankSelectApplicant": "Select an applicant to run predictive verification",
+  "bankSelectApplicant": "Select a request to run predictive verification",
   "@bankSelectApplicant": {
-    "description": "Detail empty state — no applicant selected."
+    "description": "Detail empty state — no request selected."
   },
   "bankGenerateReport": "Generate predictive report",
   "@bankGenerateReport": {
@@ -569,5 +632,351 @@
   "bankAutoDeclineNote": "Applications with a forecast DTI at or above this are declined automatically.",
   "@bankAutoDeclineNote": {
     "description": "Auto-decline slider help text."
+  },
+  "loginTagline": "Foresight for your financial health",
+  "@loginTagline": {
+    "description": "Tagline under the brand on the login hero."
+  },
+  "loginMobileTitle": "Sign in",
+  "@loginMobileTitle": {
+    "description": "Heading of the mobile-entry (stage 1) login step."
+  },
+  "loginMobileSubtitle": "Enter your mobile number to receive a verification code.",
+  "@loginMobileSubtitle": {
+    "description": "Sub-heading of the mobile-entry login step."
+  },
+  "loginMobileLabel": "Mobile number",
+  "@loginMobileLabel": {
+    "description": "Label for the mobile-number field."
+  },
+  "loginMobileHint": "+9665XXXXXXXX",
+  "@loginMobileHint": {
+    "description": "Placeholder showing the expected E.164 Saudi mobile format."
+  },
+  "loginMobileInvalid": "Enter a valid mobile number, e.g. +966501000001",
+  "@loginMobileInvalid": {
+    "description": "Validation error for a malformed mobile number."
+  },
+  "loginSendCode": "Send code",
+  "@loginSendCode": {
+    "description": "Button that requests an OTP for the entered mobile."
+  },
+  "loginOtpTitle": "Enter your code",
+  "@loginOtpTitle": {
+    "description": "Heading of the OTP-entry (stage 2) login step."
+  },
+  "loginOtpSentTo": "We sent a 6-digit code to {mobile}.",
+  "@loginOtpSentTo": {
+    "description": "Sub-heading of the OTP step naming the destination mobile.",
+    "placeholders": {
+      "mobile": { "type": "String" }
+    }
+  },
+  "loginOtpLabel": "Verification code",
+  "@loginOtpLabel": {
+    "description": "Label for the 6-digit OTP field."
+  },
+  "loginOtpDemoHint": "Demo: enter the test code from your configuration.",
+  "@loginOtpDemoHint": {
+    "description": "Hint that the OTP is the configured mock value; never reveals the actual secret."
+  },
+  "loginOtpRequired": "Enter the 6-digit code",
+  "@loginOtpRequired": {
+    "description": "Validation error when the OTP field is empty or not 6 digits."
+  },
+  "loginVerify": "Verify",
+  "@loginVerify": {
+    "description": "Button that verifies the entered OTP and signs in."
+  },
+  "loginResend": "Resend code",
+  "@loginResend": {
+    "description": "Affordance to request a fresh OTP."
+  },
+  "loginResent": "A new code has been sent.",
+  "@loginResent": {
+    "description": "Snackbar confirmation after a resend."
+  },
+  "loginChangeMobile": "Change number",
+  "@loginChangeMobile": {
+    "description": "Action returning from the OTP step to the mobile-entry step."
+  },
+  "loginInvalidCode": "That code is invalid or has expired. Please try again.",
+  "@loginInvalidCode": {
+    "description": "Inline error shown for a rejected (wrong/expired) OTP."
+  },
+  "loginNetworkError": "Something went wrong. Please try again.",
+  "@loginNetworkError": {
+    "description": "Generic error for a failed login network call."
+  },
+  "logout": "Log out",
+  "@logout": {
+    "description": "Account-menu action that signs the user out."
+  },
+  "back": "Back",
+  "navBankFinancing": "Price",
+  "bankFinancingTitle": "Price",
+  "bankFinancingPending": "Awaiting reply",
+  "bankFinancingQueueEmpty": "No financing requests right now.",
+  "bankFinancingSelectPrompt": "Select a request to send an offer.",
+  "bankFinancingRequestedAmount": "Requested",
+  "bankFinancingClientScore": "Client score",
+  "bankFinancingRate": "Profit rate",
+  "bankFinancingTerm": "Term (months)",
+  "bankFinancingInvalid": "Invalid",
+  "bankFinancingReply": "Send offer",
+  "bankFinancingDecline": "Decline",
+  "bankFinancingReplied": "Offer sent",
+  "bankFinancingDeclined": "Declined",
+  "bankFinancingReplyError": "Couldn't send the offer. Please try again.",
+  "financingRequestCta": "Request financing offers",
+  "financingTitle": "Request financing",
+  "financingPickBanksTitle": "Choose banks to ask",
+  "financingPickBanksSubtitle": "We'll request offers to cover {amount} from the banks you hold accounts with.",
+  "@financingPickBanksSubtitle": {
+    "placeholders": { "amount": { "type": "String" } }
+  },
+  "financingNoBanks": "You have no linked banks to request financing from.",
+  "financingSubmit": "Request offers",
+  "financingPendingTitle": "Awaiting bank offers",
+  "financingPendingSubtitle": "We've asked your banks. Offers appear here as they reply.",
+  "financingAwaiting": "Awaiting reply",
+  "financingReceived": "Offer in",
+  "financingRequestsTitle": "Your financing requests",
+  "financingNewRequest": "New request",
+  "financingNoRequests": "You haven't requested financing yet.",
+  "financingStatusPending": "Pending",
+  "financingStatusOffers": "Offers ready",
+  "financingStatusArranged": "Arranged",
+  "financingBankCount": "{count, plural, one{1 bank} other{{count} banks}}",
+  "@financingBankCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "financingStatusAccepted": "Awaiting disbursement",
+  "financingStatusActive": "Active",
+  "financingAccept": "Accept",
+  "financingConfirmTitle": "Confirm the terms",
+  "financingConfirmAmount": "Amount",
+  "financingConfirmRate": "Profit rate",
+  "financingConfirmTerm": "Term",
+  "financingConfirmCancel": "Cancel",
+  "financingConfirmAccept": "Accept",
+  "financingAcceptedTitle": "Offer accepted",
+  "financingAwaitingDisbursement": "Awaiting the bank's disbursement.",
+  "financingFacilityTitle": "Your facility",
+  "financingFacilitySubtitle": "Your predicted shortfall is now covered.",
+  "financingFirstPayment": "First payment",
+  "navBankDisbursements": "Disburse",
+  "bankDisbursementsTitle": "Disburse",
+  "bankDisbursementsPending": "Awaiting funding",
+  "bankDisbursementsEmpty": "No offers awaiting disbursement.",
+  "bankDisbursementsSelectPrompt": "Select an accepted offer to fund.",
+  "bankDisburse": "Disburse",
+  "bankDisbursed": "Funds disbursed",
+  "bankDisbursementDeclined": "Declined",
+  "bankDisbursementError": "Couldn't complete. Please try again.",
+  "bankAffordabilityLabel": "Affordability",
+  "bankAffordabilityComfortable": "Comfortable",
+  "bankAffordabilityStrains": "Strains liquidity",
+  "bankAffordabilityNotAffordable": "Not affordable",
+  "financingDeclined": "Declined",
+  "financingProposalsTitle": "Choose an offer",
+  "financingAllDeclined": "None of the banks made an offer this time.",
+  "financingRateValue": "{rate}% · {term} months",
+  "@financingRateValue": {
+    "placeholders": { "rate": { "type": "String" }, "term": { "type": "int" } }
+  },
+  "financingMonthly": "Monthly payment",
+  "financingTotal": "Total repayment",
+  "financingDti": "Debt-to-income",
+  "financingProjectedScore": "Projected score",
+  "financingChoose": "Choose this offer",
+  "financingChooseError": "Couldn't confirm. Please try again.",
+  "financingDoneTitle": "Financing arranged",
+  "financingScoreChange": "Projected score {before} → {after}",
+  "@financingScoreChange": {
+    "placeholders": { "before": { "type": "int" }, "after": { "type": "int" } }
+  },
+  "expensesTitle": "Declared Expenses",
+  "@expensesTitle": {
+    "description": "Consumer Expenses screen title (user-declared periodic expenses)."
+  },
+  "expensesSubtitle": "Spending your bank can't see",
+  "@expensesSubtitle": {
+    "description": "Expenses screen subtitle under the title."
+  },
+  "expensesHonestyNote": "These are recurring costs your bank feed can't see — like cash rent or family support. Don't add anything already in your linked accounts; it would be counted twice.",
+  "@expensesHonestyNote": {
+    "description": "List-level explainer (the UI half of the double-count guard): declared expenses are spending the bank feed can't see; don't duplicate what's already tracked."
+  },
+  "expensesEmptyTitle": "Nothing declared yet",
+  "@expensesEmptyTitle": {
+    "description": "Title of the empty state when the client has declared no expenses."
+  },
+  "expensesEmptyBody": "Some spending never reaches your bank — cash rent, family support, private tuition. Declare it here so your financial picture, and the health score banks rely on, isn't missing what you actually pay.",
+  "@expensesEmptyBody": {
+    "description": "Empty-state body explaining the feature's purpose, not just that the list is empty."
+  },
+  "expensesAddCta": "Declare an expense",
+  "@expensesAddCta": {
+    "description": "Button/FAB that opens the add-expense form."
+  },
+  "expensesMonthly": "Monthly",
+  "@expensesMonthly": {
+    "description": "Caption on an expense card marking the amount as a recurring monthly figure."
+  },
+  "expensesDayOfMonthLabel": "Day {day} of each month",
+  "@expensesDayOfMonthLabel": {
+    "description": "Recurrence line on an expense card; day is pre-formatted for locale digits.",
+    "placeholders": {
+      "day": { "type": "String" }
+    }
+  },
+  "expensesEdit": "Edit",
+  "@expensesEdit": {
+    "description": "Action that opens the edit form for a declared expense."
+  },
+  "expensesRemove": "Remove",
+  "@expensesRemove": {
+    "description": "Action that deactivates (soft-deletes) a declared expense so it stops counting."
+  },
+  "expensesFormAddTitle": "Declare an expense",
+  "@expensesFormAddTitle": {
+    "description": "Heading of the add-expense form."
+  },
+  "expensesFormEditTitle": "Edit expense",
+  "@expensesFormEditTitle": {
+    "description": "Heading of the edit-expense form."
+  },
+  "expensesLabelField": "Description",
+  "@expensesLabelField": {
+    "description": "Label for the free-text expense description field."
+  },
+  "expensesLabelHint": "e.g. Apartment rent (cash)",
+  "@expensesLabelHint": {
+    "description": "Placeholder for the expense description field."
+  },
+  "expensesCategoryField": "Category",
+  "@expensesCategoryField": {
+    "description": "Label for the expense-category picker."
+  },
+  "expensesCategoryHint": "Choose a category",
+  "@expensesCategoryHint": {
+    "description": "Placeholder shown before a category is picked."
+  },
+  "expensesAmountField": "Monthly amount (SAR)",
+  "@expensesAmountField": {
+    "description": "Label for the monthly-amount field."
+  },
+  "expensesDayField": "Day of the month",
+  "@expensesDayField": {
+    "description": "Label for the day-of-month field (1–31)."
+  },
+  "expensesDayHint": "1–31",
+  "@expensesDayHint": {
+    "description": "Placeholder for the day-of-month field."
+  },
+  "expensesImpactNote": "Declared expenses count toward your Financial Health Score and any bank's loan assessment — that's the point: they make what you truly owe visible.",
+  "@expensesImpactNote": {
+    "description": "Impact disclosure in the form: a declared expense affects the stress score and loan assessment (Step 11.3)."
+  },
+  "expensesSave": "Save",
+  "@expensesSave": {
+    "description": "Button that submits the add/edit expense form."
+  },
+  "expensesCancel": "Cancel",
+  "@expensesCancel": {
+    "description": "Button that dismisses the add/edit expense form without saving."
+  },
+  "expensesLabelRequired": "Enter a short description",
+  "@expensesLabelRequired": {
+    "description": "Validation error when the description field is blank."
+  },
+  "expensesCategoryRequired": "Choose a category",
+  "@expensesCategoryRequired": {
+    "description": "Validation error when no category is picked."
+  },
+  "expensesAmountInvalid": "Enter an amount greater than 0",
+  "@expensesAmountInvalid": {
+    "description": "Validation error for a non-positive or non-numeric amount."
+  },
+  "expensesDayInvalid": "Enter a day from 1 to 31",
+  "@expensesDayInvalid": {
+    "description": "Validation error for a day-of-month outside 1–31."
+  },
+  "expensesSaveError": "Couldn't save. Your details are kept — please try again.",
+  "@expensesSaveError": {
+    "description": "Error shown when a create/update fails; the form keeps the user's input."
+  },
+  "expensesRemoveError": "Couldn't remove this expense. Please try again.",
+  "@expensesRemoveError": {
+    "description": "Snackbar shown when a deactivate call fails."
+  },
+  "categoryGroceries": "Groceries",
+  "@categoryGroceries": {
+    "description": "Declared-expense category label for GROCERIES (everyday food & household)."
+  },
+  "categoryRestaurantsDining": "Restaurants & dining",
+  "@categoryRestaurantsDining": {
+    "description": "Declared-expense category label for RESTAURANTS_DINING (everyday eating out)."
+  },
+  "categoryRestaurantsLuxury": "Fine dining",
+  "@categoryRestaurantsLuxury": {
+    "description": "Declared-expense category label for RESTAURANTS_LUXURY (upscale restaurants)."
+  },
+  "categoryTransportation": "Transportation",
+  "@categoryTransportation": {
+    "description": "Declared-expense category label for TRANSPORTATION (fuel, ride-hailing, public transit)."
+  },
+  "categoryTravelFlights": "Flights",
+  "@categoryTravelFlights": {
+    "description": "Declared-expense category label for TRAVEL_FLIGHTS (air travel)."
+  },
+  "categoryTravelHotels": "Hotels & stays",
+  "@categoryTravelHotels": {
+    "description": "Declared-expense category label for TRAVEL_HOTELS (accommodation)."
+  },
+  "categoryShopping": "Shopping",
+  "@categoryShopping": {
+    "description": "Declared-expense category label for SHOPPING (general retail)."
+  },
+  "categoryShoppingLuxury": "Luxury shopping",
+  "@categoryShoppingLuxury": {
+    "description": "Declared-expense category label for SHOPPING_LUXURY (premium/designer retail)."
+  },
+  "categoryTelecom": "Telecom",
+  "@categoryTelecom": {
+    "description": "Declared-expense category label for TELECOM (mobile & internet plans)."
+  },
+  "categoryUtilities": "Utilities",
+  "@categoryUtilities": {
+    "description": "Declared-expense category label for UTILITIES (electricity, water, gas)."
+  },
+  "categoryHealthcare": "Healthcare",
+  "@categoryHealthcare": {
+    "description": "Declared-expense category label for HEALTHCARE (clinics, medicine, treatment)."
+  },
+  "categoryHealthFitness": "Health & fitness",
+  "@categoryHealthFitness": {
+    "description": "Declared-expense category label for HEALTH_FITNESS (gym, sports, wellness)."
+  },
+  "categoryEducationBooks": "Education & books",
+  "@categoryEducationBooks": {
+    "description": "Declared-expense category label for EDUCATION_BOOKS (tuition, courses, books)."
+  },
+  "categoryEntertainmentSubscriptions": "Entertainment subscriptions",
+  "@categoryEntertainmentSubscriptions": {
+    "description": "Declared-expense category label for ENTERTAINMENT_SUBSCRIPTIONS (streaming, media)."
+  },
+  "categorySoftwareSubscriptions": "Software subscriptions",
+  "@categorySoftwareSubscriptions": {
+    "description": "Declared-expense category label for SOFTWARE_SUBSCRIPTIONS (apps, SaaS, cloud)."
+  },
+  "categoryBusinessExpenses": "Business expenses",
+  "@categoryBusinessExpenses": {
+    "description": "Declared-expense category label for BUSINESS_EXPENSES (self-employed/work costs)."
+  },
+  "categoryOther": "Other",
+  "@categoryOther": {
+    "description": "Declared-expense category label for OTHER — a real, storable catch-all (e.g. cash rent, family support), not just a fallback."
   }
 }

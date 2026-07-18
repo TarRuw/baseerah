@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../core/format.dart';
 import '../../../theme/baseerah_theme.dart';
 import '../data/account.dart';
+import 'bank_logo.dart';
 
 /// The client's linked accounts (DESIGN §7.1): one row per account showing the
-/// bank's display colour, its name, and the latest balance formatted with
-/// [Fmt.money] (SAR/ر.س by locale). Non-scrolling — the Home screen owns scroll.
+/// bank's mark, its name, and the latest balance formatted with [Fmt.money]
+/// (SAR/ر.س by locale). Non-scrolling — the Home screen owns scroll.
 class LinkedAccountsList extends StatelessWidget {
   const LinkedAccountsList({
     super.key,
@@ -57,19 +58,7 @@ class _AccountRow extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: account.displayColor.withValues(alpha: 0.15),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.account_balance_outlined,
-              size: 20,
-              color: account.displayColor,
-            ),
-          ),
+          BankLogo(account: account),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

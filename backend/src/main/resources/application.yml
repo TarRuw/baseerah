@@ -1,17 +1,20 @@
 spring:
+  # Active profile is environment-driven. Defaults to `prod`; override with SPRING_PROFILES_ACTIVE.
   profiles:
-    active: dev
+    active: ${SPRING_PROFILES_ACTIVE:prod}
   messages:
-    # Server-provided content strings (Step 8.1). Resolved per request from Accept-Language; UTF-8 so the
-    # Arabic bundle reads correctly, and no system-locale fallback so a non-ar locale lands on the English
+    # Server-provided content strings. Resolved per request from Accept-Language; UTF-8 so the Arabic
+    # bundle reads correctly, and no system-locale fallback so a non-ar locale lands on the English
     # default bundle (messages.properties) rather than the JVM's locale.
     basename: messages
     encoding: UTF-8
     fallback-to-system-locale: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/baseerah
-    username: baseerah
-    password: baseerah
+    # Connection details are supplied entirely via the environment — no credentials are baked into the
+    # image. Placeholders have no default, so the application fails fast at startup if any is missing.
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -26,17 +29,35 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
 baseerah:
-  seed:
-    # Directory of data-mocks/*.json SAMA payloads. Resolved relative to the working dir; the seeder
-    # also searches parent dirs, so running from backend/ still finds the repo-root data-mocks/.
-    data-mocks-path: data-mocks
-    enabled: true
+  analytics:
+    # The day the scoring engines treat as "today": the trailing 90-day scoring window ends here. In
+    # production the telemetry is live, so this tracks the wall clock. Override with BASEERAH_AS_OF_DATE
+    # (an ISO date) only to pin the window to a fixed day.
+    as-of-date: ${BASEERAH_AS_OF_DATE:system}
+  # NOTE: the boot-time demo/persona seeders (users, personas, loan requests) and their Liquibase
+  # mock-data changesets have been removed for production. Only system reference data is seeded:
+  # the bank registry (013-banks.sql) and the bank-wide risk policy (006-bank.sql). Per-client
+  # gamification challenges are still derived at boot from each real client's own transactions
+  # (ChallengeSeeder) — no fabricated data.
+  cors:
+    # Comma-separated origin allow-list for the browser frontend. Supplied per environment; there is no
+    # production default so a misconfigured deploy fails loud rather than silently allowing localhost.
+    allowed-origin-patterns: ${BASEERAH_CORS_ALLOWED_ORIGIN_PATTERNS}
+  auth:
+    # Phone + OTP authentication (DESIGN §12). NOTE: the bundled OtpService is still a MOCK — it has no
+    # real SMS/OTP gateway and accepts a single configured code. Replace it with a real provider adapter
+    # before going live. Both values are required from the environment (no in-code defaults).
+    mock-otp: ${BASEERAH_AUTH_MOCK_OTP}
+    # HS256 signing key (≥32 bytes). Required from the environment; never hardcode it.
+    jwt-secret: ${BASEERAH_AUTH_JWT_SECRET}
+    # Access-token lifetime (ISO-8601 duration).
+    jwt-ttl: ${BASEERAH_AUTH_JWT_TTL:PT12H}
   genai:
-    # GenAiClient provider (DESIGN §2): mock (default, deterministic, needs no API key) | remote (Phase 7).
-    # Overridable via the GENAI_PROVIDER env var; falls back to mock so the demo runs offline.
+    # GenAiClient provider: mock (default, deterministic, needs no API key) | remote.
+    # Overridable via the GENAI_PROVIDER env var; falls back to mock so the app runs without a key.
     provider: ${GENAI_PROVIDER:mock}
-    # RemoteGenAi settings (Step 7.2). Only consulted when provider=remote AND api-key is non-blank;
-    # otherwise the app cleanly falls back to the mock. No secret is hardcoded — all env-driven.
+    # RemoteGenAi settings. Only consulted when provider=remote AND api-key is non-blank; otherwise the
+    # app cleanly falls back to the mock. No secret is hardcoded — all env-driven.
     remote:
       model: ${GENAI_MODEL:claude-opus-4-8}
       base-url: ${GENAI_BASE_URL:https://api.anthropic.com}
@@ -55,6 +76,7 @@ management:
 
 ---
 spring:
+  # Local development profile: verbose SQL. Activate with SPRING_PROFILES_ACTIVE=dev.
   config:
     activate:
       on-profile: dev
